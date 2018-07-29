@@ -1,4 +1,12 @@
-% All the information are saved in Labels
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pending: 
+% velocity angle
+% close image handle when saving
+% straght line metric, 
+% seperate selecting object position and calculation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% All the information are saved as folowing
 % Labels(:,2) Nose x
 % Labels(:,3) Nose y
 % Labels(:,5) Leftear x
@@ -10,8 +18,15 @@
 % Labels(:,14) Head x  'average of nose, leftear and rightear'
 % Labels(:,15) Head y
 % Labels(:,17) Head distance from object
-% Labels(:,15) 
+% Labels(:,18) upper left corner distance from object center
+% Labels(:,19) average buttom left or upper right conerner distance from object cente
+% Labels(:,20) buttom right corner distance from object center
+% Labels(:,21) if distance to object <= radius 1; else 0
+% Labels(:,22) orientation related to object [-180,180]
+% Labels(:,23) if orientation related to object <= +angle_radius and >= -angle_radius 1; else 0
 
+% Dis_t_obj Time spent in the radius according to the distance
+% Ang_t_obj Time spent orienting towards the object according to the orientation
 
 
 
@@ -213,6 +228,9 @@ mouse=imrect;
 pos=getPosition(mouse);% x1 y1 w h
 ROI=[pos(1) pos(2) pos(1)+pos(3) pos(2)+pos(4)]; 
 end
+
+
+% another function for reference
 
 % function BoxTable=getAllbox(folder)
 % fileFolder=fullfile(folder);
