@@ -1,3 +1,20 @@
+% All the information are saved in Labels
+% Labels(:,2) Nose x
+% Labels(:,3) Nose y
+% Labels(:,5) Leftear x
+% Labels(:,6) Leftear y
+% Labels(:,8) Rightear x
+% Labels(:,9) Rightear y
+% Labels(:,11) Tailbase x
+% Labels(:,12) Tailbase y
+% Labels(:,14) Head x  'average of nose, leftear and rightear'
+% Labels(:,15) Head y
+% Labels(:,17) Head distance from object
+% Labels(:,15) 
+
+
+
+
 path=cd
 PathRoot=[path '/'];
 filelist=dir([PathRoot,'*.csv']);
