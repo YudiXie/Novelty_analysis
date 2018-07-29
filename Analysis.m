@@ -18,12 +18,12 @@ obj=Labelrect(frame,'Please Select Object');
 obj_center=0.5.*[obj(1)+obj(3),obj(2)+obj(4)];
 
 
-
+%
 % % Show object center
 % imshow(frame)
 % hold on 
 % plot(obj_center(1),obj_center(2),'*')
-
+%
 
 %***********************************************************
 % Calculation
