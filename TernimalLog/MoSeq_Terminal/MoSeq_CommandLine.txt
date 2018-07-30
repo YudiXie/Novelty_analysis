@@ -1,0 +1,13 @@
+cd ~/Programs/MoSeq2/python_repos/
+
+conda create -n "moseq2" python=3.6 -y
+source activate moseq2
+
+moseq2-extract extract ~/Programs/MoSeq_videos/MoSeq_test/session_20180728154636/depth.dat
+
+moseq2-extract download-flip-file
+
+/home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl
+
+moseq2-extract extract ~/Programs/MoSeq_videos/MoSeq_test/session_20180728154636/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl
+
