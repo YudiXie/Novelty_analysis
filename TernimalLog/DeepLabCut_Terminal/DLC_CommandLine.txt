@@ -1,0 +1,20 @@
+alex@UchidaGPU:~$ cd ..
+alex@UchidaGPU:/home$ cd ..
+alex@UchidaGPU:/$ cd media/alex/
+
+alex@UchidaGPU:/media/alex$ sudo mount /dev/sdc2 /media/alex/noveltydisk
+
+alex@UchidaGPU:/media/alex$ docker ps -a
+
+alex@UchidaGPU:/media/alex$ docker start gpu1novelty 
+
+alex@UchidaGPU:/media/alex$ docker exec -it gpu1novelty /bin/bash
+
+root@bd5ab139811e:/opt/caffe# cd 
+root@bd5ab139811e:~# cd ..
+root@bd5ab139811e:/# cd media/
+root@bd5ab139811e:/media# cd alex/noveltydisk/EvaluationCode/
+
+root@bd5ab139811e:/media/alex/noveltydisk/EvaluationCode# python3 RunAnalysisoverVideos.py 
+
+
