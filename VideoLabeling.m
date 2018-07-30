@@ -14,7 +14,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-ppcs= 40/50;    %pixels per cm/s
+ppcs= 40/100;    %pixels per cm/s
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Initialization
@@ -60,7 +60,7 @@ for fiter =1:flen
                     520,220;  %
                     520,240;  %y speed (cm/s)
                     520,260;  %
-                    520,290]; %legend
+                    520,280]; %legend
         insertedtext = {'Frame Number:';
                         num2str(framenum);
                         'Distance (cm)';
@@ -73,7 +73,7 @@ for fiter =1:flen
                         num2str(Labels(framenum,24));
                         'y speed (cm/s)';
                         num2str(Labels(framenum,25));
-                        '50cm/s'};      
+                        '100cm/s'};      
         finalframe = insertText(finalframe,textpos,insertedtext,'BoxOpacity',0);
 
         if Labels(framenum,21)==1  
@@ -96,7 +96,7 @@ for fiter =1:flen
 
         %Adding speed plot
         finalframe = insertShape(finalframe,'Line',[530 370 610 370;570 330 570 410],'Color','Black');  % x y axis
-        finalframe = insertShape(finalframe,'Line',[570 280 610 280],'Color','Black');  % legend
+        finalframe = insertShape(finalframe,'Line',[570 290 610 290],'Color','Black');  % legend
 
         finalframe = insertShape(finalframe,'Line',[570,370,570-Labels(framenum,24).*ppcs,370-Labels(framenum,25).*ppcs],'Color','Red');  % velosity
         writeVideo(final_video,finalframe);
