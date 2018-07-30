@@ -43,7 +43,7 @@ path = cd;
 PathRoot=[path '/'];
 filelist=dir([PathRoot,'*.csv']);
 flen = length(filelist);
-
+tic;
 for fiter =1:flen
     fn = filelist(fiter).name;
     vn = [filelist(fiter).name(1:32) '.mp4'];
@@ -220,6 +220,7 @@ for fiter =1:flen
     clearvars -except arena obj obj_center filelist fiter
 
     cd ..
+    toc;
 end
 
 close all

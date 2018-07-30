@@ -60,14 +60,14 @@ for fiter =1:flen
                     520,220;  %
                     520,240;  %y speed (cm/s)
                     520,260;  %
-                    520,410]; %legend
+                    520,280]; %legend
         insertedtext = {'Frame Number:';
                         num2str(framenum);
                         'Distance (cm)';
                         num2str(Labels(framenum,17));
                         'In radius';
                         'Orientation (d)';
-                        num2str(Labels(framenum,21));
+                        num2str(Labels(framenum,22));
                         'Towards';
                         'x speed (cm/s)';
                         num2str(Labels(framenum,24));
@@ -96,9 +96,9 @@ for fiter =1:flen
 
         %Adding speed plot
         finalframe = insertShape(finalframe,'Line',[530 370 610 370;570 330 570 410],'Color','Black');  % x y axis
-        finalframe = insertShape(finalframe,'Line',[570 410 610 410],'Color','Black');  % legend
+        finalframe = insertShape(finalframe,'Line',[570 280 610 280],'Color','Black');  % legend
 
-        finalframe = insertShape(finalframe,'Line',[570,370,570+Labels(framenum,24).*ppcs,370+Labels(framenum,24).*ppcs],'Color','Red');  % velosity
+        finalframe = insertShape(finalframe,'Line',[570,370,570+Labels(framenum,24).*ppcs,370+Labels(framenum,25).*ppcs],'Color','Red');  % velosity
         writeVideo(final_video,finalframe);
         framenum = framenum + 1;
 
