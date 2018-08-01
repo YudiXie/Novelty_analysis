@@ -143,7 +143,7 @@ for fiter =1:flen
     %***********************************************************
 
     % plot distances
-    Disfigure=figure(1);
+    Disfigure=figure('visible",‘off');
     plot(Labels(plot_fs:plot_fe,1)./fpm,Labels(plot_fs:plot_fe,17),'linewidth',2);
     hold on
     plot(Labels(plot_fs:plot_fe,1)./fpm,Labels(plot_fs:plot_fe,18),'linewidth',2);
@@ -157,7 +157,7 @@ for fiter =1:flen
     set(Disfigure, 'position', [0 0 2000 1000]);
             
     % plot orientation
-    Angfigure=figure(2);
+    Angfigure=figure('visible",‘off');
     plot(Labels(plot_fs:plot_fe,1)./fpm,Labels(plot_fs:plot_fe,22),'linewidth',2);
     title(['Orientation (first ' num2str((plot_fe-plot_fs)/fpm) 'min) radius=' num2str(angle_radius)]);
     xlabel('time min')
@@ -184,13 +184,13 @@ for fiter =1:flen
         end
     end
 
-    Hmfigure=figure(3);
+    Hmfigure=figure('visible",‘off');
     hm=heatmap(pooled_map,'GridVisible','off','Colormap',parula,'FontSize',0.01);
     % rectangle('Position',[arena(fiter,1)-round(pool_size/2),arena(fiter,2)-round(pool_size/2),arena(fiter,3)-arena(fiter,1),arena(fiter,4)-arena(fiter,2)])
 
 
     % Plot trajectory
-    Trafigure=figure(4);
+    Trafigure=figure('visible",‘off');
     scatter(Labels(:,14),Labels(:,15));
     rectangle('Position',[arena(fiter,1),arena(fiter,2),arena(fiter,3)-arena(fiter,1),arena(fiter,4)-arena(fiter,2)],'EdgeColor','r','linewidth',4)
     rectangle('Position',[obj(fiter,1),obj(fiter,2),obj(fiter,3)-obj(fiter,1),obj(fiter,4)-obj(fiter,2)],'EdgeColor','r','linewidth',4)
