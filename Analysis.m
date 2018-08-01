@@ -52,8 +52,6 @@ for fiter =1:flen
     Labels = csvread(fn,3,0);
     len = length(Labels(:,1));
     Labels = [Labels zeros(len,14)];
-    video=VideoReader(vn);
-    frame=readFrame(video);
 
     %***********************************************************
     % Parameters
