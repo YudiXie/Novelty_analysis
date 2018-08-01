@@ -1,3 +1,5 @@
+%This script doesn't work because the foldernames is deleted by MarkObjPos
+
 folderpath = cd;
 d = dir(folderpath);
 isub = [d(:).isdir];
