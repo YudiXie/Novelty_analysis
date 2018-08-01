@@ -213,7 +213,7 @@ for fiter =1:flen
 
     cd ..
 
-    save([vn(1:end-4)],'Labels','Dis_t_obj','Ang_t_obj');
+    save(vn(1:end-4),'Labels','Dis_t_obj','Ang_t_obj');
     close all
     clearvars -except arena obj obj_center filelist fiter
 
