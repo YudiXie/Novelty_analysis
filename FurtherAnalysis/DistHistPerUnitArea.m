@@ -7,42 +7,107 @@ cd Analyzed_Data;
 load('Arena_Obj_Pos.mat');
 tic;
 
-fine_scale=2;        % fine scale for estimation
+fine_scale=1;        % fine scale for estimation
 ppc=355./(2.*30.48); % pixels per cm
 fps=30;              % video frame per second
 frame_start=1;
 frame_end=18000;
 
-for fiter =1:1
+for fiter =1
     fn = filelist(fiter).name;
-    vn = [filelist(fiter).name(1:32) '.mp4'];
     disp(['Analyzing: ' fn]);
     load([filelist(fiter).name(1:32) '.mat'],'Labels');
     x_c=obj_center(fiter,1);
     y_c=obj_center(fiter,2);
-    x_1=arena(fiter,1);
-    y_1=arena(fiter,2);
-    x_2=arena(fiter,3);
-    y_2=arena(fiter,4);
+    x_1=round(arena(fiter,1),0);
+    y_1=round(arena(fiter,2),0);
+    x_2=round(arena(fiter,3),0);
+    y_2=round(arena(fiter,4),0);
     
-    [N,edges]=histcounts(Labels(:,17));
-    bin_size=edge(2)-edge(1);
+    Distances=Labels(frame_start:frame_end,17);
+    Locate=find(Distances>Labels(1,20));
+    Distances(Locate)=[];
+    [N,edges]=histcounts(Distances);
+    bin_size=edges(2)-edges(1);
     dis=0.5.*(edges(2:end)+edges(1:end-1));
 
 
     for iter=1:length(N)
-        N_correct(iter)=N(iter)./area_weight_est(dis(iter),x_1,y_1,x_2,y_2,x_c,y_c,bin_size,fine_scale,);
-        %calculate number of frames spent per unit area
+        % N_correct(iter)=N(iter)./area_weight_est(dis(iter),x_1,y_1,x_2,y_2,x_c,y_c,bin_size,fine_scale,ppc);
+        N_correct(iter)=N(iter)./area_weight(dis(iter),x_1,y_1,x_2,y_2,x_c,y_c,ppc);
+        %calculate number of frames spent per unit cm^2
     end
-    rawHist=Hist(N);
-    NHist=figure;
+    N=N./fps;
+    N_correct=N_correct./fps;
+
+    
+    % rawHist=figure(1);
+    % hist(Labels(frame_start:frame_end,17));
+    height=1.5;
+    NHist=figure(2);
     plot(dis,N);
     title('Time spent at different distance');
     xlabel('distance (cm)');
-    ylabel('time (s)')
-    NCHist=figure;
+    ylabel('time (s)');
+    hold on
+    xc_1=[1 1].*Labels(1,18);
+    xc_2=[1 1].*Labels(1,19);
+    xc_3=[1 1].*Labels(1,20);
+    y=[0 height];
+    plot(xc_1,y,xc_2,y,xc_3,y);
+
+
+    NCHist=figure(3);
     plot(dis,N_correct)
     title('Time spent at different distance per cm^2');
+    xlabel('distance (cm)');
+    ylabel('time (s)');
+    hold on
+    xc_1=[1 1].*Labels(1,18);
+    xc_2=[1 1].*Labels(1,19);
+    xc_3=[1 1].*Labels(1,20);
+    y=[0 height];
+    plot(xc_1,y,xc_2,y,xc_3,y);
+
+
+    WeightPlot=figure(4);
+    for witer=1:length(dis)
+        weights1(witer)=area_weight_est(dis(witer),x_1,y_1,x_2,y_2,x_c,y_c,bin_size,fine_scale,ppc);
+        weights2(witer)=area_weight(dis(witer),x_1,y_1,x_2,y_2,x_c,y_c,ppc);
+    end
+    plot(dis,weights1,dis,weights2)
+    legend('w1','w2');
+    hold on
+    xc_1=[1 1].*Labels(1,18);
+    xc_2=[1 1].*Labels(1,19);
+    xc_3=[1 1].*Labels(1,20);
+    y=[0 height];
+    plot(xc_1,y,xc_2,y,xc_3,y);
+
+
+    % % ***********************************************************
+    % % Save
+    % % ***********************************************************
+    % % pause
+
+    % cd Analyzed_Data
+
+    % mkdir([vn(1:end-4) '_Plots'])
+    % cd([vn(1:end-4) '_Plots'])
+
+    % saveas(Disfigure,['Distance_' vn(1:end-4) '.png'])
+    % saveas(Angfigure,['Orientation_' vn(1:end-4) '.png'])
+    % saveas(Hmfigure,['Heatmap_' vn(1:end-4) '.png'])
+    % saveas(Trafigure,['Trajectory_' vn(1:end-4) '.png'])
+
+    % cd ..
+
+    % save(vn(1:end-4),'Labels','Dis_t_obj','Ang_t_obj');
+    % close all
+    % clearvars -except arena obj obj_center filelist fiter
+
+    % cd ..
+
     toc;
 end
 
@@ -53,11 +118,39 @@ cd ..
 % Returning the weight for normalizing distance histogram
 % It recieve (x1,y1) (x2,y2) the position of the upperleft and the bottom right corner of the arena
 % (xc,yc) is the position of center of object
-% r is the diatance to the object
+% r is the diatance to the object (in cm)
+% returns a weight w,  it is acctually the part of perimeter of a circle which has r as radius and (xc,yc) as radius intersected by the arena
+% 
+% this function gernally apply, but it is not exact
+% bin is the histogram diatance bin (in cm)
+function w=area_weight_est(r,x1,y1,x2,y2,xc,yc,bin,finescale,ppc)
+    dim1=abs(x1-x2).*finescale;
+    dim2=abs(y1-y2).*finescale;
+    M = zeros(dim1,dim2);
+    for i=1:dim1
+        for j=1:dim2
+            diatance=sqrt((i-xc.*finescale).^2+(j-yc.*finescale).^2);
+            rmdr=(r-(0.5.*bin)).*ppc.*finescale;
+            rpdr=(r+(0.5.*bin)).*ppc.*finescale;
+            if diatance>rmdr && diatance<rpdr
+                M(i,j)=1;
+            end
+        end
+    end
+    w=sum(sum(M))./(finescale.^2.*ppc.^2);   % returns area (in cm^2) of the defined bin size
+end
+
+
+
+% Returning the weight for normalizing distance histogram
+% It recieve (x1,y1) (x2,y2) the position of the upperleft and the bottom right corner of the arena
+% (xc,yc) is the position of center of object
+% r is the diatance to the object (cm)
 % returns a weight w,  it is acctually the part of perimeter of a circle which has r as radius and (xc,yc) as radius intersected by the arena
 % 
 % this function does not gernally apply, only applys to those object is placed near one corner of the arena and near the diagonal line  (len(3)<len(4))
-function w=area_weight(r,x1,y1,x2,y2,xc,yc)
+function w=area_weight(r,x1,y1,x2,y2,xc,yc,ppc)
+    r=r.*ppc;
     len=[abs(xc-x1);
          abs(yc-y1);
          abs(xc-x2);
@@ -88,28 +181,5 @@ function w=area_weight(r,x1,y1,x2,y2,xc,yc)
     else 
         w=+Inf;
     end
-end
-
-
-% Returning the weight for normalizing distance histogram
-% It recieve (x1,y1) (x2,y2) the position of the upperleft and the bottom right corner of the arena
-% (xc,yc) is the position of center of object
-% r is the diatance to the object
-% returns a weight w,  it is acctually the part of perimeter of a circle which has r as radius and (xc,yc) as radius intersected by the arena
-% 
-% this function gernally apply, but it is not exact
-% bin is the histogram diatance bin
-function w=area_weight_est(r,x1,y1,x2,y2,xc,yc,bin,finescale,ppc)
-    dim1=abs(x1-x2).*finescale;
-    dim2=abs(y1-y2).*finescale;
-    M = zeros(dim1,dim2);
-    for i=1:dim1
-        for j=1:dim2
-            diatance=sqrt((i-xc.*finescale).^2+(j-yc.*finescale).^2);
-            if diatance>(r-(0.5.*bin)).*finescale && diatance<(r+(0.5.*bin)).*finescale
-                M(i,j)=1;
-            end
-        end
-    end
-    w=sum(sum(M))./(finescale.^2.*;
+    w=w./ppc;
 end
