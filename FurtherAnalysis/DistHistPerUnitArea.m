@@ -31,7 +31,7 @@ for fiter =3:3
     plot(dis,N);
     title('N');
     NCHist=figure;
-    plot(dis.N_correct)
+    plot(dis,N_correct)
     title('N_correct');
     toc;
 end
