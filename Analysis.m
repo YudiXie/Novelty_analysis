@@ -39,8 +39,8 @@
 cd Analyzed_Data;
 load('Arena_Obj_Pos.mat');
 cd ..
-path = cd;
-PathRoot=[path '/'];
+pathname = cd;
+PathRoot=[pathname '/'];
 filelist=dir([PathRoot,'*.csv']);
 flen = length(filelist);
 tic;
