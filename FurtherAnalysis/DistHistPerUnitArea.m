@@ -7,11 +7,11 @@ cd Analyzed_Data;
 load('Arena_Obj_Pos.mat');
 tic;
 
-for fiter =1:1
+for fiter =3:3
     fn = filelist(fiter).name;
     vn = [filelist(fiter).name(1:32) '.mp4'];
     disp(['Analyzing: ' fn]);
-    load('filelist(fiter).name(1:32).mat','Labels');
+    load([filelist(fiter).name(1:32) '.mat'],'Labels');
     x_c=obj_center(fiter,1);
     y_c=obj_center(fiter,2);
     x_1=arena(fiter,1);
@@ -22,12 +22,10 @@ for fiter =1:1
     hist(Labels(:,17))
 
 
-
+    toc;
 end
 
-
-
-
+cd ..
 
 
 
@@ -80,7 +78,7 @@ end
 % 
 % this function gernally apply, but it is not exact
 % bin is the histogram diatance bin
-function w=area_weight(r,x1,y1,x2,y2,xc,yc,bin,finescale)
+function w=area_weight_est(r,x1,y1,x2,y2,xc,yc,bin,finescale)
     dim1=abs(x1-x2).*finescale;
     dim2=abs(y1-y2).*finescale;
     M = zeros(dim1,dim2);
