@@ -7,7 +7,13 @@ cd Analyzed_Data;
 load('Arena_Obj_Pos.mat');
 tic;
 
-for fiter =3:3
+fine_scale=2;        % fine scale for estimation
+ppc=355./(2.*30.48); % pixels per cm
+fps=30;              % video frame per second
+frame_start=1;
+frame_end=18000;
+
+for fiter =1:1
     fn = filelist(fiter).name;
     vn = [filelist(fiter).name(1:32) '.mp4'];
     disp(['Analyzing: ' fn]);
@@ -25,14 +31,18 @@ for fiter =3:3
 
 
     for iter=1:length(N)
-        N_correct(iter)=N(iter)./area_weight(dis(iter),x_1,y_1,x_2,y_2,x_c,y_c);
+        N_correct(iter)=N(iter)./area_weight_est(dis(iter),x_1,y_1,x_2,y_2,x_c,y_c,bin_size,fine_scale,);
+        %calculate number of frames spent per unit area
     end
+    rawHist=Hist(N);
     NHist=figure;
     plot(dis,N);
-    title('N');
+    title('Time spent at different distance');
+    xlabel('distance (cm)');
+    ylabel('time (s)')
     NCHist=figure;
     plot(dis,N_correct)
-    title('N_correct');
+    title('Time spent at different distance per cm^2');
     toc;
 end
 
@@ -89,17 +99,17 @@ end
 % 
 % this function gernally apply, but it is not exact
 % bin is the histogram diatance bin
-function w=area_weight_est(r,x1,y1,x2,y2,xc,yc,bin,finescale)
+function w=area_weight_est(r,x1,y1,x2,y2,xc,yc,bin,finescale,ppc)
     dim1=abs(x1-x2).*finescale;
     dim2=abs(y1-y2).*finescale;
     M = zeros(dim1,dim2);
     for i=1:dim1
-        for j=1:dim1
+        for j=1:dim2
             diatance=sqrt((i-xc.*finescale).^2+(j-yc.*finescale).^2);
             if diatance>(r-(0.5.*bin)).*finescale && diatance<(r+(0.5.*bin)).*finescale
                 M(i,j)=1;
             end
         end
     end
-    w=sum(sum(M));
+    w=sum(sum(M))./(finescale.^2.*;
 end
