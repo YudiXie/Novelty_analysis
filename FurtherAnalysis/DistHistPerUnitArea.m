@@ -19,9 +19,20 @@ for fiter =3:3
     x_2=arena(fiter,3);
     y_2=arena(fiter,4);
     
-    hist(Labels(:,17))
+    [N,edges]=histcounts(Labels(:,17));
+    bin_size=edge(2)-edge(1);
+    dis=0.5.*(edges(2:end)+edges(1:end-1));
 
 
+    for iter=1:length(N)
+        N_correct(iter)=N(iter)./area_weight(dis(iter),x_1,y_1,x_2,y_2,x_c,y_c);
+    end
+    NHist=figure;
+    plot(dis,N);
+    title('N');
+    NCHist=figure;
+    plot(dis.N_correct)
+    title('N_correct');
     toc;
 end
 
