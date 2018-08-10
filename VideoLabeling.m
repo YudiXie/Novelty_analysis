@@ -1,3 +1,6 @@
+% Only works when frame size is 420X520
+
+
 % Features shown on the videos:
 % Frame number
 % Distance to the object
