@@ -22,13 +22,18 @@ ppcs= 40/100;    %pixels per cm/s
 
 path = cd;
 PathRoot=[path '/'];
-filelist=dir([PathRoot,'*0000.mp4']);
+filelist=dir([PathRoot,'*.(mp4|avi)']);
+for fiter =1:flen
+    if ~isempty(strfind(filelist(fiter).name,'abeled'))
+        filelist(fiter)=[];
+    end
+end
 flen = length(filelist);
 tic
 
 for fiter =1:flen
     vn = filelist(fiter).name;
-    matn = [filelist(fiter).name(1:32) '.mat'];
+    matn = [vn(1:end-4) '.mat'];
     cd Analyzed_Data;
     load(matn);
     cd ..
