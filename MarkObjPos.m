@@ -6,7 +6,7 @@ arena=zeros(flen,4);
 obj=zeros(flen,4);
 obj_center=zeros(flen,2);
 
-for fi =1:flen
+for fi =flen:-1:1
     vn = filelist(fi).name;
     fn=[vn(1:end-4) 'DeepCut_resnet50_noveltyMay21shuffle1_700000.csv'];
 
