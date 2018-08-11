@@ -18,7 +18,7 @@
 % Parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ppcs= 40/100;    %pixels per cm/s
-
+radius = 50;     %radius pixels
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Initialization
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -39,6 +39,7 @@ for fiter =1:flen
     matn = [vn(1:end-4) '.mat'];
     cd Analyzed_Data;
     load(matn);
+    load('Arena_Obj_Pos.mat');
     cd ..
     disp(['Analyzing: ' vn]);
 
@@ -107,6 +108,9 @@ for fiter =1:flen
         finalframe = insertShape(finalframe,'Line',[570 290 610 290],'Color','Black');  % legend
 
         finalframe = insertShape(finalframe,'Line',[570,370,570-Labels(framenum,24).*ppcs,370-Labels(framenum,25).*ppcs],'Color','Red');  % velosity
+        
+        finalframe = insertShape(finalframe,'circle',[obj_center(fiter,1) obj_center(fiter,1) radius]);
+        
         writeVideo(final_video,finalframe);
         framenum = framenum + 1;
 
