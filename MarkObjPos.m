@@ -1,14 +1,14 @@
 path=cd
 PathRoot=[path '/'];
-filelist=dir([PathRoot,'*.(mp4|avi)']);
+filelist=dir([PathRoot,'*.csv']);
 flen = length(filelist);
 arena=zeros(flen,4);
 obj=zeros(flen,4);
 obj_center=zeros(flen,2);
 
 for fi =flen:-1:1
-    vn = filelist(fi).name;
-    fn=[vn(1:end-4) 'DeepCut_resnet50_noveltyMay21shuffle1_700000.csv'];
+    fn = filelist(fi).name;
+    vn=[fn(1:32) '.avi'];
 
     Labels = csvread(fn,3,0);
     video=VideoReader(vn);
