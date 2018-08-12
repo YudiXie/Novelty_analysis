@@ -1,16 +1,19 @@
+startframe=1;
+endframe=18000;
+
 path=cd
 PathRoot=[path '/'];
 filelist_fortime=dir([PathRoot,'*.mat']);
 flen_fortime = length(filelist_fortime);
 
 
-for fi = 1:flen_fortime
+for fi = 2:flen_fortime
 filename = filelist_fortime(fi).name;
 load(filename)
-Time_distance(fi)=Dis_t_obj;
-Time_angle(fi)=Ang_t_obj;
+Time_distance(fi)=sum(Labels(startframe:endframe,21));
+Time_angle(fi)=sum(Labels(startframe:endframe,23));
 
-clearvars -except filelist_fortime Time_angle Time_distance
+clearvars -except filelist_fortime Time_angle Time_distance startframe endframe
 close all
 end
 
