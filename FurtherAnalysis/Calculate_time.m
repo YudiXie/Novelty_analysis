@@ -1,5 +1,5 @@
-startframe=1;
-endframe=18000;
+startframe=3000;
+endframe=21000;
 
 path=cd
 PathRoot=[path '/'];
@@ -19,5 +19,6 @@ end
 
 
 Time=[Time_distance;Time_angle];
+Time=Time./(endframe-startframe);
 
 save('Time.txt','Time','-ascii','-double','-tabs');
