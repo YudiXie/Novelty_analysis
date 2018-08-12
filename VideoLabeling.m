@@ -25,13 +25,13 @@ radius = 50;     %radius pixels
 
 path = cd;
 PathRoot=[path '/'];
-filelist=dir([PathRoot,'*.(mp4|avi)']);
+filelist=dir([PathRoot,'*.avi']);
+flen = length(filelist);
 for fiter =1:flen
     if ~isempty(strfind(filelist(fiter).name,'abeled'))
         filelist(fiter)=[];
     end
 end
-flen = length(filelist);
 tic
 
 for fiter =1:flen
@@ -109,7 +109,7 @@ for fiter =1:flen
 
         finalframe = insertShape(finalframe,'Line',[570,370,570-Labels(framenum,24).*ppcs,370-Labels(framenum,25).*ppcs],'Color','Red');  % velosity
         
-        finalframe = insertShape(finalframe,'circle',[obj_center(fiter,1) obj_center(fiter,1) radius]);
+        finalframe = insertShape(finalframe,'circle',[obj_center(fiter,1) obj_center(fiter,2) radius]);
         
         writeVideo(final_video,finalframe);
         framenum = framenum + 1;
@@ -120,5 +120,5 @@ for fiter =1:flen
     toc
     close(final_video);
     close all
-    clearvars -except filelist flen fiter ppcs
+    clearvars -except filelist flen fiter ppcs radius
 end

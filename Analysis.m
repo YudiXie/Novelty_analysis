@@ -41,11 +41,11 @@ load('Arena_Obj_Pos.mat');
 cd ..
 pathname = cd;
 PathRoot=[pathname '/'];
-filelist=dir([PathRoot,'*.(mp4|avi)']);
+filelist=dir([PathRoot,'*.avi']);
 flen = length(filelist);
 tic;
 for fiter =1:flen
-    vn = filelist(fi).name;
+    vn = filelist(fiter).name;
     fn=[vn(1:end-4) 'DeepCut_resnet50_noveltyMay21shuffle1_700000.csv'];
     disp(['Analyzing: ' fn]);
 
