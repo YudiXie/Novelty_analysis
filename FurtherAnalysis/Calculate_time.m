@@ -10,8 +10,8 @@ flen_fortime = length(filelist_fortime);
 for fi = 2:flen_fortime
 filename = filelist_fortime(fi).name;
 load(filename)
-Time_distance(fi)=sum(Labels(startframe:endframe,21));
-Time_angle(fi)=sum(Labels(startframe:endframe,23));
+Time_distance(fi-1)=sum(Labels(startframe:endframe,21));
+Time_angle(fi-1)=sum(Labels(startframe:endframe,23));
 
 clearvars -except filelist_fortime Time_angle Time_distance startframe endframe
 close all
