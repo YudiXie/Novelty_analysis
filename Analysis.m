@@ -185,7 +185,7 @@ for fiter =1:flen
     end
 
     Hmfigure=figure('visible','off');
-    hm=heatmap(pooled_map,'GridVisible','off','Colormap',parula,'FontSize',0.01);
+    hm=heatmap(pooled_map','GridVisible','off','Colormap',parula,'FontSize',0.01);
     % rectangle('Position',[arena(fiter,1)-round(pool_size/2),arena(fiter,2)-round(pool_size/2),arena(fiter,3)-arena(fiter,1),arena(fiter,4)-arena(fiter,2)])
 
 
