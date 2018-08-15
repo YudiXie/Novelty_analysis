@@ -8,7 +8,7 @@ obj_center=zeros(flen,2);
 
 for fi =flen:-1:1
     fn = filelist(fi).name;
-    vn=[fn(1:32) '.avi'];
+    vn=[fn(1:end-48) '.avi'];
 
     Labels = csvread(fn,3,0);
     video=VideoReader(vn);
