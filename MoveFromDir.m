@@ -1,8 +1,8 @@
 
 folderpath = cd;
-d = dir(folderpath);
-isub = [d(:).isdir];
-foldernames = {d(isub).name}';
+folderd = dir(folderpath);
+isub = [folderd(:).isdir];
+foldernames = {folderd(isub).name}';
 foldernames(ismember(foldernames,{'.','..'})) = [];
 folderlen=length(foldernames);
 
