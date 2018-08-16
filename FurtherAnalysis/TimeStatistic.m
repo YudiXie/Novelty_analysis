@@ -4,8 +4,8 @@
 start_min=1;
 end_min=11;
 fps=30;
-startframe=3000%start_min.*60.*fps;
-endframe=21000%end_min.*60.*fps;
+startframe=start_min.*60.*fps;
+endframe=end_min.*60.*fps;
 
 folderpath = cd;
 folderd = dir(folderpath);
