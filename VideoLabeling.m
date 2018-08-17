@@ -25,7 +25,7 @@ radius = 50;     %radius pixels
 
 path = cd;
 PathRoot=[path '/'];
-filelist=dir([PathRoot,'*.avi']);
+filelist=dir([PathRoot,'*.mp4']);
 flen = length(filelist);
 for fiter =1:flen
     if ~isempty(strfind(filelist(fiter).name,'abeled'))

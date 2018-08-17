@@ -41,7 +41,7 @@ load('Arena_Obj_Pos.mat');
 cd ..
 pathname = cd;
 PathRoot=[pathname '/'];
-filelist=dir([PathRoot,'*.avi']);
+filelist=dir([PathRoot,'*.mp4']);
 flen = length(filelist);
 tic;
 for fiter =1:flen
