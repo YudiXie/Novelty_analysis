@@ -43,6 +43,14 @@ pathname = cd;
 PathRoot=[pathname '/'];
 filelist=dir([PathRoot,'*.mp4']);
 flen = length(filelist);
+
+for fiter =1:flen
+    if ~isempty(strfind(filelist(fiter).name,'abeled'))
+        filelist(fiter)=[];
+    end
+end
+flen = length(filelist);
+
 tic;
 for fiter =1:flen
     vn = filelist(fiter).name;

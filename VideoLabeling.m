@@ -32,6 +32,7 @@ for fiter =1:flen
         filelist(fiter)=[];
     end
 end
+flen = length(filelist);
 tic
 
 for fiter =1:flen
