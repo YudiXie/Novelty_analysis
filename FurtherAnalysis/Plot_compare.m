@@ -39,7 +39,7 @@ conastd=std(Y_ang(1:3,:));
 stuastd=std(Y_ang(4:6,:));
 
 
-disfig=figure(1)
+disfig=figure(1);
 errorbar(X,condavg,condstd)
 hold on
 errorbar(X,studavg,studstd)
@@ -64,7 +64,7 @@ xticklabels(XTick);
 axis([X(1)-0.5 X(end)+0.5 0 max(max(Y_dis))+0.03]);
 
 
-angfig=figure(2)
+angfig=figure(2);
 errorbar(X,conaavg,conastd)
 hold on
 errorbar(X,stuaavg,stuastd)
