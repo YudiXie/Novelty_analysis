@@ -1,6 +1,3 @@
-% Only works when frame size is 420X520
-
-
 % Features shown on the videos:
 % Frame number
 % Distance to the object
@@ -54,23 +51,35 @@ for fiter =1:flen
     h = waitbar(0,[num2str(round(100*framenum/videolength)) '%' '    |    ' num2str(framenum) '/' num2str(videolength)]);
     while hasFrame(raw_video)
         rawframe=readFrame(raw_video); 
-        sideframe=255*ones(420,100,3);
-        finalframe = cat(2,rawframe,sideframe);
+        if raw_video.Height>420
+            sideframe=255*ones(raw_video.Height,100,3);
+            finalframe = cat(2,rawframe,sideframe);
+        elseif raw_video.Height<420
+            bottomframe=255*ones(420-raw_video.Height,raw_video.Width,3);
+            sideframe=255*ones(420,100,3);
+            finalframe = cat(1,rawframe,bottomframe);
+            finalframe = cat(2,finalframe,sideframe);
+        else
+            sideframe=255*ones(420,100,3);
+            finalframe = cat(2,rawframe,sideframe);
+        end
+    
+        
 
         %Adding text
-        textpos  = [520,0;    %Frame Number
-                    520,20;   %
-                    520,40;   %Distance (cm)
-                    520,60;   %
-                    520,80;   %In radius
-                    520,120;  %Orientation (d)
-                    520,140;  %
-                    520,160;  %Towards
-                    520,200;  %x speed (cm/s)
-                    520,220;  %
-                    520,240;  %y speed (cm/s)
-                    520,260;  %
-                    520,280]; %legend
+        textpos  = [raw_video.Width,0;    %Frame Number
+                    raw_video.Width,20;   %
+                    raw_video.Width,40;   %Distance (cm)
+                    raw_video.Width,60;   %
+                    raw_video.Width,80;   %In radius
+                    raw_video.Width,120;  %Orientation (d)
+                    raw_video.Width,140;  %
+                    raw_video.Width,160;  %Towards
+                    raw_video.Width,200;  %x speed (cm/s)
+                    raw_video.Width,220;  %
+                    raw_video.Width,240;  %y speed (cm/s)
+                    raw_video.Width,260;  %
+                    raw_video.Width,280]; %legend
         insertedtext = {'Frame Number:';
                         num2str(framenum);
                         'Distance (cm)';
@@ -87,10 +96,10 @@ for fiter =1:flen
         finalframe = insertText(finalframe,textpos,insertedtext,'BoxOpacity',0);
 
         if Labels(framenum,21)==1  
-        finalframe = insertShape(finalframe,'Filledcircle',[590 90 10],'Color','Red');
+        finalframe = insertShape(finalframe,'Filledcircle',[raw_video.Width+70 90 10],'Color','Red');
         end
         if Labels(framenum,23)==1
-        finalframe = insertShape(finalframe,'Filledcircle',[590 170 10],'Color','Red');
+        finalframe = insertShape(finalframe,'Filledcircle',[raw_video.Width+70 170 10],'Color','Red');
         end
         
         %Adding marker
@@ -105,10 +114,10 @@ for fiter =1:flen
         finalframe = insertMarker(finalframe,markerpos,'x','color',markercolor,'size',3);
 
         %Adding speed plot
-        finalframe = insertShape(finalframe,'Line',[530 370 610 370;570 330 570 410],'Color','Black');  % x y axis
-        finalframe = insertShape(finalframe,'Line',[570 290 610 290],'Color','Black');  % legend
+        finalframe = insertShape(finalframe,'Line',[raw_video.Width+10 370 raw_video.Width+90 370;raw_video.Width+50 330 raw_video.Width+50 410],'Color','Black');  % x y axis
+        finalframe = insertShape(finalframe,'Line',[raw_video.Width+60 290 raw_video.Width+100 290],'Color','Black');  % legend
 
-        finalframe = insertShape(finalframe,'Line',[570,370,570-Labels(framenum,24).*ppcs,370-Labels(framenum,25).*ppcs],'Color','Red');  % velosity
+        finalframe = insertShape(finalframe,'Line',[raw_video.Width+50,370,raw_video.Width+50-Labels(framenum,24).*ppcs,370-Labels(framenum,25).*ppcs],'Color','Red');  % velosity
         
         finalframe = insertShape(finalframe,'circle',[obj_center(fiter,1) obj_center(fiter,2) radius]);
         
