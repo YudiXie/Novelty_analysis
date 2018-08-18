@@ -42,7 +42,7 @@ for fiter =1:flen
     disp(['Analyzing: ' vn]);
 
     raw_video=VideoReader(vn);
-    final_video = VideoWriter([filelist(fiter).name(1:32) '_Labeled.avi']);
+    final_video = VideoWriter([filelist(fiter).name(1:end-4) '_Labeled.avi']);
     final_video.FrameRate = raw_video.FrameRate;
     open(final_video);
     videolength=round(raw_video.Duration.*raw_video.FrameRate);
