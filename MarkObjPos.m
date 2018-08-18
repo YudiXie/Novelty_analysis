@@ -1,4 +1,4 @@
-path=cd
+path=cd;
 PathRoot=[path '/'];
 filelist=dir([PathRoot,'*.csv']);
 flen = length(filelist);
@@ -14,14 +14,16 @@ for fi =flen:-1:1
     video=VideoReader(vn);
     frame=readFrame(video);
 
-    arena_choice=input('Use deflault arena? 1/0');
-    if arena_choice == 1
-        cur_arena = [133.4 31.2 483.4 391.6];
-    elseif arena_choice == 0
-        cur_arena=Labelrect(frame,'Please Select Arena');
-        close all
-    else
-        error('invalid input');
+    if fi == flen
+        arena_choice=input('Use deflault arena? 1/0');
+        if arena_choice == 1
+            cur_arena = [133.4 31.2 483.4 391.6];
+        elseif arena_choice == 0
+            cur_arena=Labelrect(frame,'Please Select Arena');
+            close all
+        else
+            error('invalid input');
+        end
     end
     arena(fi,:)=cur_arena;
 
