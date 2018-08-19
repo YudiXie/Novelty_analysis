@@ -1,3 +1,5 @@
+# MoSeq my_model.p data structure
+#
 # loglikes
 # labels
 # keys
@@ -27,6 +29,8 @@ import scipy.io as sio
 import joblib
 # import numpy
 # numpy.set_printoptions(threshold=numpy.nan)
+
+
 data = joblib.load('my_model.p')
 save_dict={'MSid':data['keys']}
 
