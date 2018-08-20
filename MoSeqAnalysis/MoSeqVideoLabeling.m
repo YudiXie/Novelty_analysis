@@ -3,7 +3,7 @@ load('ModelData.mat')
 Labels=MSLabels{14};
 
 vn='ff8c_Kaylee_N1.mp4';
-Changepoint=(Labels(2:end)-Labels(1:end-1)>0);
+Changepoint=(abs(Labels(2:end)-Labels(1:end-1))>0);
 Changepoint=[Changepoint zeros(1,6)];
 cmap=jet(100);
 
