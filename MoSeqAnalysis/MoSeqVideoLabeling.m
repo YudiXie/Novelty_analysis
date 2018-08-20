@@ -39,7 +39,7 @@ while hasFrame(raw_video)
 
     %Adding Changepoint Notation
 
-    if Changepoint(framenum)==1 ||  Changepoint(framenum+1)==1 || Changepoint(framenum+2)==1 || Changepoint(framenum+3)==1 || Changepoint(framenum+4)==1
+    if Changepoint(framenum)~=0 ||  Changepoint(framenum+1)~=0 || Changepoint(framenum+2)~=0
         finalframe = insertShape(finalframe,'Filledcircle',[40 90 10],'Color','Red');
         finalframe = insertShape(finalframe,'Filledcircle',[40 raw_video.Height-10 10],'Color','Red');
     end
