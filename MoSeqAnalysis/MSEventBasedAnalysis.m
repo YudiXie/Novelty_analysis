@@ -1,9 +1,11 @@
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Initialization
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-PlotWidth=200;
+PlotWidth=500;
 BarHeight=5;
 cmap=jet(100);
+fps=30;
 
 AnalysisDay=3;      % first novelty day
 
@@ -32,7 +34,7 @@ Mice(1).ExpDay(4).MSid='a52bf424-0b9a-4195-8f9e-7b87abe5398c';  % N2
 % Wash
 Mice(2).ExpDay(1).MSid='1b21fd16-843d-40a2-a180-e885b618060d';  % H1
 Mice(2).ExpDay(2).MSid='06232efa-884e-44f6-b3a2-b8ef949e2b14';  % H2
-Mice(2).ExpDay(3).MSid='a';  % N1
+Mice(2).ExpDay(3).MSid='84ca42ce-f065-4298-a097-b18c49a7cbe1';  % N1
 Mice(2).ExpDay(4).MSid='4b737026-c1ce-4e93-95b7-458e52259ad3';  % N2
 
 % Kaylee
@@ -76,7 +78,7 @@ for miceiter=1:length(Mice)
     % find MSid index
     MSidindex=1;
     for indexiter=1:size(MSid,1)
-        if strcmp(MSid(indexiter,:),MiceMice(miceiter).ExpDay(AnalysisDay).MSid)
+        if strcmp(MSid(indexiter,:),Mice(miceiter).ExpDay(AnalysisDay).MSid)
             break
         end
         MSidindex=MSidindex+1;
@@ -85,9 +87,11 @@ for miceiter=1:length(Mice)
         end
     end
 
-    Labels=MSLabels(MSidindex);
-    
-    rasterimage(miceiter)=
+    Labels=MSLabels{MSidindex};
+    labellen=length(Labels);
+
+    rasterimage{miceiter}=uint8(255.*ones(20,PlotWidth,3));
+    rasterimage{miceiter}=insertText(rasterimage{miceiter},[round(PlotWidth./2-35,0),0],[Mice(miceiter).name '  Day: ' num2str(AnalysisDay)],'BoxOpacity',0,'TextColor','black');
 
     for actiter=1:Mice(miceiter).datanum
 
@@ -124,7 +128,7 @@ for miceiter=1:length(Mice)
             Syllableline(:,lineiter)=Syllableline(:,lineiter).*(syllablecolor');
         end
 
-        barline=zeros(1,PlotWidth,3);
+        barline=uint8(zeros(1,PlotWidth,3));
         barline(1,:,1)=Syllableline(1,:);
         barline(1,:,2)=Syllableline(2,:);
         barline(1,:,3)=Syllableline(3,:);
@@ -133,15 +137,17 @@ for miceiter=1:length(Mice)
         for appenditer=1:BarHeight-1
             Syllablebar=cat(1,Syllablebar,barline);
         end
-
-        rasterimage(miceiter)=cat(1,rasterimage,Syllablebar);
-
-        % writeVideo(final_video,finalimage);
+        rasterimage{miceiter}=cat(1,rasterimage{miceiter},Syllablebar);
     end
-    
-
 end
 
+mkdir('RasterPlot')
+cd('RasterPlot')
 
+for miceiter=1:length(Mice)
+    imwrite(rasterimage{miceiter},[Mice(miceiter).name '_interaction_raster_plot.png']);
+end
 
+cd ..
+toc
 
