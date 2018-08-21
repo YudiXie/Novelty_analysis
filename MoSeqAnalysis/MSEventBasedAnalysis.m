@@ -193,7 +193,7 @@ xlabel('Time (s)')
 ylabel('Usage Percentage')
 axis([timeline(1),timeline(end),0,1])
 
-
+% This is for matching the syllable color with the color in the raster plot and labeled videos
 % for coloriter=1:100
 %     areahandle(coloriter).FaceColor=cmap(coloriter,:);
 % end
