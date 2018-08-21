@@ -1,4 +1,5 @@
-
+% Now using a loop to generate image, by implementing matrix operation using index information in actalignedusage could improve speed
+% when syllable index is -5 it is a 'none' type
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Initialization
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -63,7 +64,7 @@ if endindex ~= length(AllActLabels)+1
 end
 
 for miceiter=1:length(Mice)
-    Mice(miceiter).act=AllActLabels(Mice(miceiter).index:Mice(miceiter).index+Mice(miceiter).datanum-1,:);
+    Mice(miceiter).ExpDay(AnalysisDay).act=AllActLabels(Mice(miceiter).index:Mice(miceiter).index+Mice(miceiter).datanum-1,:);
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -90,12 +91,12 @@ for miceiter=1:length(Mice)
     Labels=MSLabels{MSidindex};
     labellen=length(Labels);
 
-    rasterimage{miceiter}=uint8(255.*ones(20,PlotWidth,3));
-    rasterimage{miceiter}=insertText(rasterimage{miceiter},[round(PlotWidth./2-35,0),0],[Mice(miceiter).name '  Day: ' num2str(AnalysisDay)],'BoxOpacity',0,'TextColor','black');
+    Mice(miceiter).ExpDay(AnalysisDay).rasterimage=uint8(255.*ones(20,PlotWidth,3));
+    Mice(miceiter).ExpDay(AnalysisDay).rasterimage=insertText(Mice(miceiter).ExpDay(AnalysisDay).rasterimage,[round(PlotWidth./2-35,0),0],[Mice(miceiter).name '  Day: ' num2str(AnalysisDay)],'BoxOpacity',0,'TextColor','black');
 
     for actiter=1:Mice(miceiter).datanum
 
-        framenum=Mice(miceiter).act(actiter,2);
+        framenum=Mice(miceiter).ExpDay(AnalysisDay).act(actiter,2);
 
         %Adding Syllable Bar
         middle_x=round(PlotWidth./2,0);
@@ -105,24 +106,34 @@ for miceiter=1:length(Mice)
 
         for lineiter=1:PlotWidth
             rpos=lineiter-middle_x;
+
+
+            plotframenum=framenum+rpos;
+
+            if plotframenum<=0 || plotframenum>labellen
+                syllableindex=-5;
+            else
+                syllableindex=Labels(plotframenum);
+            end
+
+
+            % Adding to a matrix actalignedusage that store all syllable usage around the labeled point
+            % actalignedpoint is the labeled point
+            Mice(miceiter).ExpDay(AnalysisDay).actalignedusage(actiter,lineiter)=syllableindex;
+            Mice(miceiter).ExpDay(AnalysisDay).actalignedpoint(actiter)=middle_x;
+
+            % Calculatiing syllabel color corrisponding to color map
+            if syllableindex==-5
+                syllablecolor=[0 0 0];
+            elseif syllableindex<100 && syllableindex>=0
+                syllablecolor=cmap(syllableindex+1,:);
+            else
+                error(['syllableindex out of bund, index=' num2str(syllableindex)]);
+            end
+
+            % Adding current position pointer in the raster plot
             if rpos>-1 && rpos<1
                 syllablecolor=[1 0 0];
-            else
-                plotframenum=framenum+rpos;
-
-                if plotframenum<=0 || plotframenum>labellen
-                    syllableindex=-5;
-                else
-                    syllableindex=Labels(plotframenum);
-                end
-
-                if syllableindex==-5
-                    syllablecolor=[0 0 0];
-                elseif syllableindex<100 && syllableindex>=0
-                    syllablecolor=cmap(syllableindex+1,:);
-                else
-                    error(['syllableindex out of bund, index=' num2str(syllableindex)]);
-                end
             end
 
             Syllableline(:,lineiter)=Syllableline(:,lineiter).*(syllablecolor');
@@ -137,17 +148,68 @@ for miceiter=1:length(Mice)
         for appenditer=1:BarHeight-1
             Syllablebar=cat(1,Syllablebar,barline);
         end
-        rasterimage{miceiter}=cat(1,rasterimage{miceiter},Syllablebar);
+        Mice(miceiter).ExpDay(AnalysisDay).rasterimage=cat(1,Mice(miceiter).ExpDay(AnalysisDay).rasterimage,Syllablebar);
     end
 end
 
-mkdir('RasterPlot')
-cd('RasterPlot')
 
+% Calculating general usage only used, when plot width is cosistent across mice
+Generalactalignedusage=[];
 for miceiter=1:length(Mice)
-    imwrite(rasterimage{miceiter},[Mice(miceiter).name '_interaction_raster_plot.png']);
+    Generalactalignedusage=cat(1,Generalactalignedusage,Mice(miceiter).ExpDay(AnalysisDay).actalignedusage);
 end
 
+% General act aligned syllable usage GAASU, 
+% meaning GAASU(r , c) = count of syllable r-1 in all data at frame c
+Syllablebinedge=[-6,-0.5:1:99.5];
+GAASU=zeros(101,PlotWidth);
+for lineiter =1:PlotWidth
+    GAASU(:,lineiter)=(histcounts(Generalactalignedusage(:,lineiter),Syllablebinedge))';
+end
+GAASU(size(GAASU,1)+1,:)=GAASU(1,:);
+GAASU(1,:)=[];
+
+% Percentage usage
+PGAASU=GAASU./size(Generalactalignedusage,1);
+
+% % Accumulated act aligned syllable usage AAASU
+% AAASU=GAASU;
+% for rowiter=size(AAASU,1):-1:2
+%     AAASU(rowiter,:)=sum(AAASU(1:rowiter,:));
+% end
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Making plots
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+timeline=((1:PlotWidth)-round(PlotWidth./2,0))./fps;
+
+Plot_actalignedusage=figure(1);
+areahandle=area(timeline,PGAASU');
+areahandle(82).FaceColor=cmap(82,:);
+title('Syllable Usage Aligned by Human Labeled interaction')
+xlabel('Time (s)')
+ylabel('Usage Percentage')
+axis([timeline(1),timeline(end),0,1])
+
+
+% for coloriter=1:100
+%     areahandle(coloriter).FaceColor=cmap(coloriter,:);
+% end
+% areahandle(101).FaceColor=[0 0 0];
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Saving
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+mkdir('EventBasedAnalysis')
+cd('EventBasedAnalysis')
+
+% Saving raster plot
+for miceiter=1:length(Mice)
+    imwrite(Mice(miceiter).ExpDay(AnalysisDay).rasterimage,[Mice(miceiter).name '_interaction_raster_plot.png']);
+end
 cd ..
 toc
 
