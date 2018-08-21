@@ -1,6 +1,7 @@
 tic
 load('ModelData.mat')
 Labels=MSLabels{14};
+BarHeight=30;
 
 vn='ff8c_Kaylee_N1.mp4';
 Changepoint=(abs(Labels(2:end)-Labels(1:end-1))>0);
@@ -81,7 +82,7 @@ while hasFrame(raw_video)
     videoline(1,:,3)=Syllableline(3,:);
 
     Syllablebar=videoline;
-    for appenditer=1:30
+    for appenditer=1:BarHeight
         Syllablebar=cat(1,Syllablebar,videoline);
     end
 
