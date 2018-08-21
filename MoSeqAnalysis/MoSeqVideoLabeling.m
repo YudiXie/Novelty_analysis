@@ -82,7 +82,7 @@ while hasFrame(raw_video)
     videoline(1,:,3)=Syllableline(3,:);
 
     Syllablebar=videoline;
-    for appenditer=1:BarHeight
+    for appenditer=1:BarHeight-1
         Syllablebar=cat(1,Syllablebar,videoline);
     end
 
