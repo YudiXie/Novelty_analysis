@@ -178,6 +178,8 @@ X=0:100;
 SyllablesX=-1:99;
 fsize=16;
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Plot_GeneralUsage=figure;
 plot(X,GSortedusage,'LineWidth',1.5)
 title('General Syllable Usage (sorted by usage, Serenity H1H2N1N2)','FontSize',fsize)
@@ -186,6 +188,7 @@ xlabel('Syllables','FontSize',fsize)
 xticks(X);
 xticklabels(SyllablesX(GSortedusageindex));
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Plot_AccGeneralUsage=figure;
 plot(X,AccGSortedusage,'LineWidth',1.5)
 title('Accumulated General Syllable Usage (Serenity H1H2N1N2)','FontSize',fsize)
@@ -193,7 +196,7 @@ ylabel('Percentage','FontSize',fsize)
 xlabel('Syllables Rank','FontSize',fsize)
 xticks(X);
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Plot_UsageCompare=figure;
 plot(X,PHUsage,'LineWidth',1.5)
 hold on
@@ -206,6 +209,7 @@ xlabel('Syllables','FontSize',fsize)
 xticks(X);
 xticklabels(SyllablesX);
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Plot_UsageCompare_sorted=figure;
 plot(X,PHUsage(NvsHSortedusageindex),'LineWidth',1.5)
 hold on
@@ -217,6 +221,15 @@ ylabel('Percentage','FontSize',fsize)
 xlabel('Syllables','FontSize',fsize)
 xticks(X);
 xticklabels(SyllablesX(NvsHSortedusageindex));
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Making plots
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+close all
+clearvars Plot_UsageCompare_sorted Plot_UsageCompare Plot_AccGeneralUsage Plot_GeneralUsage
+save('GeneralUsage.mat')
 
 
 
