@@ -68,14 +68,14 @@ for edgeiter=elen:-1:1
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% General transtion on Novelty days
+% General transition on Novelty days
 % Node size novelty usage
 % Edge width coded by bigram transition probability on novelty days
 % Edge color coded by bigram transition probability on novelty days
 % Edge length invert related to bigram transition probability
-% Transition threshoded by transition probability
-% Nodes threshoded by usage
-% Postion initialized by circle, updated by force directed algorithm with gravity
+% Transition threshold by transition probability
+% Nodes threshold by usage
+% Position initialized by circle, updated by force directed algorithm with gravity
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 NoveltyTransition=figure;
@@ -106,13 +106,13 @@ Z=Plot_NTG.ZData;
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% General transtion on Habituation days
+% General transition on Habituation days
 % Node size habituation usage
 % Edge width coded by bigram transition probability on habituation days
 % Edge color coded by bigram transition probability on habituation days
-% Transition threshoded by transition probability
-% Nodes threshoded by usage
-% Postion initialized by circle, updated by force directed algorithm with gravity
+% Transition threshold by transition probability
+% Nodes threshold by usage
+% Position initialized by circle, updated by force directed algorithm with gravity
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 HabituationTransition=figure;
@@ -130,13 +130,13 @@ title('General Transition on Habituation Day','FontSize',fsize)
 set(HabituationTransition, 'position', [0 0 1000 850]);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% General transtion comparison Novelty days vs Habituation days
+% General transition comparison Novelty days vs Habituation days
 % Node size general usage on both novelty and habituation days
 % Edge width coded by bigram absolute value of transition probability comparison between Novelty and Habituation days
 % Edge color coded by bigram transition probability comparison between Novelty and Habituation days
-% Transition threshoded by transition probability
-% Nodes threshoded by usage
-% Postion initialized by circle, updated by force directed algorithm with gravity
+% Transition threshold by transition probability
+% Nodes threshold by usage
+% Position initialized by circle, updated by force directed algorithm with gravity
 % Node color is red with novelty enriched syllables
 % Node color is blue with habituation enriched syllables
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

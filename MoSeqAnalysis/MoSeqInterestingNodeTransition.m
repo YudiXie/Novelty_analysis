@@ -64,15 +64,15 @@ NHs81 = successors(NHCompareG,'81');
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Syllable 81 transtion on Novelty days
+% Syllable 81 transition on Novelty days
 % Node size coded by novelty usage
 % edge width coded by novelty transition probabitliy
 % Node color coded by indegree+outdegree
 % Edge color is red with in '81' transition
 % Edge color is blue with out '81' transition
 % Hightlighted in and out 81 transition
-% Transition threshoded by transition probability
-% Nodes threshoded by in and out degree
+% Transition threshold by transition probability
+% Nodes threshold by in and out degree
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Novelty81Transition=figure;
@@ -98,7 +98,7 @@ Y=Plot_81NTG.YData;
 Z=Plot_81NTG.ZData;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Syllable 81 transtion on Habituation days
+% Syllable 81 transition on Habituation days
 % Use X Y Data from the former graph
 % Node size coded by habituation usage
 % edge width coded by habituation transition probabitliy
@@ -106,8 +106,8 @@ Z=Plot_81NTG.ZData;
 % Edge color is red with in '81' transition
 % Edge color is blue with out '81' transition
 % Hightlighted in and out 81 transition
-% Transition threshoded by transition probability
-% Nodes threshoded by in and out degree
+% Transition threshold by transition probability
+% Nodes threshold by in and out degree
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Habituation81Transition=figure;
@@ -129,7 +129,7 @@ title('Syllable 81 Transition on Habituation Day','FontSize',fsize)
 set(Habituation81Transition, 'position', [0 0 1000 850]);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Syllable 81 transtion compare Novelty days vs Habituation days
+% Syllable 81 transition compare Novelty days vs Habituation days
 % Use X Y Data from the former graph
 % Node size coded by general usage
 % Node color coded by Novelty Habituation usage comparison
@@ -137,8 +137,8 @@ set(Habituation81Transition, 'position', [0 0 1000 850]);
 % Edge color is red with novelty entiched transition
 % Edge color is blue with habituation enrichard transition
 % Hightlighted in and out 81 transition
-% Transition threshoded by transition probability
-% Nodes threshoded by in and out degree
+% Transition threshold by transition probability
+% Nodes threshold by in and out degree
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 NvsH81Transition=figure;
 Plot_81NvsHTG=plot(NHCompareG,'XData',X,'YData',Y);
