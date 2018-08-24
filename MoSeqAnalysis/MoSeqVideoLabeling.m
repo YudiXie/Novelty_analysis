@@ -1,3 +1,5 @@
+% Notice: some of MoSeq videos and label length do not match
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -77,13 +79,20 @@ for miceiter=1:length(Mice)
         videolength=round(raw_video.Duration.*raw_video.FrameRate,0);
 
         labellen=length(Labels);
-        if videolength~=labellen
-            error('video and label mot match');
-        end
+
+        % if videolength<labellen-5 || videolength>labellen+5
+        %     error('video and label mot match');
+        % end
 
         framenum = 1;
         mywaitbar = waitbar(0,[num2str(round(100*framenum/videolength)) '%' '    |    ' num2str(framenum) '/' num2str(videolength)]);
-        while hasFrame(raw_video)
+        % while hasFrame(raw_video) 
+        for frameiter=1:labellen
+
+            if ~hasFrame(raw_video)
+                break
+            end
+
             rawframe=readFrame(raw_video);
 
             finalframe=rawframe;
