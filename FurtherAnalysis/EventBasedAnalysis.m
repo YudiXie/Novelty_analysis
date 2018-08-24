@@ -568,6 +568,18 @@ title('Approach-Retreat angle distribution')
 xlabel('Approach-Retreat (degree)')
 ylabel('Count')
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+PolarDistribution=figure;
+stepsize=30;
+AngleHistEdge=-180:stepsize:180;
+ContextualAvsRangleHistCount=histcounts(ContextualAvsRangledis,AngleHistEdge);
+StimulusAvsRangleHistCount=histcounts(StimulusAvsRangledis,AngleHistEdge);
+PolarX=deg2rad([-180+(stepsize/2):stepsize:180-(stepsize/2) 180+stepsize/2]);
+polarplot(PolarX,[ContextualAvsRangleHistCount ContextualAvsRangleHistCount(1)],'LineWidth',1.5);
+hold on
+polarplot(PolarX,[StimulusAvsRangleHistCount StimulusAvsRangleHistCount(1)],'LineWidth',1.5);
+title('Approach-Retreat Angle Distribution');
+legend('Contextual','Stimulus');
 %***********************************************************
 % Save
 % ***********************************************************
