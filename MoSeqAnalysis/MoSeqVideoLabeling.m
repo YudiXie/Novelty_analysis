@@ -71,7 +71,7 @@ for miceiter=1:length(Mice)
         cmap=jet(100);
 
         raw_video=VideoReader(vn);
-        final_video = VideoWriter([vn(1:end-4) '_Labeled.avi']);
+        final_video = VideoWriter([vn(1:end-4) '_Labeled.mp4']);
         final_video.FrameRate = raw_video.FrameRate;
         open(final_video);
         videolength=round(raw_video.Duration.*raw_video.FrameRate,0);
