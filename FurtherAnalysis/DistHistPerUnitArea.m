@@ -1,117 +1,150 @@
-
-pathname = cd;
-PathRoot=[pathname '/'];
-filelist=dir([PathRoot,'*.csv']);
-flen = length(filelist);
-cd Analyzed_Data;
-load('Arena_Obj_Pos.mat');
-tic;
-
 fine_scale=1;        % fine scale for estimation
 ppc=355./(2.*30.48); % pixels per cm
 fps=30;              % video frame per second
-frame_start=1;
-frame_end=18000;
+frame_start=1000;
+frame_end=19000;
 
-for fiter =1
-    fn = filelist(fiter).name;
-    disp(['Analyzing: ' fn]);
-    load([filelist(fiter).name(1:32) '.mat'],'Labels');
-    x_c=obj_center(fiter,1);
-    y_c=obj_center(fiter,2);
-    x_1=round(arena(fiter,1),0);
-    y_1=round(arena(fiter,2),0);
-    x_2=round(arena(fiter,3),0);
-    y_2=round(arena(fiter,4),0);
+AnalysisDay=3;
+tic;
+
+Mice(1).name='C1_Akbar';
+Mice(2).name='C2_Emperor';
+Mice(3).name='C3_Piett';
+Mice(4).name='S1_Anakin';
+Mice(5).name='S2_Jabba';
+Mice(6).name='S3_Wedge';
+
+Mice(1).novelty='C';
+Mice(2).novelty='C';
+Mice(3).novelty='C';
+Mice(4).novelty='S';
+Mice(5).novelty='S';
+Mice(6).novelty='S';
+
+CDistances=[];
+SDistances=[];
+for miceiter=1:length(Mice)
+    cd(Mice(miceiter).name);
+    cd('Analyzed_Data');
+
+    pathname = cd;
+    PathRoot=[pathname '/'];
+    filelist=dir([PathRoot,'*.mat']);
+    flen = length(filelist);
+
+    load('Arena_Obj_Pos.mat');
+    load(filelist(AnalysisDay+1).name);
+
+
+    x_c(miceiter)=obj_center(AnalysisDay,1);
+    y_c(miceiter)=obj_center(AnalysisDay,2);
+    x_1(miceiter)=arena(AnalysisDay,1);
+    y_1(miceiter)=arena(AnalysisDay,2);
+    x_2(miceiter)=arena(AnalysisDay,3);
+    y_2(miceiter)=arena(AnalysisDay,4);
     
-    Distances=Labels(frame_start:frame_end,17);
-    Locate=find(Distances>Labels(1,20));
-    Distances(Locate)=[];
-    [N,edges]=histcounts(Distances);
-    bin_size=edges(2)-edges(1);
-    dis=0.5.*(edges(2:end)+edges(1:end-1));
-
-
-    for iter=1:length(N)
-        % N_correct(iter)=N(iter)./area_weight_est(dis(iter),x_1,y_1,x_2,y_2,x_c,y_c,bin_size,fine_scale,ppc);
-        N_correct(iter)=N(iter)./area_weight(dis(iter),x_1,y_1,x_2,y_2,x_c,y_c,ppc);
-        %calculate number of frames spent per unit cm^2
+    if Mice(miceiter).novelty=='C'
+        CDistances=[CDistances Labels(frame_start:frame_end,17)'];
+    elseif Mice(miceiter).novelty=='S'
+        SDistances=[SDistances Labels(frame_start:frame_end,17)'];
     end
-    N=N./fps;
-    N_correct=N_correct./fps;
-
-    
-    % rawHist=figure(1);
-    % hist(Labels(frame_start:frame_end,17));
-    height=1.5;
-    NHist=figure(2);
-    plot(dis,N);
-    title('Time spent at different distance');
-    xlabel('distance (cm)');
-    ylabel('time (s)');
-    hold on
-    xc_1=[1 1].*Labels(1,18);
-    xc_2=[1 1].*Labels(1,19);
-    xc_3=[1 1].*Labels(1,20);
-    y=[0 height];
-    plot(xc_1,y,xc_2,y,xc_3,y);
-
-
-    NCHist=figure(3);
-    plot(dis,N_correct)
-    title('Time spent at different distance per cm^2');
-    xlabel('distance (cm)');
-    ylabel('time (s)');
-    hold on
-    xc_1=[1 1].*Labels(1,18);
-    xc_2=[1 1].*Labels(1,19);
-    xc_3=[1 1].*Labels(1,20);
-    y=[0 height];
-    plot(xc_1,y,xc_2,y,xc_3,y);
-
-
-    WeightPlot=figure(4);
-    for witer=1:length(dis)
-        weights1(witer)=area_weight_est(dis(witer),x_1,y_1,x_2,y_2,x_c,y_c,bin_size,fine_scale,ppc);
-        weights2(witer)=area_weight(dis(witer),x_1,y_1,x_2,y_2,x_c,y_c,ppc);
-    end
-    plot(dis,weights1,dis,weights2)
-    legend('w1','w2');
-    hold on
-    xc_1=[1 1].*Labels(1,18);
-    xc_2=[1 1].*Labels(1,19);
-    xc_3=[1 1].*Labels(1,20);
-    y=[0 height];
-    plot(xc_1,y,xc_2,y,xc_3,y);
-
-
-    % % ***********************************************************
-    % % Save
-    % % ***********************************************************
-    % % pause
-
-    % cd Analyzed_Data
-
-    % mkdir([vn(1:end-4) '_Plots'])
-    % cd([vn(1:end-4) '_Plots'])
-
-    % saveas(Disfigure,['Distance_' vn(1:end-4) '.png'])
-    % saveas(Angfigure,['Orientation_' vn(1:end-4) '.png'])
-    % saveas(Hmfigure,['Heatmap_' vn(1:end-4) '.png'])
-    % saveas(Trafigure,['Trajectory_' vn(1:end-4) '.png'])
-
-    % cd ..
-
-    % save(vn(1:end-4),'Labels','Dis_t_obj','Ang_t_obj');
-    % close all
-    % clearvars -except arena obj obj_center filelist fiter
-
-    % cd ..
-
-    toc;
+    cd ..
+    cd ..
 end
 
-cd ..
+
+dilusize=30;
+x_c_avg=mean(x_c);
+y_c_avg=mean(y_c);
+x_1_avg=round(mean(x_1),0)-dilusize;
+y_1_avg=round(mean(y_1),0)-dilusize;
+x_2_avg=round(mean(x_2),0)+dilusize;
+y_2_avg=round(mean(y_2),0)+dilusize;
+
+cutoff=5;
+Locate=find(CDistances>Labels(1,20)+cutoff);
+CDistances(Locate)=[];
+Locate=find(SDistances>Labels(1,20)+cutoff);
+SDistances(Locate)=[];
+
+
+disedges=0:2.5:70;
+CN=histcounts(CDistances,disedges);
+SN=histcounts(SDistances,disedges);
+bin_size=disedges(2)-disedges(1);
+dis=0.5.*(disedges(2:end)+disedges(1:end-1));
+
+
+for iter=1:length(CN)
+    % N_correct(iter)=N(iter)./area_weight_est(dis(iter),x_1,y_1,x_2,y_2,x_c,y_c,bin_size,fine_scale,ppc);
+    CN_correct(iter)=CN(iter)./area_weight(dis(iter),x_1_avg,y_1_avg,x_2_avg,y_2_avg,x_c_avg,y_c_avg,bin_size,ppc);
+    %calculate number of frames spent per unit cm^2
+end
+
+
+for iter=1:length(SN)
+    % N_correct(iter)=N(iter)./area_weight_est(dis(iter),x_1,y_1,x_2,y_2,x_c,y_c,bin_size,fine_scale,ppc);
+    SN_correct(iter)=SN(iter)./area_weight(dis(iter),x_1_avg,y_1_avg,x_2_avg,y_2_avg,x_c_avg,y_c_avg,bin_size,ppc);
+    %calculate number of frames spent per unit cm^2
+end
+
+CN=CN./(fps.*length(Mice));
+CN_correct=CN_correct./(fps.*length(Mice));
+
+SN=SN./(fps.*length(Mice));
+SN_correct=SN_correct./(fps.*length(Mice));
+
+
+
+height=0.5;
+fsize=16;
+
+NHist=figure(1);
+plot(dis,CN,'LineWidth',1.5);
+hold on
+plot(dis,SN,'LineWidth',1.5);
+legend('Contextual','Stimulus');
+title('Time spent at different distance','FontSize',fsize);
+xlabel('Distance (cm)','FontSize',fsize);
+ylabel('time (s)','FontSize',fsize);
+hold on
+xc_1=[1 1].*Labels(1,18);
+xc_2=[1 1].*Labels(1,19);
+xc_3=[1 1].*Labels(1,20);
+y=[0 height];
+plot(xc_1,y,xc_2,y,xc_3,y);
+
+
+NCHist=figure(2);
+p1=plot(dis,CN_correct,'LineWidth',1.5);
+hold on
+p2=plot(dis,SN_correct,'LineWidth',1.5);
+
+title('Time spent at different distance per cm^2 (ROTJ) first 10 min','FontSize',fsize);
+xlabel('Distance (cm)','FontSize',fsize);
+ylabel('time (s)','FontSize',fsize);
+hold on
+xc_1=[1 1].*Labels(1,18);
+xc_2=[1 1].*Labels(1,19);
+xc_3=[1 1].*Labels(1,20);
+y=[0 height];
+plot(xc_1,y,xc_2,y,xc_3,y);
+legend([p1 p2],'Contextual','Stimulus');
+
+
+WeightPlot=figure(3);
+for witer=1:length(dis)
+    weights1(witer)=area_weight_est(dis(witer),x_1_avg,y_1_avg,x_2_avg,y_2_avg,x_c_avg,y_c_avg,bin_size,fine_scale,ppc);
+    weights2(witer)=area_weight(dis(witer),x_1_avg,y_1_avg,x_2_avg,y_2_avg,x_c_avg,y_c_avg,bin_size,ppc);
+end
+plot(dis,weights1,dis,weights2)
+legend('w1','w2');
+hold on
+xc_1=[1 1].*Labels(1,18);
+xc_2=[1 1].*Labels(1,19);
+xc_3=[1 1].*Labels(1,20);
+y=[0 height];
+plot(xc_1,y,xc_2,y,xc_3,y);
 
 
 
@@ -149,7 +182,7 @@ end
 % returns a weight w,  it is acctually the part of perimeter of a circle which has r as radius and (xc,yc) as radius intersected by the arena
 % 
 % this function does not gernally apply, only applys to those object is placed near one corner of the arena and near the diagonal line  (len(3)<len(4))
-function w=area_weight(r,x1,y1,x2,y2,xc,yc,ppc)
+function w=area_weight(r,x1,y1,x2,y2,xc,yc,bin,ppc)
     r=r.*ppc;
     len=[abs(xc-x1);
          abs(yc-y1);
@@ -181,5 +214,5 @@ function w=area_weight(r,x1,y1,x2,y2,xc,yc,ppc)
     else 
         w=+Inf;
     end
-    w=w./ppc;
+    w=(w.*bin)./ppc;
 end
