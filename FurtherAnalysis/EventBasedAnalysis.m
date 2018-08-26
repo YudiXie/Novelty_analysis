@@ -36,7 +36,7 @@ timeseg=[0 2 4 6 8 15];     % in minute
 
 timeseg=starttime+timeseg;
 frameseg=timeseg.*60.*fps;
-
+fsize=16;
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -236,8 +236,8 @@ end
 legend('Contextual vs Stimulus',' ','Akb','Emp','Pie','Ana','Jab','Wed')
 set(Plot_total_interaction_count, 'position', [0 0 500 800]);
 ylim([0 50])
-title('Interaction Count in first 10 min on novelty day 1 (ROTJ)')
-ylabel('Interaction Count')
+title('Interaction Count in first 10 min on novelty day 1 (ROTJ)','FontSize',fsize)
+ylabel('Interaction Count','FontSize',fsize)
 xticks(CVSX);
 xticklabels(CVSXTick);
 
@@ -267,8 +267,8 @@ end
 
 legend('Contextual vs Stimulus',' ','Akb','Emp','Pie','Ana','Jab','Wed')
 set(Plot_total_interaction_time, 'position', [0 0 500 800]);
-title('Total Interaction Time in first 10 min on novelty day 1 (ROTJ)')
-ylabel('Time (s)')
+title('Total Interaction Time in first 10 min on novelty day 1 (ROTJ)','FontSize',fsize)
+ylabel('Time (s)','FontSize',fsize)
 xticks(CVSX);
 xticklabels(CVSXTick);
 
@@ -301,8 +301,8 @@ end
 legend('Contextual vs Stimulus',' ','Akb','Emp','Pie','Ana','Jab','Wed')
 set(Plot_time_per_interaction_at, 'position', [0 0 500 800]);
 
-title('Average time per interaction (all bouts) in first 10 min on novelty day 1 (ROTJ)')
-ylabel('Time (s)')
+title('Average time per interaction (all bouts) in first 10 min on novelty day 1 (ROTJ)','FontSize',fsize)
+ylabel('Time (s)','FontSize',fsize)
 xticks(CVSX);
 xticklabels(CVSXTick);
 
@@ -337,9 +337,9 @@ end
 xlim([0.5 5.5]);
 
 
-title('Interaction per minute in first 10 min on novelty day 1 (ROTJ)')
+title('Interaction per minute in first 10 min on novelty day 1 (ROTJ)','FontSize',fsize)
 legend('Contextual','Stimulus','Akb','Emp','Pie','Ana','Jab','Wed')
-ylabel('Interaction Count')
+ylabel('Interaction Count','FontSize',fsize)
 xticks(IntersessionX);
 xticklabels(IntersessionXTick);
 
@@ -374,9 +374,9 @@ end
 xlim([0.5 5.5]);
 
 
-title('Average time per interaction in first 10 min on novelty day 1 (ROTJ)')
+title('Average time per interaction in first 10 min on novelty day 1 (ROTJ)','FontSize',fsize)
 legend('Contextual','Stimulus','Akb','Emp','Pie','Ana','Jab','Wed')
-ylabel('Time (s)')
+ylabel('Time (s)','FontSize',fsize)
 xticks(IntersessionX);
 xticklabels(IntersessionXTick);
 
@@ -411,8 +411,8 @@ legend('Contextual vs Stimulus',' ','Akb','Emp','Pie','Ana','Jab','Wed')
 set(Plot_retreat_speed_at, 'position', [0 0 500 800]);
 ylim([0 100]);
 
-title('Averaged retreat speed (all bouts) in first 10 min on novelty day 1 (ROTJ)')
-ylabel('Speed  (cm/s)')
+title('Averaged retreat speed (all bouts) in first 10 min on novelty day 1 (ROTJ)','FontSize',fsize)
+ylabel('Speed  (cm/s)','FontSize',fsize)
 xticks(CVSX);
 xticklabels(CVSXTick);
 
@@ -447,9 +447,9 @@ end
 xlim([0.5 5.5]);
 
 
-title('Averaged retreat speed in first 10 min on novelty day 1 (ROTJ)')
+title('Averaged retreat speed in first 10 min on novelty day 1 (ROTJ)','FontSize',fsize)
 legend('Contextual','Stimulus','Akb','Emp','Pie','Ana','Jab','Wed')
-ylabel('Speed  (cm/s)')
+ylabel('Speed  (cm/s)','FontSize',fsize)
 xticks(IntersessionX);
 xticklabels(IntersessionXTick);
 
@@ -479,8 +479,8 @@ for miceiter=1:length(Mice)
 end
 
 legend('Contextual vs Stimulus',' ','Akb','Emp','Pie','Ana','Jab','Wed')
-title('Averaged body length index during interaction (all bouts) in first 10 min on novelty day 1 (ROTJ)')
-ylabel('body length index    (length during interaction)/(average length)')
+title('Averaged body length index during interaction (all bouts) in first 10 min on novelty day 1 (ROTJ)','FontSize',fsize)
+ylabel('body length index    (length during interaction)/(average length)','FontSize',fsize)
 xticks(CVSX);
 xticklabels(CVSXTick);
 set(Plot_body_length_at, 'position', [0 0 500 800]);
@@ -516,9 +516,9 @@ for miceiter=1:length(Mice)
 end
 xlim([0.5 5.5]);
 
-title('Averaged body length index during interaction in first 10 min on novelty day 1 (ROTJ)')
+title('Averaged body length index during interaction in first 10 min on novelty day 1 (ROTJ)','FontSize',fsize)
 legend('Contextual','Stimulus','Akb','Emp','Pie','Ana','Jab','Wed')
-ylabel('body length index    (length during interaction)/(average length)')
+ylabel('body length index    (length during interaction)/(average length)','FontSize',fsize)
 xticks(IntersessionX);
 xticklabels(IntersessionXTick);
 
@@ -542,8 +542,8 @@ scatter(X1,ContextualAvsRangledis,10,'Marker','d')
 hold on 
 scatter(X2,StimulusAvsRangledis,10,'Marker','d')
 
-title('Averaged approach-retreat angle (all bouts) in first 10 min on novelty day 1 (ROTJ)')
-ylabel('Retreat angle (degree)')
+title('Averaged approach-retreat angle (all bouts) in first 10 min on novelty day 1 (ROTJ)','FontSize',fsize)
+ylabel('Retreat angle (degree)','FontSize',fsize)
 xticks(CVSX);
 xticklabels(CVSXTick);
 set(Plot_AvsR_Angle, 'position', [0 0 500 800]);
@@ -565,11 +565,11 @@ hist(Anglecompare,15);
 legend('Contextual','Stimulus')
 xlim([-200 200]);
 title('Approach-Retreat angle distribution')
-xlabel('Approach-Retreat (degree)')
-ylabel('Count')
+xlabel('Approach-Retreat (degree)','FontSize',fsize)
+ylabel('Count','FontSize',fsize)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-PolarDistribution=figure;
+PolarDistribution=figure('visible','off');
 stepsize=30;
 AngleHistEdge=-180:stepsize:180;
 ContextualAvsRangleHistCount=histcounts(ContextualAvsRangledis,AngleHistEdge);
@@ -578,7 +578,7 @@ PolarX=deg2rad([-180+(stepsize/2):stepsize:180-(stepsize/2) 180+stepsize/2]);
 polarplot(PolarX,[ContextualAvsRangleHistCount ContextualAvsRangleHistCount(1)],'LineWidth',1.5);
 hold on
 polarplot(PolarX,[StimulusAvsRangleHistCount StimulusAvsRangleHistCount(1)],'LineWidth',1.5);
-title('Approach-Retreat Angle Distribution');
+title('Approach-Retreat Angle Distribution','FontSize',fsize);
 legend('Contextual','Stimulus');
 %***********************************************************
 % Save
@@ -598,6 +598,7 @@ saveas(Plot_body_length_at,'Plot_body_length_at.png')
 saveas(Plot_body_length,'Plot_body_length.png')
 saveas(Plot_AvsR_Angle,'Plot_AvsR_Angle.png')
 saveas(Plot_AvsR_Angle_dis,'Plot_AvsR_Angle_dis.png')
+saveas(PolarDistribution,'Plot_AvsR_Angle_dis_polar.png')
 
 save('Noveltyday1EventAnalysis.mat');
 cd ..
