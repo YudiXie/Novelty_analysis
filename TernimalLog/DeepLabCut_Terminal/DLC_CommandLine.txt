@@ -18,3 +18,55 @@ root@bd5ab139811e:/media# cd alex/noveltydisk/EvaluationCode/
 root@bd5ab139811e:/media/alex/noveltydisk/EvaluationCode# python3 RunAnalysisoverVideos.py 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Traning a network
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+docker start yuxie_GPU1
+docker exec -it yuxie_GPU1 /bin/bash
+
+(0) Configuration of your project:
+myconfig.py
+
+(1) Selecting data to label:
+cd Generating_a_Training_Set
+python3 Step1_SelectRandomFrames_fromVideos.py
+
+(2) Label the frames:
+ fiji: File > Import > Image Sequence > (check "virtual stack")
+
+(3) Formatting the data I:
+python3 Step2_ConvertingLabels2DataFrame.py
+
+(4) Checking the formatted data:
+python3 Step3_CheckLabels.py
+
+(5) Formatting the data II:
+python3 Step4_GenerateTrainingFileFromLabelledData.py
+
+(6) Training the deep neural network:
+first time:
+ $ cd pose-tensorflow/models/pretrained
+ $ ./download.sh
+
+$ cp -r YOURexperimentNameTheDate-trainset95shuffle1 ../pose-tensorflow/models/
+$ cp -r UnaugmentedDataSet_YOURexperimentNameTheDate ../pose-tensorflow/models/
+
+$ cd pose-tensorflow/models/reachingJan30-trainset95shuffle1/train
+$ TF_CUDNN_USE_AUTOTUNE=0 CUDA_VISIBLE_DEVICES=0 python3 ../../../train.py 
+
+(7) Evaluate your network:
+$ CUDA_VISIBLE_DEVICES=0 python3 Step1_EvaluateModelonDataset.py #to evaluate your model [needs TensorFlow]
+$ python3 Step2_AnalysisofResults.py  #to compute test & train errors for your trained model
+
+
+##########################################################
+Analyzing videos
+(0) Configuration of your project:
+myconfig_analysis.py
+
+(1) AnalyzingVideos:
+$ CUDA_VISIBLE_DEVICES=0 python3 AnalyzeVideos.py
+
+(2) Making labeled videos
+$ python3 MakingLabeledVideo.py
+
