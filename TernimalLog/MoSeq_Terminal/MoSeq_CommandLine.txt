@@ -11,3 +11,40 @@ moseq2-extract download-flip-file
 
 moseq2-extract extract ~/Programs/MoSeq_videos/MoSeq_test/session_20180728154636/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl
 
+#!/bin/bash
+
+moseq2-extract extract /media/alex/DataDrive1/MoSeqData/Serenity/Kaylee/180812/session_20180812143819/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75
+moseq2-extract extract /media/alex/DataDrive1/MoSeqData/Serenity/Kaylee/180813/session_20180813132917/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75
+moseq2-extract extract /media/alex/DataDrive1/MoSeqData/Serenity/Kaylee/180814/session_20180814141049/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75
+moseq2-extract extract /media/alex/DataDrive1/MoSeqData/Serenity/Kaylee/180815/session_20180815131431/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75
+moseq2-extract extract /media/alex/DataDrive1/MoSeqData/Serenity/Kaylee/180816/session_20180816140036/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75
+moseq2-extract extract /media/alex/DataDrive1/MoSeqData/Serenity/Kaylee/180817/session_20180817133448/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75
+
+moseq2-extract extract /media/alex/DataDrive1/MoSeqData/Serenity/Mal/180812/session_20180812132450/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75
+moseq2-extract extract /media/alex/DataDrive1/MoSeqData/Serenity/Mal/180813/session_20180813120739/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75
+moseq2-extract extract /media/alex/DataDrive1/MoSeqData/Serenity/Mal/180814/session_20180814130111/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75
+moseq2-extract extract /media/alex/DataDrive1/MoSeqData/Serenity/Mal/180815/session_20180815120253/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75
+moseq2-extract extract /media/alex/DataDrive1/MoSeqData/Serenity/Mal/180816/session_20180816124812/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75
+moseq2-extract extract /media/alex/DataDrive1/MoSeqData/Serenity/Mal/180817/session_20180817122859/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75
+
+moseq2-extract extract /media/alex/DataDrive1/MoSeqData/Serenity/River/180812/session_20180812151217/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75
+moseq2-extract extract /media/alex/DataDrive1/MoSeqData/Serenity/River/180813/session_20180813140143/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75
+moseq2-extract extract /media/alex/DataDrive1/MoSeqData/Serenity/River/180814/session_20180814144550/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75
+moseq2-extract extract /media/alex/DataDrive1/MoSeqData/Serenity/River/180815/session_20180815134927/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75
+moseq2-extract extract /media/alex/DataDrive1/MoSeqData/Serenity/River/180816/session_20180816143410/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75
+moseq2-extract extract /media/alex/DataDrive1/MoSeqData/Serenity/River/180817/session_20180817140758/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75
+
+moseq2-extract extract /media/alex/DataDrive1/MoSeqData/Serenity/Wash/180812/session_20180812140244/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75
+moseq2-extract extract /media/alex/DataDrive1/MoSeqData/Serenity/Wash/180813/session_20180813125538/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75
+moseq2-extract extract /media/alex/DataDrive1/MoSeqData/Serenity/Wash/180814/session_20180814133545/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75
+moseq2-extract extract /media/alex/DataDrive1/MoSeqData/Serenity/Wash/180815/session_20180815123754/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75 
+moseq2-extract extract /media/alex/DataDrive1/MoSeqData/Serenity/Wash/180816/session_20180816132615/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75
+moseq2-extract extract /media/alex/DataDrive1/MoSeqData/Serenity/Wash/180817/session_20180817130302/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75 
+
+moseq2-pca train-pca
+moseq2-pca apply-pca
+moseq2-pca compute-changepoints
+moseq2-model learn-model _pca/pca_scores.h5 my_model.p
+moseq2-viz generate-index 
+moseq2-viz make-crowd-movies moseq2-index.yaml my_model.p
+moseq2-viz plot-usages moseq2-index.yaml my_model.p
