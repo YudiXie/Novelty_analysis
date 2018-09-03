@@ -51,3 +51,5 @@ for i=1:folderlen
     cd ..
 
 end
+
+cd
