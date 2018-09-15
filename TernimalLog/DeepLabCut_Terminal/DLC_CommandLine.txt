@@ -51,7 +51,7 @@ first time:
 $ cp -r YOURexperimentNameTheDate-trainset95shuffle1 ../pose-tensorflow/models/
 $ cp -r UnaugmentedDataSet_YOURexperimentNameTheDate ../pose-tensorflow/models/
 
-$ cd pose-tensorflow/models/reachingJan30-trainset95shuffle1/train
+$ cd pose-tensorflow/models/data_set_name/train
 $ TF_CUDNN_USE_AUTOTUNE=0 CUDA_VISIBLE_DEVICES=0 python3 ../../../train.py 
 
 (7) Evaluate your network:
