@@ -1,3 +1,5 @@
+Config_NovAna;
+
 path=cd;
 PathRoot=[path '/'];
 filelist=dir([PathRoot,'*.csv']);
@@ -8,7 +10,7 @@ obj_center=zeros(flen,2);
 
 for fi =flen:-1:1
     fn = filelist(fi).name;
-    vn=[fn(1:end-48) '.mp4'];
+    vn=[fn(1:end-4-length(networkname_format)) videoname_format(end-3:end)];
 
     Labels = csvread(fn,3,0);
     video=VideoReader(vn);

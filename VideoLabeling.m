@@ -15,14 +15,13 @@
 % Parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ppcs= 40/100;    %pixels per cm/s
-radius = 50;     %radius pixels
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Initialization
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+Config_NovAna;
 path = cd;
 PathRoot=[path '/'];
-filelist=dir([PathRoot,'*.mp4']);
+filelist=dir([PathRoot,'*' videoname_format(end-3:end)]);
 flen = length(filelist);
 for fiter =1:flen
     if ~isempty(strfind(filelist(fiter).name,'abeled'))

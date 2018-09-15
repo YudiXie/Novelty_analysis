@@ -35,13 +35,15 @@
 %***********************************************************
 % Initialization
 %***********************************************************
+Config_NovAna;
+
 
 cd Analyzed_Data;
 load('Arena_Obj_Pos.mat');
 cd ..
 pathname = cd;
 PathRoot=[pathname '/'];
-filelist=dir([PathRoot,'*.mp4']);
+filelist=dir([PathRoot,'*' videoname_format(end-3:end)]);
 flen = length(filelist);
 
 for fiter =1:flen
@@ -54,7 +56,7 @@ flen = length(filelist);
 tic;
 for fiter =1:flen
     vn = filelist(fiter).name;
-    fn=[vn(1:end-4) 'DeepCut_resnet50_noveltyMay21shuffle1_700000.csv'];
+    fn=[vn(1:end-4) networkname_format '.csv'];
     disp(['Analyzing: ' fn]);
 
     Labels = csvread(fn,3,0);
@@ -64,28 +66,13 @@ for fiter =1:flen
     %***********************************************************
     % Parameters
     %***********************************************************
-
-    fpm = 1800;          % frames per minute
-    fps = fpm./60;       % frames per second
-    ppc = 355/(2*30.48); % pixels per cm
-
-    % Calculation Parameters
-    radius = 50;            % Time spent around the obj radius (pixels)
-    radius_cm = radius/ppc;  % Time spent around the obj radius (cm)
-    Dis_ts_frame=1;         % Time spent around the obf start and end frame
-    Dis_te_frame=18000;
-
-    angle_radius = 15;      % Time orient towards the obj radius (degree)
-    Ang_ts_frame=1;         % Time orient towards the obj start and end frame
-    Ang_te_frame=18000;
-
     vspace=3;      % average frame space to calculate the velocity Must be a odd intiger
     % Plot parameters
     plot_fs=1;      % Distance/Orientation plot start and end frame
     plot_fe=5400;
 
-    x_length=520;   % Heatmap x and y axis length (pixels)
-    y_length=420;
+    x_length=video_xlen;   % Heatmap x and y axis length (pixels)
+    y_length=video_ywid;
 
     %***********************************************************
     % Calculation
@@ -162,7 +149,7 @@ for fiter =1:flen
     title(['Distance (first ' num2str((plot_fe-plot_fs)/fpm) 'min) radius=' num2str(radius_cm) ' cm']);
     xlabel('time (min)')
     ylabel('Distance (cm)')
-    set(Disfigure, 'position', [0 0 2000 1000]);
+    set(Disfigure, 'position', [0 0 1000 500]);
             
     % plot orientation
     Angfigure=figure('visible','off');
@@ -170,7 +157,7 @@ for fiter =1:flen
     title(['Orientation (first ' num2str((plot_fe-plot_fs)/fpm) 'min) radius=' num2str(angle_radius)]);
     xlabel('time min')
     ylabel('degree');
-    set(Angfigure, 'position', [0 0 2000 1000]);
+    set(Angfigure, 'position', [0 0 1000 500]);
 
     % Heatmap
     fov=zeros(x_length,y_length);
@@ -199,11 +186,13 @@ for fiter =1:flen
 
     % Plot trajectory
     Trafigure=figure('visible','off');
-    scatter(Labels(:,14),Labels(:,15));
+    scatter(Labels(:,14),Labels(:,15),20);
     rectangle('Position',[arena(fiter,1),arena(fiter,2),arena(fiter,3)-arena(fiter,1),arena(fiter,4)-arena(fiter,2)],'EdgeColor','r','linewidth',4)
     rectangle('Position',[obj(fiter,1),obj(fiter,2),obj(fiter,3)-obj(fiter,1),obj(fiter,4)-obj(fiter,2)],'EdgeColor','r','linewidth',4)
     set(gca,'ydir','reverse')
-    set(Trafigure, 'position', [0 0 1400 1200]);
+    xlim([0 video_xlen]);
+    ylim([0 video_ywid]);
+    set(Trafigure, 'position', [0 0 1200 900]);
 
     % ***********************************************************
     % Save
@@ -223,7 +212,9 @@ for fiter =1:flen
 
     save(vn(1:end-4),'Labels','Dis_t_obj','Ang_t_obj');
     close all
-    clearvars -except arena obj obj_center filelist fiter
+    clearvars -except arena obj obj_center filelist fiter fpm fps ppc radius radius_cm angle_radius...
+                      Dis_ts_frame Dis_te_frame Ang_ts_frame Ang_te_frame video_xlen video_ywid...
+                      networkname_format videoname_format
 
     cd ..
     toc;
