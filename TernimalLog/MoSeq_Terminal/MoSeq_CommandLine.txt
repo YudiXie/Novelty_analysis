@@ -54,7 +54,7 @@ moseq2-pca train-pca -c 1 -n 6 -m 3GB
 moseq2-pca apply-pca -c 1 -n 6 -m 3GB
 moseq2-pca compute-changepoints -c 1 -n 1 -m 3GB
 moseq2-model learn-model --kappa 1334455 _pca/pca_scores.h5 my_model.p
-
+moseq2-model learn-model --kappa 2604919 --save-model _pca/pca_scores.h5 my_model.p
 ##############################################################
 
 moseq2-extract --help
