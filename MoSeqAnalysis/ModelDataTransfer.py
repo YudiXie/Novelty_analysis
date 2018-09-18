@@ -29,7 +29,8 @@ index, sorted_index = parse_index(index_file)
 dist = get_behavioral_distance(sorted_index, 
                                model_file, 
                                distances=['ar[init]'], 
-                               max_syllable=None)
+                               max_syllable=None,
+                               sort_labels_by_usage=False)
 
 # packs data into a dataframe, including all scalars and model labels (note that -5 is a fill value, ignore for all downstream analysis)
 
