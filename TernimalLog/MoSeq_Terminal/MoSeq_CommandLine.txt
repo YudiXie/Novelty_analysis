@@ -51,6 +51,8 @@ moseq2-viz plot-usages moseq2-index.yaml my_model.p
 
 moseq2-viz make-crowd-movies --max-syllable 1000 --sort False moseq2-index.yaml my_model.p
 moseq2-viz make-crowd-movies --max-syllable 1000 --sort True moseq2-index.yaml my_model.p
+moseq2-viz make-crowd-movies  --max-syllable 10 --min-height 0 --max-height 1000 --sort False moseq2-index.yaml my_model.p
+moseq2-viz make-crowd-movies  --max-syllable 1000 --raw-size 512 512 --sort False moseq2-index.yaml my_model.p
 
 moseq2-pca train-pca -c 1 -n 6 -m 3GB
 moseq2-pca apply-pca -c 1 -n 6 -m 3GB
