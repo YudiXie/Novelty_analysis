@@ -186,7 +186,7 @@ PGAASU=GAASU./size(Generalactalignedusage,1);
 timeline=((1:PlotWidth)-round(PlotWidth./2,0))./fps;
 
 Plot_actalignedusage=figure(1);
-areahandle=area(timeline,PGAASU');
+areahandle=area(timeline,PGAASU','LineStyle','none');
 areahandle(82).FaceColor=cmap(82,:);
 title('Syllable Usage Aligned by Human Labeled interaction')
 xlabel('Time (s)')
