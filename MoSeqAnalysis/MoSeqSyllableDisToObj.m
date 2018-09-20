@@ -6,31 +6,30 @@ Mice_Index_path='/Users/yuxie/Dropbox/YuXie/CvsS_180831/CvsS_180831_MoSeq/Mice_I
 run(Mice_Index_path);
 FSize=20;
 
-% Analysis_Mice=1:8;
-% Analysis_Days=3;
+Analysis_Mice=1:8;
+Analysis_Days=3;
 
-% MoSeqDataFrame.SODis=sqrt((MoSeqDataFrame.centroid_x_mm-ObjPos(1)).^2+(MoSeqDataFrame.centroid_y_mm-ObjPos(1)).^2);
+MoSeqDataFrame.SODis=sqrt((MoSeqDataFrame.centroid_x_mm-ObjPos(1)).^2+(MoSeqDataFrame.centroid_y_mm-ObjPos(1)).^2);
 
-% FilteredLabel=[];
-% FilteredSODis=[];
-% for miceiter=Analysis_Mice
+FilteredLabel=[];
+FilteredSODis=[];
+for miceiter=Analysis_Mice
 
-%     for dayiter=Analysis_Days
+    for dayiter=Analysis_Days
 
-%         for frameiter=1:length(MoSeqDataFrame.SODis)
-%             if strcmp(Mice(miceiter).ExpDay(dayiter).MSid, MoSeqDataFrame.uuid(frameiter,:))
-%                 FilteredLabel=[FilteredLabel double(MoSeqDataFrame.model_label(frameiter))];
-%                 FilteredSODis=[FilteredSODis MoSeqDataFrame.SODis(frameiter)];
-%             end
-%         end
+        for frameiter=1:length(MoSeqDataFrame.SODis)
+            if strcmp(Mice(miceiter).ExpDay(dayiter).MSid, MoSeqDataFrame.uuid(frameiter,:))
+                FilteredLabel=[FilteredLabel double(MoSeqDataFrame.model_label(frameiter))];
+                FilteredSODis=[FilteredSODis MoSeqDataFrame.SODis(frameiter)];
+            end
+        end
 
-%     end
+    end
 
-% end
+end
 
 % save('filteredlabels.mat','FilteredLabel','FilteredSODis');
-
-load('filteredlabels.mat');
+% load('filteredlabels.mat');
 
 
 disedges=0:10:700;
