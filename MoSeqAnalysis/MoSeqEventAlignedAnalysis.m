@@ -7,50 +7,20 @@ PlotWidth=500;
 BarHeight=5;
 cmap=jet(100);
 fps=30;
+fsize=20;
 
 AnalysisDay=3;      % first novelty day
+G1_Mice=[1 2 3 4];
+G2_Mice=[5 6 7 8];
 
-Mice(1).datanum=26;
-Mice(2).datanum=43;
-Mice(3).datanum=40;
-Mice(4).datanum=41;
+load('MoSeqDataFrame.mat');
+Mice_Index_path='/Users/yuxie/Dropbox/YuXie/CvsS_180831/CvsS_180831_MoSeq/Mice_Index.m';
+run(Mice_Index_path);
 
+trim_frame_start=1200;
 
-Mice(1).name='Mal';
-Mice(2).name='Wash';
-Mice(3).name='Kaylee';
-Mice(4).name='River';
-
-Mice(1).novelty='S';
-Mice(2).novelty='S';
-Mice(3).novelty='S';
-Mice(4).novelty='S';
-
-% Mal:
-Mice(1).ExpDay(1).MSid='e7ed0e85-149a-45d7-b40d-f56b73b3050c';  % H1
-Mice(1).ExpDay(2).MSid='1a6cc63c-934a-4fb6-8c2f-b1e1616b9604';  % H2
-Mice(1).ExpDay(3).MSid='af5e0790-8ffb-4fa1-86e4-614a4efae7d4';  % N1
-Mice(1).ExpDay(4).MSid='a52bf424-0b9a-4195-8f9e-7b87abe5398c';  % N2
-
-% Wash
-Mice(2).ExpDay(1).MSid='1b21fd16-843d-40a2-a180-e885b618060d';  % H1
-Mice(2).ExpDay(2).MSid='06232efa-884e-44f6-b3a2-b8ef949e2b14';  % H2
-Mice(2).ExpDay(3).MSid='84ca42ce-f065-4298-a097-b18c49a7cbe1';  % N1
-Mice(2).ExpDay(4).MSid='4b737026-c1ce-4e93-95b7-458e52259ad3';  % N2
-
-% Kaylee
-Mice(3).ExpDay(1).MSid='798b577a-1a84-453a-8dc3-aa020f26acf3';  % H1
-Mice(3).ExpDay(2).MSid='fc9658f3-8614-42ad-9275-4037e37da9f9';  % H2
-Mice(3).ExpDay(3).MSid='dd7ceaaf-ff8c-4a0e-a386-58698597cfcf';  % N1
-Mice(3).ExpDay(4).MSid='08eaaec2-c507-4b3b-a822-79d531453937';  % N2
-
-% River
-Mice(4).ExpDay(1).MSid='d97fe1d2-4959-45bb-8da6-6166fd0300f4';  % H1
-Mice(4).ExpDay(2).MSid='bb40083a-e633-498f-8397-b8e6ac91aa0a';  % H2
-Mice(4).ExpDay(3).MSid='352262f2-2c47-420d-a8cc-debbac31061d';  % N1
-Mice(4).ExpDay(4).MSid='45813819-f6e2-42eb-a5f7-763a87187996';  % N2
-
-AllActLabels=csvread('serenity_poke_labels_N1.csv',1,2);
+AllActLabels=csvread('CvsS_poke_labels_N1.csv',1,2);
+AllActLabels=AllActLabels-trim_frame_start;
 AllActLabels(:,4)=(AllActLabels(:,3)-AllActLabels(:,1))./fps;
 
 Mice(1).index=1;
@@ -71,24 +41,23 @@ end
 % Calculation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 tic
-load('ModelData.mat')
 
 for miceiter=1:length(Mice)
 
 
     % find MSid index
     MSidindex=1;
-    for indexiter=1:size(MSid,1)
-        if strcmp(MSid(indexiter,:),Mice(miceiter).ExpDay(AnalysisDay).MSid)
+    for indexiter=1:size(MoSeqDataFrame.session_uuid,1)
+        if strcmp(MoSeqDataFrame.session_uuid(indexiter,:),Mice(miceiter).ExpDay(AnalysisDay).MSid)
             break
         end
         MSidindex=MSidindex+1;
-        if MSidindex==size(MSid,1)+1
+        if MSidindex==size(MoSeqDataFrame.session_uuid,1)+1
             error('MSid not found');
         end
     end
 
-    Labels=MSLabels{MSidindex};
+    Labels=double(MoSeqDataFrame.labels{MSidindex});
     labellen=length(Labels);
 
     Mice(miceiter).ExpDay(AnalysisDay).rasterimage=uint8(255.*ones(20,PlotWidth,3));
@@ -153,7 +122,7 @@ for miceiter=1:length(Mice)
 end
 
 
-% Calculating general usage only used, when plot width is cosistent across mice
+% Calculating general usage only used when plot width is cosistent across mice
 Generalactalignedusage=[];
 for miceiter=1:length(Mice)
     Generalactalignedusage=cat(1,Generalactalignedusage,Mice(miceiter).ExpDay(AnalysisDay).actalignedusage);
@@ -178,6 +147,43 @@ PGAASU=GAASU./size(Generalactalignedusage,1);
 %     AAASU(rowiter,:)=sum(AAASU(1:rowiter,:));
 % end
 
+% Calculating Group1 Group2 usage only used when plot width is cosistent across mice
+G1actalignedusage=[];
+for miceiter=G1_Mice
+    G1actalignedusage=cat(1,G1actalignedusage,Mice(miceiter).ExpDay(AnalysisDay).actalignedusage);
+end
+
+G2actalignedusage=[];
+for miceiter=G2_Mice
+    G2actalignedusage=cat(1,G2actalignedusage,Mice(miceiter).ExpDay(AnalysisDay).actalignedusage);
+end
+
+% Group1 act aligned syllable usage G1AASU,  
+% meaning G1AASU(r , c) = count of syllable r-1 in all data at frame c
+Syllablebinedge=[-6,-0.5:1:99.5];
+G1AASU=zeros(101,PlotWidth);
+for lineiter =1:PlotWidth
+    G1AASU(:,lineiter)=(histcounts(G1actalignedusage(:,lineiter),Syllablebinedge))';
+end
+G1AASU(size(G1AASU,1)+1,:)=G1AASU(1,:);
+G1AASU(1,:)=[];
+
+% Percentage usage
+PG1AASU=G1AASU./size(G1actalignedusage,1);
+
+
+% Group2 act aligned syllable usage G2AASU,
+% meaning G2AASU(r , c) = count of syllable r-1 in all data at frame c
+G2AASU=zeros(101,PlotWidth);
+for lineiter =1:PlotWidth
+    G2AASU(:,lineiter)=(histcounts(G2actalignedusage(:,lineiter),Syllablebinedge))';
+end
+G2AASU(size(G2AASU,1)+1,:)=G2AASU(1,:);
+G2AASU(1,:)=[];
+
+% Percentage usage
+PG2AASU=G2AASU./size(G2actalignedusage,1);
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -185,13 +191,31 @@ PGAASU=GAASU./size(Generalactalignedusage,1);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 timeline=((1:PlotWidth)-round(PlotWidth./2,0))./fps;
 
-Plot_actalignedusage=figure(1);
-areahandle=area(timeline,PGAASU','LineStyle','none');
-areahandle(82).FaceColor=cmap(82,:);
-title('Syllable Usage Aligned by Human Labeled interaction')
-xlabel('Time (s)')
-ylabel('Usage Percentage')
+Plot_Gactalignedusage=figure;
+Gareahandle=area(timeline,PGAASU','LineWidth',0.05);
+% areahandle(82).FaceColor=cmap(82,:);
+title('Syllable Usage Aligned by Human Labeled interaction','FontSize',fsize)
+xlabel('Time (s)','FontSize',fsize)
+ylabel('Usage Percentage','FontSize',fsize)
 axis([timeline(1),timeline(end),0,1])
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Plot_G1actalignedusage=figure;
+G1areahandle=area(timeline,PG1AASU','LineWidth',0.05);
+title('Syllable Usage of Contextual Novelty Mice','FontSize',fsize)
+xlabel('Time (s)','FontSize',fsize)
+ylabel('Usage Percentage','FontSize',fsize)
+axis([timeline(1),timeline(end),0,1])
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Plot_G2actalignedusage=figure;
+G2areahandle=area(timeline,PG2AASU','LineWidth',0.05);
+title('Syllable Usage of Stimulus Novelty Mice','FontSize',fsize)
+xlabel('Time (s)','FontSize',fsize)
+ylabel('Usage Percentage','FontSize',fsize)
+axis([timeline(1),timeline(end),0,1])
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % This is for matching the syllable color with the color in the raster plot and labeled videos
 % for coloriter=1:100
@@ -203,8 +227,8 @@ axis([timeline(1),timeline(end),0,1])
 % Saving
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-mkdir('EventBasedAnalysis')
-cd('EventBasedAnalysis')
+mkdir('EventAlignedAnalysis')
+cd('EventAlignedAnalysis')
 
 % Saving raster plot
 for miceiter=1:length(Mice)
