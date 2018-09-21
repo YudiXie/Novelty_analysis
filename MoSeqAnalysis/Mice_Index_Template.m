@@ -16,6 +16,16 @@ Mice(6).novelty='S';
 Mice(7).novelty='S';
 Mice(8).novelty='S';
 
+
+Mice(1).datanum=71;
+Mice(2).datanum=68;
+Mice(3).datanum=40;
+Mice(4).datanum=37;
+Mice(5).datanum=35;
+Mice(6).datanum=39;
+Mice(7).datanum=48;
+Mice(8).datanum=84;
+
 % C4:
 Mice(1).ExpDay(1).MSid='ca9e36a4-378e-4f84-9dae-7e7bf19552ef';  % H1
 Mice(1).ExpDay(2).MSid='4fded88d-93b4-4d92-8c78-124db4f5a392';  % H2
