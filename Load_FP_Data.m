@@ -1,4 +1,4 @@
-function [cart_GCaMP, cart_tdTom, cart_water] = load_photometry_raw(fpath)
+function [cart_GCaMP, cart_tdTom, cart_water] = Load_FP_Data(fpath)
 disp(['load_photometry_raw: ' fpath]);
 file_ID = fopen(fpath, 'r');
 CC_cart_analog = fread(file_ID, inf, 'double', 0, 'b');
