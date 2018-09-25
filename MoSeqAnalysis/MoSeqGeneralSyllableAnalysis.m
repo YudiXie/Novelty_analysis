@@ -6,6 +6,10 @@ G2_Mice=[5 6 7 8];
 G1_Days=[3 4 5 6];
 G2_Days=[3 4 5 6];
 
+% G3 Base line
+G3_Mice=1:8;
+G3_Days=[1 2];
+
 load('MoSeqDataFrame.mat')
 cmap=jet(100);
 fps=30;
@@ -82,7 +86,7 @@ for usageiter=1:length(GSortedusage)
     AccGSortedusage(usageiter)=sum(GSortedusage(1:usageiter));
 end
 
-% Calculate Usage of Group1 and Group2
+% Calculate Usage of Group1, Group2, and Group3
 G1Usage=zeros(1,101);
 for miceiter=G1_Mice
     for dayiter=G1_Days
@@ -98,6 +102,14 @@ for miceiter=G2_Mice
     end
 end
 PG2Usage=G2Usage./sum(G2Usage);
+
+G3Usage=zeros(1,101);
+for miceiter=G3_Mice
+    for dayiter=G3_Days
+        G3Usage = G3Usage + Mice(miceiter).ExpDay(dayiter).usage;
+    end
+end
+PG3Usage=G3Usage./sum(G3Usage);
 
 G2vsG1usage=(PG2Usage-PG1Usage)./(PG2Usage+PG1Usage);
 [G2vsG1Sortedusage,G2vsG1Sortedusageindex]=sort(G2vsG1usage,'descend');
@@ -164,7 +176,7 @@ hold on
 plot(X,PG2Usage,'LineWidth',1.5)
 
 legend('Contextual Novelty','Stimulus Novelty')
-title('Syllable Usage Compare of Contextual/Stimulus Novely Mice (CvsS 180831)','FontSize',fsize)
+title('Syllable Usage Comparison of Contextual/Stimulus Novely Mice (CvsS 180831)','FontSize',fsize)
 ylabel('Percentage','FontSize',fsize)
 xlabel('Syllables','FontSize',fsize)
 xticks(X);
@@ -175,9 +187,11 @@ Plot_UsageCompare_sorted=figure;
 plot(X,PG1Usage(G2vsG1Sortedusageindex),'LineWidth',1.5)
 hold on
 plot(X,PG2Usage(G2vsG1Sortedusageindex),'LineWidth',1.5)
+hold on
+plot(X,PG3Usage(G2vsG1Sortedusageindex),'LineWidth',1,'Color','Black')
 
-legend('Contextual Novelty','Stimulus Novelty')
-title('Syllable Usage Compare of Contextual/Stimulus Novely Mice (CvsS 180831) (Sorted by stimulus novelty enrichment)','FontSize',fsize)
+legend({'Contextual Novelty','Stimulus Novelty','Habituattion'},'FontSize',fsize)
+title('Syllable Usage Comparison of Contextual/Stimulus Novely Mice (CvsS 180831) (Sorted by stimulus novelty enrichment)','FontSize',fsize)
 ylabel('Percentage','FontSize',fsize)
 xlabel('Syllables','FontSize',fsize)
 xticks(X);
