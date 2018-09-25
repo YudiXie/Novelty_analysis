@@ -61,6 +61,9 @@ moseq2-pca train-pca -c 6 -n 1
 moseq2-pca train-pca -c 6 -n 1 --missing-data
 moseq2-pca apply-pca -c 6 -n 1
 moseq2-pca compute-changepoints -c 6 -n 1
+moseq2-model learn-model --kappa 108843 --save-model _pca/pca_scores.h5 my_model.p
+cd ..
+
 moseq2-model learn-model --kappa 1334455 _pca/pca_scores.h5 my_model.p
 moseq2-model learn-model --kappa 2604919 --save-model _pca/pca_scores.h5 my_model.p
 ##############################################################
