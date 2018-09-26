@@ -37,7 +37,9 @@ To do this, all your video need to be directly placed under the directory you sp
 If your videos are orgnized by mice names and experiment days:
 * Mouse1
     * 180925
+        * video1.mp4
     * 180926
+        * video1.mp4
     * ...
 * Mouse2
     * 180925
