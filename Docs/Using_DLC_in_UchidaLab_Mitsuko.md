@@ -39,7 +39,7 @@ If your videos are orgnized by mice names and experiment days:
     * 180925
     * 180926
     * ...
-* Mouse1
+* Mouse2
     * 180925
     * 180926
     * ...
