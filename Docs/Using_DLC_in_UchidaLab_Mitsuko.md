@@ -21,7 +21,7 @@ Go to the following directory (you don't need to do this in the terminal):
 `/home/alex/Programs/DeepLabCut_new/DeepLabCut/` 
 and you can find many configuration files. Open `myconfig_analysis (MitsukoOperantLearning).py`, edit the `videopath` for you new videos, and save the changes.
 
-Rename this configeration file to `myconfig_analysis.py` and replace the existing file.
+Rename this configeration file to `myconfig_analysis.py` and replace the existing file. Also save a copy of this file with name `myconfig_analysis (MitsukoOperantLearning).py` for your future use.
 
 #### 3. Start extraction
 Go to `Analysis-tools` subfolder inside the DeepLabCut folder in the docker terminal
