@@ -39,11 +39,13 @@ If your videos are orgnized by mice names and experiment days:
     * 180925
         * video1.mp4
     * 180926
-        * video1.mp4
+        * video2.mp4
     * ...
 * Mouse2
     * 180925
+        * video3.mp4
     * 180926
+        * video4.mp4
     * ...
 
 you can run
