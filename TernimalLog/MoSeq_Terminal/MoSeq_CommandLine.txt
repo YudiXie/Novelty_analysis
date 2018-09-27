@@ -67,305 +67,53 @@ cd ..
 moseq2-model learn-model --kappa 1334455 _pca/pca_scores.h5 my_model.p
 moseq2-model learn-model --kappa 2604919 --save-model _pca/pca_scores.h5 my_model.p
 ##############################################################
+srun --pty --mem=50G -n 20 -N 1 -p test,shared -t 60 bash
 
-moseq2-extract --help
-Usage: moseq2-extract [OPTIONS] COMMAND [ARGS]...
+srun --pty -p gpu -t 0-06:00 --mem 8000 --gres=gpu:1 /bin/bash
 
-Options:
-  --help  Show this message and exit.  [default: False]
+module load cuda/9.0-fasrc02 cudnn/7.0_cuda9.0-fasrc01
+srun --pty --mem=8G -n 4 -N 1 -p gpu -t 60 --gres=gpu:2 bash
 
-Commands:
-  download-flip-file
-  extract
-  find-roi
-  generate-config
+source activate moseq2
 
+cd /n/regal/uchida_lab/yuxie/Serenity/Serenity_MoSeq
 
-moseq2-extract extract --help
-Usage: moseq2-extract extract [OPTIONS] INPUT_FILE
-
-Options:
-  -c, --crop-size <INTEGER INTEGER>...
-                                  Width and height of cropped mouse image
-                                  [default: 80, 80]
-  --bg-roi-dilate <INTEGER INTEGER>...
-                                  Size of the mask dilation (to include
-                                  environment walls)  [default: 10, 10]
-  --bg-roi-shape TEXT             Shape to use for the mask dilation (ellipse
-                                  or rect)  [default: ellipse]
-  --bg-roi-index INTEGER          Index of which background mask(s) to use
-                                  [default: 0]
-  --bg-roi-weights <FLOAT FLOAT FLOAT>...
-                                  Feature weighting (area, extent, dist) of
-                                  the background mask  [default: 1, 0.1, 1]
-  --min-height INTEGER            Min mouse height from floor (mm)  [default:
-                                  10]
-  --max-height INTEGER            Max mouse height from floor (mm)  [default:
-                                  100]
-  --fps INTEGER                   Frame rate of camera  [default: 30]
-  --flip-classifier TEXT          Location of the flip classifier used to
-                                  properly orient the mouse (.pkl file)
-  --flip-classifier-smoothing INTEGER
-                                  Number of frames to smooth flip classifier
-                                  probabilities  [default: 51]
-  --use-tracking-model BOOLEAN    Use an expectation-maximization style model
-                                  to aid mouse tracking. Useful for data with
-                                  cables  [default: False]
-  --tracking-model-ll-threshold FLOAT
-                                  Threshold on log-likelihood for pixels to
-                                  use for update during tracking  [default:
-                                  -100]
-  --tracking-model-mask-threshold FLOAT
-                                  Threshold on log-likelihood to include
-                                  pixels for centroid and angle calculation
-                                  [default: -16]
-  --tracking-model-ll-clip FLOAT  Clip log-likelihoods below this value
-                                  [default: -100]
-  --tracking-model-segment BOOLEAN
-                                  Segment likelihood mask from tracking model
-                                  [default: True]
-  --cable-filter-iters INTEGER    Number of cable filter iterations  [default:
-                                  0]
-  --cable-filter-shape TEXT       Cable filter shape (rectangle or ellipse)
-                                  [default: rectangle]
-  --cable-filter-size <INTEGER INTEGER>...
-                                  Cable filter size (in pixels)  [default: 5,
-                                  5]
-  --tail-filter-iters INTEGER     Number of tail filter iterations  [default:
-                                  1]
-  --tail-filter-size <INTEGER INTEGER>...
-                                  Tail filter size  [default: 9, 9]
-  --tail-filter-shape TEXT        Tail filter shape  [default: ellipse]
-  -s, --spatial-filter-size INTEGER
-                                  Space prefilter kernel (median filter, must
-                                  be odd)  [default: 3]
-  -t, --temporal-filter-size INTEGER
-                                  Time prefilter kernel (median filter, must
-                                  be odd)  [default: 0]
-  --chunk-size INTEGER            Number of frames for each processing
-                                  iteration  [default: 1000]
-  --chunk-overlap INTEGER         Frames overlapped in each chunk. Useful for
-                                  cable tracking  [default: 0]
-  --output-dir TEXT               Output directory to save the results h5 file
-  --write-movie BOOLEAN           Write a results output movie including an
-                                  extracted mouse  [default: True]
-  --use-plane-bground             Use a plane fit for the background. Useful
-                                  for mice that don't move much  [default:
-                                  False]
-  --frame-dtype [uint8|uint16]    Data type for processed frames  [default:
-                                  uint8]
-  --config-file PATH
-  --help                          Show this message and exit.  [default:
-                                  False]
+moseq2-pca train-pca -n 10 -c 2
 
 
-##############################################################
-
-moseq2-pca --help
-Usage: moseq2-pca [OPTIONS] COMMAND [ARGS]...
-
-Options:
-  --help  Show this message and exit.  [default: False]
-
-Commands:
-  add-groups            Add group from an index file to a PCA scores...
-  apply-pca
-  clip-scores           Clips PCA scores from the beginning or end...
-  compute-changepoints
-  train-pca
+moseq2-pca train-pca --cluster-type slurm --queue test --wall-time 01:00:00 --nworkers 30 --timeout 5 -c 4 —-memory 30GB
 
 
-moseq2-pca train-pca --help
-Usage: moseq2-pca train-pca [OPTIONS]
-
-Options:
-  -i, --input-dir PATH            Directory to find h5 files  [default: /media
-                                  /alex/noveltydisk/MoSeqData/Serenity/Serenit
-                                  y_MoSeq]
-  --cluster-type [local|slurm]    Cluster type  [default: local]
-  -o, --output-dir PATH           Directory to store results  [default: /media
-                                  /alex/noveltydisk/MoSeqData/Serenity/Serenit
-                                  y_MoSeq/_pca]
-  --gaussfilter-space <FLOAT FLOAT>...
-                                  Spatial filter for data (Gaussian)
-                                  [default: 1.5, 1]
-  --gaussfilter-time FLOAT        Temporal filter for data (Gaussian)
-                                  [default: 0]
-  --medfilter-space INTEGER       Median spatial filter  [default: 0]
-  --medfilter-time INTEGER        Median temporal filter  [default: 0]
-  --missing-data                  Use missing data PCA  [default: False]
-  --missing-data-iters INTEGER    Missing data PCA iterations  [default: 10]
-  --mask-threshold FLOAT          Threshold for mask (missing data only)
-                                  [default: -16]
-  --mask-height-threshold FLOAT   Threshold for mask based on floor height
-                                  [default: 5]
-  --min-height INTEGER            Min mouse height from floor (mm)  [default:
-                                  10]
-  --max-height INTEGER            Max mouse height from floor (mm)  [default:
-                                  100]
-  --tailfilter-size <INTEGER INTEGER>...
-                                  Tail filter size  [default: 9, 9]
-  --tailfilter-shape TEXT         Tail filter shape  [default: ellipse]
-  --use-fft                       Use 2D fft  [default: False]
-  --recon-pcs INTEGER             Number of PCs to use for missing data
-                                  reconstruction  [default: 10]
-  --rank INTEGER                  Rank for compressed SVD (generally>>nPCS)
-                                  [default: 50]
-  --output-file TEXT              Name of h5 file for storing pca results
-                                  [default: pca]
-  --h5-path TEXT                  Path to data in h5 files  [default: /frames]
-  --h5-mask-path TEXT             Path to log-likelihood mask in h5 files
-                                  [default: /frames_mask]
-  --chunk-size INTEGER            Number of frames per chunk  [default: 4000]
-  --visualize-results BOOLEAN     Visualize results  [default: True]
-  --config-file PATH              Path to configuration file
-  -d, --dask-cache-path PATH      Path to spill data to disk for dask local
-                                  scheduler  [default: /home/alex/moseq2_pca]
-  --local-processes BOOLEAN       Use processes with local scheduler
-                                  [default: True]
-  -q, --queue TEXT                Cluster queue/partition for submitting jobs
-                                  [default: debug]
-  -n, --nworkers INTEGER          Number of workers  [default: 10]
-  -c, --cores INTEGER             Number of cores per worker  [default: 1]
-  -p, --processes INTEGER         Number of processes to run on each worker
-                                  [default: 1]
-  -m, --memory TEXT               Total RAM usage per worker  [default: 15GB]
-  -w, --wall-time TEXT            Wall time for workers  [default: 06:00:00]
-  --timeout FLOAT                 Time to wait for workers to initialize
-                                  before proceeding (minutes)  [default: 5]
-  --help                          Show this message and exit.  [default:
-                                  False]
-                                  
-moseq2-pca apply-pca --help
-Usage: moseq2-pca apply-pca [OPTIONS]
-
-Options:
-  -i, --input-dir PATH            Directory to find h5 files  [default: /media
-                                  /alex/noveltydisk/MoSeqData/Serenity/Serenit
-                                  y_MoSeq]
-  --cluster-type [local|slurm|nodask]
-                                  Cluster type  [default: local]
-  -o, --output-dir PATH           Directory to store results  [default: /media
-                                  /alex/noveltydisk/MoSeqData/Serenity/Serenit
-                                  y_MoSeq/_pca]
-  --output-file TEXT              Name of h5 file for storing pca results
-                                  [default: pca_scores]
-  --h5-path TEXT                  Path to data in h5 files  [default: /frames]
-  --h5-mask-path TEXT             Path to log-likelihood mask in h5 files
-                                  [default: /frames_mask]
-  --h5-timestamp-path TEXT        Path to timestamps in h5 files  [default:
-                                  /metadata/timestamps]
-  --h5-metadata-path TEXT         Path to metadata in h5 files  [default:
-                                  /metadata/extraction]
-  --pca-path TEXT                 Path to pca components  [default:
-                                  /components]
-  --pca-file PATH                 Path to PCA results
-  --chunk-size INTEGER            Number of frames per chunk  [default: 4000]
-  --fill-gaps BOOLEAN             Fill dropped frames with nans  [default:
-                                  True]
-  --fps INTEGER                   Fps (only used if no timestamps found)
-                                  [default: 30]
-  --detrend-window FLOAT          Length of detrend window (in seconds, 0 for
-                                  no detrending)  [default: 0]
-  --config-file PATH              Path to configuration file
-  -d, --dask-cache-path PATH      Path to spill data to disk for dask local
-                                  scheduler  [default: /home/alex/moseq2_pca]
-  -q, --queue TEXT                Cluster queue/partition for submitting jobs
-                                  [default: debug]
-  -n, --nworkers INTEGER          Number of workers  [default: 10]
-  -c, --cores INTEGER             Number of cores per worker  [default: 1]
-  -p, --processes INTEGER         Number of processes to run on each worker
-                                  [default: 1]
-  -m, --memory TEXT               RAM usage per workers  [default: 15GB]
-  -w, --wall-time TEXT            Wall time for workers  [default: 06:00:00]
-  --timeout FLOAT                 Time to wait for workers to initialize
-                                  before proceeding (minutes)  [default: 5]
-  --help                          Show this message and exit.  [default:
-                                  False]
-
-##############################################################
-
-moseq2-model learn-model --help
-Usage: moseq2-model learn-model [OPTIONS] INPUT_FILE DEST_FILE
-
-Options:
-  -h, --hold-out                Hold out one fold (set by nfolds) for
-                                computing heldout likelihood  [default: False]
-  --hold-out-seed INTEGER       Random seed for holding out data (set for
-                                reproducibility)  [default: -1]
-  --nfolds INTEGER              Number of folds for split  [default: 5]
-  -n, --num-iter INTEGER        Number of times to resample model  [default:
-                                100]
-  -r, --restarts INTEGER        Number of restarts for model  [default: 1]
-  --var-name TEXT               Variable name in input file with PCs
-                                [default: scores]
-  -s, --save-every INTEGER      Increment to save labels and model object (-1
-                                for just last)  [default: -1]
-  --save-model                  Save model object  [default: False]
-  -m, --max-states INTEGER      Maximum number of states  [default: 100]
-  -p, --model-progress BOOLEAN  Show model progress  [default: True]
-  --npcs INTEGER                Number of PCs to use  [default: 10]
-  -w, --whiten TEXT             Whiten (e)each (a)ll or (n)o whitening
-                                [default: all]
-  -k, --kappa FLOAT             Kappa  [default: 100000000.0]
-  -g, --gamma FLOAT             Gamma  [default: 1000.0]
-  --nu FLOAT                    Nu (only applicable if robust set to true)
-                                [default: 4]
-  --nlags INTEGER               Number of lags to use  [default: 3]
-  --separate-trans              Use separate transition matrix per group
-                                [default: False]
-  --robust                      Use tAR model  [default: False]
-  --help                        Show this message and exit.  [default: False]
-  
-  
-##############################################################
-moseq2-batch --help
-Usage: moseq2-batch [OPTIONS] COMMAND [ARGS]...
-
-Options:
-  --help  Show this message and exit.
-
-Commands:
-  aggregate-extract-results
-  aggregate-modeling-results
-  extract-batch
-  gen-gridsearch-config
-  learn-model-parameter-scan
-  
- moseq2-batch aggregate-extract-results --help
-Usage: moseq2-batch aggregate-extract-results [OPTIONS]
-
-Options:
-  -i, --input-dir PATH     Directory to find h5 files
-  -f, --format TEXT        Mapping from metadata to new file
-  -o, --output-dir PATH    Where to store results
-  --mouse-threshold FLOAT  Use average over pixels to determine if mouse is
-                           present
-  --help                   Show this message and exit.
-
-moseq2-batch aggregate-modeling-results --help
-Usage: moseq2-batch aggregate-modeling-results [OPTIONS]
-
-Options:
-  -i, --input-dir PATH
-  -j, --job-manifest TEXT
-  -d, --dest-file PATH
-  --help                   Show this message and exit.
-
-moseq2-batch extract-batch --help
-Usage: moseq2-batch extract-batch [OPTIONS]
-
-Options:
-  -i, --input-dir PATH          Directory to find h5 files
-  -c, --config-file PATH        Path to configuration file
-  --cluster-type [slurm|local]  Cluster type
-  --temp-storage PATH           Temp storage
-  -n, --ncpus INTEGER           Number of CPUs
-  -m, --memory TEXT             RAM string
-  -w, --wall-time TEXT          Wall time
-  --partition TEXT              Partition name
-  --bg-roi-index INTEGER        Partition name
-  --prefix TEXT                 Command to run before extract
-  --help                        Show this message and exit.
+moseq2-pca train-pca --cluster-type slurm --queue test --wall-time 01:00:00 --nworkers 30 --timeout 5 -c 4 —-memory 30GB
 
 
+
+moseq2-extract extract  /n/regal/uchida_lab/yuxie/MoSeq_Testing/depth.dat 
+
+(moseq2) rxie@holy7c09313:~/python_repos/moseq2-extract$ git diff
+diff --git a/moseq2_extract/cli.py b/moseq2_extract/cli.py
+index 99b161a..25a93bf 100644
+--- a/moseq2_extract/cli.py
++++ b/moseq2_extract/cli.py
+@@ -135,7 +135,7 @@ def extract(input_file, crop_size, bg_roi_dilate, bg_roi_shape, bg_roi_index, bg
+         'metadata': ''
+     }
+ 
+-    np.seterr(invalid='raise')
++    # np.seterr(invalid='raise')
+ 
+     video_metadata = get_movie_info(input_file)
+     nframes = video_metadata['nframes’]
+
+
+
+
+DeepLabCut
+
+`bg-roi-depth-range`
+
+Try out the defaults first.  If they don't work, the only filter you may want to turn down is the `tail` filter, try:
+
+--tail-filter-size 5, 5 
+
+If you run into more issues we can move the conversation to Github.
