@@ -17,7 +17,7 @@ docker exec -it yuxie_GPU1 /bin/bash
 you should see your prompt shows `root` rather than your user name now.
 
 #### 2. Changing configuration files: 
-For the new network trained for MoSeq Arena, Go to the following directory (you don't need to do this in the terminal): 
+Go to the following directory (you don't need to do this in the terminal): 
 `/home/alex/Programs/DeepLabCut_new/DeepLabCut/` 
 and you can find many configuration files. Open `myconfig_analysis (EvaNovelty).py`, edit the `videopath` for you new videos, and save the changes. 
 
