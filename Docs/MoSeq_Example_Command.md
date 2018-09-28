@@ -61,53 +61,47 @@ moseq2-viz plot-usages moseq2-index.yaml my_model.p
 ```
 * use `--max-syllable` to specify the maximun number of syllables to generate, 
 * Sometimes the lower part of the arena is not included in the crowd movies, use `--raw-size 512 512`. 
-* use `--sort False`, so that the syllables numbers generated corrispond to model labels in the `my_model.p`file.
+* use `--sort False`, so that the syllables numbers generated correspond to model labels in the `my_model.p`file.
 ```
 moseq2-viz make-crowd-movies  --max-syllable 1000 --raw-size 512 512 --sort False moseq2-index.yaml my_model.p
 ```
 
 # Using MoSeq on a cluster
+
+1. Start an interactivate session, activate moseq conda environment
 ```
 srun --pty --mem=50G -n 20 -N 1 -p test,shared -t 60 bash
+source activate moseq2
+```
 
+2. Go to the folder where you store your data
+```
+cd /n/regal/uchida_lab/yuxie/Serenity/Serenity_MoSeq
+```
+
+3. Sample commands
+```
+moseq2-extract extract  /n/regal/uchida_lab/yuxie/MoSeq_Testing/depth.dat 
+moseq2-pca train-pca -n 10 -c 2
+moseq2-pca train-pca --cluster-type slurm --queue test --wall-time 01:00:00 --nworkers 30 --timeout 5 -c 4 —-memory 30GB
+moseq2-pca train-pca --cluster-type slurm --queue test --wall-time 01:00:00 --nworkers 30 --timeout 5 -c 4 —-memory 30GB
+```
+
+# Updating MoSeq
+```
+cd ~/location_of_moseq2-extract/
+git pull
+pip install somehing
+```
+
+
+
+
+```
 srun --pty -p gpu -t 0-06:00 --mem 8000 --gres=gpu:1 /bin/bash
 
 module load cuda/9.0-fasrc02 cudnn/7.0_cuda9.0-fasrc01
 srun --pty --mem=8G -n 4 -N 1 -p gpu -t 60 --gres=gpu:2 bash
-
-source activate moseq2
-
-cd /n/regal/uchida_lab/yuxie/Serenity/Serenity_MoSeq
-
-moseq2-pca train-pca -n 10 -c 2
-
-
-moseq2-pca train-pca --cluster-type slurm --queue test --wall-time 01:00:00 --nworkers 30 --timeout 5 -c 4 —-memory 30GB
-
-
-moseq2-pca train-pca --cluster-type slurm --queue test --wall-time 01:00:00 --nworkers 30 --timeout 5 -c 4 —-memory 30GB
-
-
-
-moseq2-extract extract  /n/regal/uchida_lab/yuxie/MoSeq_Testing/depth.dat 
-
-(moseq2) rxie@holy7c09313:~/python_repos/moseq2-extract$ git diff
-diff --git a/moseq2_extract/cli.py b/moseq2_extract/cli.py
-index 99b161a..25a93bf 100644
---- a/moseq2_extract/cli.py
-+++ b/moseq2_extract/cli.py
-@@ -135,7 +135,7 @@ def extract(input_file, crop_size, bg_roi_dilate, bg_roi_shape, bg_roi_index, bg
-         'metadata': ''
-     }
- 
--    np.seterr(invalid='raise')
-+    # np.seterr(invalid='raise')
- 
-     video_metadata = get_movie_info(input_file)
-     nframes = video_metadata['nframes’]
-
-
-
 
 DeepLabCut
 
