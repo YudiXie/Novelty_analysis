@@ -65,3 +65,23 @@ CUDA_VISIBLE_DEVICES=0 python3 AnalyzeVideos.py
 ```
 python3 MakingLabeledVideo.py
 ```
+
+# Runing on the cluster
+Start an interactivate session with GPU
+
+```
+srun --pty -p gpu -t 0-06:00 --mem 8000 --gres=gpu:1 /bin/bash
+srun --pty --mem=8G -n 4 -N 1 -p gpu -t 60 --gres=gpu:2 bash
+```
+Load mudules in the interactivate session
+```
+module load cuda/9.0-fasrc02 cudnn/7.0_cuda9.0-fasrc01
+
+```
+
+Generate a singularity image from docker local image.
+```
+docker run -it --name for_export dlc_user/dlc_tf1.2 /bin/true
+docker export for_export > dlc_tf1.2.tar
+singularity build dlc_tf1.2.simg dlc_tf1.2.tar
+```
