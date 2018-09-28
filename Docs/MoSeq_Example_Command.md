@@ -22,6 +22,17 @@ moseq2-extract extract /path/to/data/depth.dat --flip-classifier /home/alex/mose
 ```
 moseq2-extract extract depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75 --use-tracking-model True --cable-filter-iters 1
 ```
+* Trimming frames when the mouse is not in the arena, this is staged for the next version of moseq2-extract (v0.1.1). If you want to try now checkout the v0.1.1 branch,
+```
+cd ~/location_of_moseq2-extract/
+git pull
+git checkout v0.1.1
+```
+
+The relevant option is --frame-trim which is number of frames to trim from the beginning and from the end. To skip the first 500 and last 5000 frames,
+```
+moseq2-extract --frame-trim 500 5000 depth.dat --output-dir trim_test
+```
 
 3. Training PCA
 
@@ -92,43 +103,4 @@ moseq2-pca train-pca --cluster-type slurm --queue test --wall-time 01:00:00 --nw
 cd ~/location_of_moseq2-extract/
 git pull
 pip install somehing
-```
-
-
-
-
-```
-srun --pty -p gpu -t 0-06:00 --mem 8000 --gres=gpu:1 /bin/bash
-
-module load cuda/9.0-fasrc02 cudnn/7.0_cuda9.0-fasrc01
-srun --pty --mem=8G -n 4 -N 1 -p gpu -t 60 --gres=gpu:2 bash
-
-DeepLabCut
-
-`bg-roi-depth-range`
-
-Try out the defaults first.  If they don't work, the only filter you may want to turn down is the `tail` filter, try:
-
---tail-filter-size 5, 5 
-
-If you run into more issues we can move the conversation to Github.
-
-
-
-I am able to generate a singularity image from docker local image.
-
-docker run -it --name for_export dlc_user/dlc_tf1.2 /bin/true
-docker export for_export > dlc_tf1.2.tar
-singularity build dlc_tf1.2.simg dlc_tf1.2.tar
-
-
-Okay this is now staged for the next version of moseq2-extract (v0.1.1). If you want to try now checkout the v0.1.1 branch,
-
-cd ~/location_of_moseq2-extract/
-git pull
-git checkout v0.1.1
-The relevant option is --frame-trim which is number of frames to trim from the beginning and from the end. To skip the first 500 and last 5000 frames,
-
-moseq2-extract --frame-trim 500 5000 depth.dat --output-dir trim_test
-Note that this branch is not as stable as master, but I've been using it internally just fine.
 ```
