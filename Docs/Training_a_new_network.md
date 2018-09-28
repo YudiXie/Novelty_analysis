@@ -33,23 +33,23 @@ python3 Step4_GenerateTrainingFileFromLabelledData.py
 
 If using for the first time, download a pretrained network:
 ```
- $ cd pose-tensorflow/models/pretrained
- $ ./download.sh
+cd pose-tensorflow/models/pretrained
+./download.sh
 ```
 Copy the two folders generated from the last step to `/pose-tensorflow/models/`
 ```
-$ cp -r YOURexperimentNameTheDate-trainset95shuffle1 ../pose-tensorflow/models/
-$ cp -r UnaugmentedDataSet_YOURexperimentNameTheDate ../pose-tensorflow/models/
+cp -r YOURexperimentNameTheDate-trainset95shuffle1 ../pose-tensorflow/models/
+cp -r UnaugmentedDataSet_YOURexperimentNameTheDate ../pose-tensorflow/models/
 ```
 Start training
 ```
-$ cd pose-tensorflow/models/data_set_name/train
-$ TF_CUDNN_USE_AUTOTUNE=0 CUDA_VISIBLE_DEVICES=0 python3 ../../../train.py 
+cd pose-tensorflow/models/data_set_name/train
+TF_CUDNN_USE_AUTOTUNE=0 CUDA_VISIBLE_DEVICES=0 python3 ../../../train.py 
 ```
 7. Evaluate your network:
 ```
-$ CUDA_VISIBLE_DEVICES=0 python3 Step1_EvaluateModelonDataset.py #to evaluate your model [needs TensorFlow]
-$ python3 Step2_AnalysisofResults.py  #to compute test & train errors for your trained model
+CUDA_VISIBLE_DEVICES=0 python3 Step1_EvaluateModelonDataset.py #to evaluate your model [needs TensorFlow]
+python3 Step2_AnalysisofResults.py  #to compute test & train errors for your trained model
 ```
 
 # Analyzing videos
@@ -59,9 +59,9 @@ Edit: `myconfig_analysis.py`
 
 1. AnalyzingVideos:
 ```
-$ CUDA_VISIBLE_DEVICES=0 python3 AnalyzeVideos.py
+CUDA_VISIBLE_DEVICES=0 python3 AnalyzeVideos.py
 ```
 2. Making labeled videos
 ```
-$ python3 MakingLabeledVideo.py
+python3 MakingLabeledVideo.py
 ```
