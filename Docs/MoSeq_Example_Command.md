@@ -18,7 +18,7 @@ moseq2-extract download-flip-file
 ```
 moseq2-extract extract /path/to/data/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75 
 ```
-* Extraction using when doing fiber photometry
+* Use this when doing fiber photometry
 ```
 moseq2-extract extract depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75 --use-tracking-model True --cable-filter-iters 1
 ```
@@ -37,29 +37,37 @@ moseq2-pca train-pca -c 6 -n 1
 moseq2-pca train-pca -c 6 -n 1 --missing-data
 ```
 
+4. Aplly PCA
+```
+moseq2-pca apply-pca -c 6 -n 1
+```
+5. Compute change points
+```
+moseq2-pca compute-changepoints -c 6 -n 1
+```
+6. Model learning
 
-moseq2-pca apply-pca
-moseq2-pca compute-changepoints
-moseq2-model learn-model _pca/pca_scores.h5 my_model.p
+use`--save-model`to save the model parameters
+* Set kappa to the total number of frames in your traning data set
+```
+moseq2-model learn-model --kappa 108843 --save-model _pca/pca_scores.h5 my_model.p
+```
+
+7. Use built-in visualization
+```
 moseq2-viz generate-index 
 moseq2-viz make-crowd-movies moseq2-index.yaml my_model.p
 moseq2-viz plot-usages moseq2-index.yaml my_model.p
-
-moseq2-viz make-crowd-movies --max-syllable 1000 --sort False moseq2-index.yaml my_model.p
-moseq2-viz make-crowd-movies --max-syllable 1000 --sort True moseq2-index.yaml my_model.p
-moseq2-viz make-crowd-movies  --max-syllable 10 --min-height 0 --max-height 1000 --sort False moseq2-index.yaml my_model.p
+```
+* use `--max-syllable` to specify the maximun number of syllables to generate, 
+* Sometimes the lower part of the arena is not included in the crowd movies, use `--raw-size 512 512`. 
+* use `--sort False`, so that the syllables numbers generated corrispond to model labels in the `my_model.p`file.
+```
 moseq2-viz make-crowd-movies  --max-syllable 1000 --raw-size 512 512 --sort False moseq2-index.yaml my_model.p
+```
 
-
-
-moseq2-pca apply-pca -c 6 -n 1
-moseq2-pca compute-changepoints -c 6 -n 1
-moseq2-model learn-model --kappa 108843 --save-model _pca/pca_scores.h5 my_model.p
-cd ..
-
-moseq2-model learn-model --kappa 1334455 _pca/pca_scores.h5 my_model.p
-moseq2-model learn-model --kappa 2604919 --save-model _pca/pca_scores.h5 my_model.p
-##############################################################
+# Using MoSeq on a cluster
+```
 srun --pty --mem=50G -n 20 -N 1 -p test,shared -t 60 bash
 
 srun --pty -p gpu -t 0-06:00 --mem 8000 --gres=gpu:1 /bin/bash
@@ -129,3 +137,4 @@ The relevant option is --frame-trim which is number of frames to trim from the b
 
 moseq2-extract --frame-trim 500 5000 depth.dat --output-dir trim_test
 Note that this branch is not as stable as master, but I've been using it internally just fine.
+```
