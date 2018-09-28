@@ -34,6 +34,14 @@ The relevant option is --frame-trim which is number of frames to trim from the b
 moseq2-extract --frame-trim 500 5000 depth.dat --output-dir trim_test
 ```
 
+* to customize height, use `bg-roi-depth-range`
+
+You may also need to change other parameters
+
+Try out the defaults first.  If they don't work, the only filter you may want to turn down is the `tail` filter, try:
+
+`--tail-filter-size 5, 5`
+
 3. Training PCA
 
 First, go to the folder containing all your data. `moseq2-pca` analyze all your data inside the folder recursively
