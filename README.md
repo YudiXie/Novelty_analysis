@@ -2,7 +2,10 @@
 Matlab code for novelty behavior analysis
 
 ## Workflow
-0. Edit configuration file `Config_NovAna.m`. 
+0. Edit configuration file 
+```
+Config_NovAna.m
+```
 
 Especially, use correct `networkname_format`, which is the network name after 'DeepLabCut' without extension. For example `DeepCut_resnet50_MoSeqNoveltySep12shuffle1_1030000`
 
