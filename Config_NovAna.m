@@ -1,8 +1,8 @@
 networkname_format='DeepCut_resnet50_MoSeqNoveltySep12shuffle1_1030000';
 videoname_format='C4_180907_rgb.mp4';
 
-video_xlen=512;
-video_ywid=424;
+video_xlen=512;         % video length (x)
+video_ywid=424;         % video width (y)
 
 fpm = 1500;             % frames per minute
 fps = fpm./60;          % frames per second
