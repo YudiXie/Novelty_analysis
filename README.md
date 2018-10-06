@@ -41,3 +41,24 @@ VideoLabeling.m
 [Training a New Network for DeepLabCut](https://github.com/Rxie9596/Novelty_analysis/blob/master/Docs/Training_a_new_network.md)
 
 [MoSeq Sample Commands](https://github.com/Rxie9596/Novelty_analysis/blob/master/Docs/MoSeq_Example_Command.md)
+
+ 
+# Running on the cluster
+#### DeepLabCut
+1. Train a network locally, and copy the network to the cluster
+2. Generate a singularity image based on docker image
+3. Log in the cluster, Copy video to the cluster (/n/regal/uchida_lab)
+4. start an interactive session with GPUs
+5. oad modules and build singularity container
+6, Point GPUs to different videos and start extraction
+
+
+#### MoSeq
+1. Log into the cluster
+2. Start an interactive session
+3. Install  and activate moseq2 conda environment
+4. Install moseq packages
+5. Use moseq2-batch to generate a shell script
+6. Execute the shell script, start jobs inside an interactive session.
+
+
