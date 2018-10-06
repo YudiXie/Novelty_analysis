@@ -1,5 +1,6 @@
-# Novelty_analysis
-Matlab code for novelty behavior analysis
+# Novelty Analysis
+Matlab and Python code for novelty exploration behavior analysis in mice.
+Used after [DeepLabCut](https://github.com/AlexEMG/DeepLabCut) and MoSeq analysis.
 
 ## Workflow
 0. Edit configuration file 
