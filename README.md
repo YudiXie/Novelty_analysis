@@ -2,10 +2,26 @@
 Matlab code for novelty behavior analysis
 
 ## Workflow
-0. MoveFromDir.m
-1. MarkObjPos.m
-2. Analysis.m
-3. VideoLabeling.m
+0. Edit configuration file `Config_NovAna.m`. 
+
+Especially, use correct `networkname_format`, which is the network name after 'DeepLabCut' without extension. For example `DeepCut_resnet50_MoSeqNoveltySep12shuffle1_1030000`
+
+Use correct `videoname_format`, an example file name of your videos, including the '.mp4' or '.avi' extensions.
+
+* The following code need to be run directly under the folder containing all the videos and `.csv` files, if the videos are placed under subfolders use:`MoveFromDir.m`
+
+1. First mannually label the position of the arena and object, using 
+```
+MarkObjPos.m
+```
+2. Secondly, calculate head position, speed, angle etc. Also plotting the trajectory, heatmap, etc. 
+```
+Analysis.m
+```
+3. Thirdly, make labeled videos,
+```
+VideoLabeling.m
+```
 
 # Sample commands for using DeepLabCut and MoSeq
 
