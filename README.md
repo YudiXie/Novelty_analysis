@@ -9,7 +9,7 @@ Config_NovAna.m
 
 Especially, use correct `networkname_format`, which is the network name after 'DeepLabCut' without extension. For example `DeepCut_resnet50_MoSeqNoveltySep12shuffle1_1030000`
 
-Use correct `videoname_format`, an example file name of your videos, including the '.mp4' or '.avi' extensions.
+Use correct `videoname_format`, an example file name of your videos, including the '.mp4' or '.avi' extensions. For example, `C4_180907_rgb.mp4`
 
 * The following code need to be run directly under the folder containing all the videos and `.csv` files, if the videos are placed under subfolders use:`MoveFromDir.m`
 
