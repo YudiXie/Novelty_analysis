@@ -3,7 +3,7 @@
 ```
 source activate moseq2
 ```
-2. Use MoSeq extract
+2. Using MoSeq extract
 
 * Basic extraction
 ```
@@ -56,7 +56,7 @@ moseq2-pca train-pca -c 6 -n 1
 moseq2-pca train-pca -c 6 -n 1 --missing-data
 ```
 
-4. Aplly PCA
+4. Apply PCA
 ```
 moseq2-pca apply-pca -c 6 -n 1
 ```
