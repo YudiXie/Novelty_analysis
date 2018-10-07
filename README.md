@@ -94,7 +94,7 @@ MoSeqVideoLabeling.m
 
 4. Calculate and plot general syllable usage and conpare syllable expression of several different groups.
 ```
-MoSeqGeneralSyllableAnalysis
+MoSeqGeneralSyllableAnalysis.m
 ```
 Remember to spcify the mice and dates of each group. For example, G1 is contextual novelty mice, and G2 is stimulus novelty mice.
 ```
