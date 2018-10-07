@@ -14,15 +14,15 @@ Use correct `videoname_format`, an example file name of your videos, including t
 
 * The following code need to be run directly under the folder containing all the videos and `.csv` files, if the videos are placed under subfolders use:`MoveFromDir.m`
 
-1. First mannually label the position of the arena and object, using 
+1. Mannually label the position of the arena and object, using 
 ```
 MarkObjPos.m
 ```
-2. Secondly, calculate head position, speed, angle etc. Also plotting the trajectory, heatmap, etc. 
+2. Calculate head position, speed, angle etc. Also plotting the trajectory, heatmap, etc. 
 ```
 Analysis.m
 ```
-3. Thirdly, make labeled videos,
+3. Make labeled videos to check whether the labels are correct. This script generate labeled videos with a side bar showing the frame number, distance, orientation, speed, etc. for mannually label some interesting behaviors.
 ```
 VideoLabeling.m
 ```
