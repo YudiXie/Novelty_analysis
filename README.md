@@ -48,8 +48,8 @@ VideoLabeling.m
 1. Train a network locally, and copy the network to the cluster
 2. Generate a singularity image based on docker image
 3. Log in the cluster, Copy video to the cluster (/n/regal/uchida_lab)
-4. start an interactive session with GPUs
-5. oad modules and build singularity container
+4. Start an interactive session with GPUs
+5. Load modules and build singularity container
 6, Point GPUs to different videos and start extraction
 
 
