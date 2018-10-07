@@ -29,9 +29,31 @@ Analysis.m
 VideoLabeling.m
 ```
 #### Further data analysis
+* Code for calculating and plotting the time spent around the object / orienting towards the object.
+```
+TimeStatistic.m
+Plot_compare.m
+```
 
+* Code for calculating and plotting the time spent at different distances to the object per unit area.
+```
+DistHistPerUnitArea
+```
+* Code for event-based analyses, calculating and plotting several parameters, including number of interaction, time spent interacting with object, time per interaction, body length index, retreat speed, approach-retreat angle, etc.
+```
+EventBasedAnalysis.m
+```
+
+* Code for finding poking behavior in stimulus novelty mice.
+```
+FindingPokeDTW.m
+```
 
 ## Scripts for MoSeq data analysis
+
+
+
+
 
 # Sample commands for using DeepLabCut and MoSeq
 
