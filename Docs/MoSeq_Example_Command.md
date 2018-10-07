@@ -110,5 +110,5 @@ moseq2-pca train-pca --cluster-type slurm --queue test --wall-time 01:00:00 --nw
 ```
 cd ~/location_of_moseq2-extract/
 git pull
-pip install somehing
+pip install something # follow the instuction on MoSeq2/docs
 ```
