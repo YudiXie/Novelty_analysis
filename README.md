@@ -178,7 +178,7 @@ MoSeqFiberPhotometry.m
 3. Log in the cluster, Copy video to the cluster (/n/regal/uchida_lab)
 4. Start an interactive session with GPUs
 5. Load modules and build singularity container
-6, Point GPUs to different videos and start extraction
+6. Point GPUs to different videos and start extraction
 
 
 #### MoSeq
