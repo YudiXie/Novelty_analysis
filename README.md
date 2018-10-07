@@ -2,7 +2,9 @@
 Matlab and Python code for novelty exploration behavior analysis in mice.
 Used after [DeepLabCut](https://github.com/AlexEMG/DeepLabCut) and MoSeq analysis.
 
-## Workflow
+## Scripts for DeepLabCut data analysis
+
+#### Basic data analysis
 0. Edit configuration file 
 ```
 Config_NovAna.m
@@ -26,6 +28,10 @@ Analysis.m
 ```
 VideoLabeling.m
 ```
+#### Further data analysis
+
+
+## Scripts for MoSeq data analysis
 
 # Sample commands for using DeepLabCut and MoSeq
 
