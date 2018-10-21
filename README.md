@@ -64,7 +64,7 @@ Run this code in the `moseq2` conda enviroment and under the directory `Novelty_
 index_file = '/media/alex/DataDrive1/MoSeqData/CvsS_180831/CvsS_20180831_MoSeq/moseq2-index.yaml'
 model_file = '/media/alex/DataDrive1/MoSeqData/CvsS_180831/CvsS_20180831_MoSeq/my_model.p'
 ```
-Also specify where you would like to save the out put file, for example,
+Also specify where you would like to save the output file, for example,
 ```
 save_directory='/home/alex/Desktop/MoSeqDataFrame.mat'
 ```
@@ -73,7 +73,7 @@ save_directory='/home/alex/Desktop/MoSeqDataFrame.mat'
 ```
 FPDataTransfer.py
 ```
-ALso remember to specify the input and output directory.
+Also remember to specify the input and output directory.
 ```
 save_directory='/home/alex/Desktop/MoSeqFP.mat'
 filename = '/media/alex/DataDrive1/MoSeqData/MSFP_Test/180922/session_20180922154525/nidaq.dat'
