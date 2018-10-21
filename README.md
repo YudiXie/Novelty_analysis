@@ -37,7 +37,7 @@ Plot_compare.m
 
 * Code for calculating and plotting the time spent at different distances to the object per unit area.
 ```
-DistHistPerUnitArea
+DistHistPerUnitArea.m
 ```
 * Code for event-based analyses, calculating and plotting several parameters, including number of interaction, time spent interacting with object, time per interaction, body length index, retreat speed, approach-retreat angle, etc.
 ```
