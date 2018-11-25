@@ -9,7 +9,7 @@ FSize=20;
 Analysis_Mice=1:8;
 Analysis_Days=3;
 
-MoSeqDataFrame.SODis=sqrt((MoSeqDataFrame.centroid_x_mm-ObjPos(1)).^2+(MoSeqDataFrame.centroid_y_mm-ObjPos(1)).^2);
+MoSeqDataFrame.SODis=sqrt((MoSeqDataFrame.centroid_x_mm-ObjPos(1)).^2+(MoSeqDataFrame.centroid_y_mm-ObjPos(2)).^2);
 
 FilteredLabel=[];
 FilteredSODis=[];
