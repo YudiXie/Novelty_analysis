@@ -72,7 +72,8 @@ for actiter=1:size(acttime,1)
     plot(X,Signal1,'Color','g')
     hold on
     plot(X,Signal2,'Color','r')
-
+    xlabel('time (ms)')
+    ylabel('signals dF/F')
 end
 
 
