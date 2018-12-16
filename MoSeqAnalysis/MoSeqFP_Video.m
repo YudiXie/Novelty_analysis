@@ -138,8 +138,8 @@ end
 % legend('GCaMP','tdTom');
 y_bound=[-0.2,0.4];
 mywaitbar = waitbar(0,[num2str(round(100*0/deplen)) '%' '    |    ' num2str(0) '/' num2str(deplen)]);
-figure('Position',[0 0 300 100]);
-for plotiter = 1:1800
+figure('Position',[0 0 300 100],'visible','off');
+for plotiter = 1:deplen
     plot(m_time(plotiter,:),m_sg1(plotiter,:),'Color','g')
     hold on
     plot(m_time(plotiter,:),m_sg2(plotiter,:),'Color','r')
