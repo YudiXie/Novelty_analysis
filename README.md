@@ -1,6 +1,6 @@
 # Novelty Analysis
 Matlab and Python code for novelty exploration behavior analysis in mice.
-Used after [DeepLabCut](https://github.com/AlexEMG/DeepLabCut) and MoSeq analysis.
+Used after [DeepLabCut](https://github.com/AlexEMG/DeepLabCut) and [MoSeq](http://datta.hms.harvard.edu/research/behavioral-analysis/)  analysis.
 
 ## Scripts for DeepLabCut data analysis
 
@@ -10,11 +10,11 @@ Used after [DeepLabCut](https://github.com/AlexEMG/DeepLabCut) and MoSeq analysi
 Config_NovAna.m
 ```
 
-Especially, use correct `networkname_format`, which is the network name after 'DeepLabCut' without extension. For example `DeepCut_resnet50_MoSeqNoveltySep12shuffle1_1030000`
+Especially, be sure to use correct `networkname_format`, which is the network name after 'DeepLabCut' without the extension. For example `DeepCut_resnet50_MoSeqNoveltySep12shuffle1_1030000`
 
-Use correct `videoname_format`, an example file name of your videos, including the '.mp4' or '.avi' extensions. For example, `C4_180907_rgb.mp4`
+Be sure to use correct `videoname_format`, an example file name of your videos, including the '.mp4' or '.avi' extensions. For example, `C4_180907_rgb.mp4`
 
-* The following code need to be run directly under the folder containing all the videos and `.csv` files, if the videos are placed under subfolders use:`MoveFromDir.m`
+* You will need to run the following code directly under the folder containing all the videos and `.csv` files, if the videos are placed under subfolders, use:`MoveFromDir.m`
 
 1. Mannually label the position of the arena and object, using 
 ```
@@ -24,7 +24,7 @@ MarkObjPos.m
 ```
 Analysis.m
 ```
-3. Make labeled videos to check whether the labels are correct. This script generate labeled videos with a side bar showing the frame number, distance, orientation, speed, etc. for mannually label some interesting behaviors.
+3. Make labeled videos to check whether the labels are correct. This script generate labeled videos with a side bar showing the frame number, distance, orientation, speed, etc. for mannually labeling some interesting behaviors.
 ```
 VideoLabeling.m
 ```
@@ -44,7 +44,7 @@ DistHistPerUnitArea.m
 EventBasedAnalysis.m
 ```
 
-* Code for finding poking behavior in stimulus novelty mice.
+* Code for finding approach-retreat behavior in stimulus novelty mice.
 ```
 FindingPokeDTW.m
 ```
@@ -64,7 +64,7 @@ Run this code in the `moseq2` conda enviroment and under the directory `Novelty_
 index_file = '/media/alex/DataDrive1/MoSeqData/CvsS_180831/CvsS_20180831_MoSeq/moseq2-index.yaml'
 model_file = '/media/alex/DataDrive1/MoSeqData/CvsS_180831/CvsS_20180831_MoSeq/my_model.p'
 ```
-Also specify where you would like to save the output file, for example,
+Also, specify where you would like to save the output file, for example,
 ```
 save_directory='/home/alex/Desktop/MoSeqDataFrame.mat'
 ```
@@ -73,19 +73,19 @@ save_directory='/home/alex/Desktop/MoSeqDataFrame.mat'
 ```
 FPDataTransfer.py
 ```
-Also remember to specify the input and output directory.
+Also, remember to specify the input and output directory.
 ```
 save_directory='/home/alex/Desktop/MoSeqFP.mat'
 filename = '/media/alex/DataDrive1/MoSeqData/MSFP_Test/180922/session_20180922154525/nidaq.dat'
 nch=3
 ```
-`nch` is the number of channels plus 1 (timestamps) of your photometry recording.
+`nch` is the number of channels plus 1 (timestamps) of your photometry recording. For example, if you are recording two channels, GCaMP and tdTomato, choose `nch=3`
 
-2. Edit mice index file for further analysis, you can find a template here
+2. Edit mice index file for further analyses, you can find a template here
 ```
 Mice_Index_Template.m
 ```
-In the following scripts, mice indexes and date indexes are read as specified in this file, please also spcify where to find this mice index file in later analyses.
+In the following scripts, mice indexes and date indexes are used by other scripts as specified in this file , please also spcify where to find this mice index file in the following scripts that you need to run.
 
 3. Make labeled videos which show the syllables numbers and a color bar in the bottom which shows the syllables being used.
 ```
