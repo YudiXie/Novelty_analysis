@@ -71,6 +71,11 @@ use`--save-model`to save the model parameters
 ```
 moseq2-model learn-model --kappa 108843 --save-model _pca/pca_scores.h5 my_model.p
 ```
+* Try to use the following options when training fails.
+```
+--whiten each
+--robust
+```
 
 7. Use built-in visualization
 ```
