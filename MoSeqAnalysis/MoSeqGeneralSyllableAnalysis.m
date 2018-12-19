@@ -5,22 +5,23 @@ Batch_name='KaeserLab 181130';
 G1_name='Group1';
 G2_name='Group2';
 
-G1_Mice=[1 2 3 4 5];
-G2_Mice=[6 7 8 9 10];
+G1_Mice=[1 2 3 4];
+G2_Mice=[5 6 7 8];
 G1_Days=[1];
 G2_Days=[1];
 
 
 % G3 Base line
-G3_Mice=1:10;
+G3_Mice=1:8;
 G3_Days=[1];
+G3_name='Averaged Baseline';
 
 load('MoSeqDataFrame.mat')
 cmap=jet(100);
 fps=30;
 Syllablebinedge=[-6,-0.5:1:99.5];
 
-Mice_Index_path='/Users/yuxie/Dropbox/YuXie/Kaeser_Lab/181212/Mice_Index.m';
+Mice_Index_path='/Users/yuxie/Dropbox/YuXie/Kaeser_Lab/181212/Results/Mice_Index.m';
 run(Mice_Index_path);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -180,7 +181,7 @@ plot(X,PG1Usage,'LineWidth',1.5)
 hold on
 plot(X,PG2Usage,'LineWidth',1.5)
 
-legend('Contextual Novelty','Stimulus Novelty')
+legend({G1_name,G2_name},'FontSize',fsize)
 title(['Syllable Usage Comparison of ' G1_name ' vs. ' G2_name ' (' Batch_name ')'],'FontSize',fsize)
 ylabel('Percentage','FontSize',fsize)
 xlabel('Syllables','FontSize',fsize)
@@ -195,7 +196,7 @@ plot(X,PG2Usage(G2vsG1Sortedusageindex),'LineWidth',1.5)
 hold on
 plot(X,PG3Usage(G2vsG1Sortedusageindex),'LineWidth',1,'Color','Black')
 
-legend({G1_name,G2_name,Batch_name},'FontSize',fsize)
+legend({G1_name,G2_name,G3_name},'FontSize',fsize)
 title(['Syllable Usage Comparison of ' G1_name ' vs. ' G2_name ' (' Batch_name ')' '(Sorted by ' G2_name ' enrichment)'],'FontSize',fsize)
 ylabel('Percentage','FontSize',fsize)
 xlabel('Syllables','FontSize',fsize)
