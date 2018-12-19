@@ -14,7 +14,7 @@ If using for the first time, download a flip classifier
 ```
 moseq2-extract download-flip-file
 ```
-* Extraction using a flip classifier
+* Extraction using a flip classifier ann with increased dilation range.
 ```
 moseq2-extract extract /path/to/data/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75 
 ```
@@ -22,7 +22,7 @@ moseq2-extract extract /path/to/data/depth.dat --flip-classifier /home/alex/mose
 ```
 moseq2-extract extract depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75 --use-tracking-model True --cable-filter-iters 1
 ```
-* Trimming frames when the mouse is not in the arena, this is staged for the next version of moseq2-extract (v0.1.1). If you want to try now checkout the v0.1.1 branch,
+* Trimming frames when the mouse is not in the arena, this is staged for the next version of moseq2-extract (v0.1.1). If you want to try now checkout the v0.1.1 branch (if it is already this version, skip this part)
 ```
 cd ~/location_of_moseq2-extract/
 git pull
@@ -41,6 +41,9 @@ You may also need to change other parameters
 Try out the defaults first.  If they don't work, the only filter you may want to turn down is the `tail` filter, try:
 
 `--tail-filter-size 5, 5`
+
+* When some mice in the experiments don't move very much during the entire trial, use this option to prevent it is excluded as background.
+`--use-plane-bground`
 
 3. Training PCA
 
@@ -78,13 +81,41 @@ moseq2-model learn-model --kappa 108843 --save-model _pca/pca_scores.h5 my_model
 ```
 
 7. Use built-in visualization
+
+First, generate index.
 ```
 moseq2-viz generate-index 
-moseq2-viz make-crowd-movies moseq2-index.yaml my_model.p
+```
+* use `moseq2-viz add-group` to specify groups in the index. (you can also do that by editing the `moseq2-index.yaml` file directly.
+
+```
+moseq2-viz add-group -k SubjectName -v "mouse3" -v "mouse4" -v "mouse8" -v "mouse100" -g "group1" moseq2-index.yaml
+```
+* plot the syllable usages for each group
+```
+moseq2-viz plot-usages moseq2-index.yaml my_model.p --group group1 --group group2
+```
+
+if there is no group,
+```
 moseq2-viz plot-usages moseq2-index.yaml my_model.p
 ```
+
+* plot the averaged velocity or height, etc. for each group
+```
+moseq2-viz plot-scalar-summary moseq2-index.yaml
+```
+* plot the transition graph
+```
+moseq2-viz plot-transition-graph moseq2-index.yaml my_model.p --group group1 --group group2
+```
+
+* making crowd movies.
+```
+moseq2-viz make-crowd-movies moseq2-index.yaml my_model.p
+```
 * use `--max-syllable` to specify the maximun number of syllables to generate, 
-* Sometimes the lower part of the arena is not included in the crowd movies, use `--raw-size 512 512`. 
+* Sometimes the lower part of the arena is not included in the crowd movies, use, for example `--raw-size 512 512`. 
 * use `--sort False`, so that the syllables numbers generated correspond to model labels in the `my_model.p`file.
 ```
 moseq2-viz make-crowd-movies  --max-syllable 1000 --raw-size 512 512 --sort False moseq2-index.yaml my_model.p
