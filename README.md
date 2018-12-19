@@ -5,6 +5,11 @@ Used after [DeepLabCut](https://github.com/AlexEMG/DeepLabCut) and [MoSeq](http:
 ## Scripts for DeepLabCut data analysis
 
 #### Basic data analysis
+Fisrt, run the DeepLabCut, see [Running an existing network (Korleki)](https://github.com/Rxie9596/Novelty_analysis/blob/master/Docs/Using_DLC_in_UchidaLab_Korleki.md)
+
+After that,
+
+
 0. Edit configuration file 
 ```
 Config_NovAna.m
