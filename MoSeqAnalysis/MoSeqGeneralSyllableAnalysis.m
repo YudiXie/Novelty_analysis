@@ -1,21 +1,26 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Initialization
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-G1_Mice=[1 2 3 4];
-G2_Mice=[5 6 7 8];
-G1_Days=[3 4 5 6];
-G2_Days=[3 4 5 6];
+Batch_name='KaeserLab 181130';
+G1_name='Group1';
+G2_name='Group2';
+
+G1_Mice=[1 2 3 4 5];
+G2_Mice=[6 7 8 9 10];
+G1_Days=[1];
+G2_Days=[1];
+
 
 % G3 Base line
-G3_Mice=1:8;
-G3_Days=[1 2];
+G3_Mice=1:10;
+G3_Days=[1];
 
 load('MoSeqDataFrame.mat')
 cmap=jet(100);
 fps=30;
 Syllablebinedge=[-6,-0.5:1:99.5];
 
-Mice_Index_path='/Users/yuxie/Dropbox/YuXie/CvsS_180831/CvsS_180831_MoSeq/Mice_Index.m';
+Mice_Index_path='/Users/yuxie/Dropbox/YuXie/Kaeser_Lab/181212/Mice_Index.m';
 run(Mice_Index_path);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -155,7 +160,7 @@ fsize=16;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Plot_GeneralUsage=figure;
 plot(X,GSortedusage,'LineWidth',1.5)
-title('General Syllable Usage (sorted by usage, CvsS 180831)','FontSize',fsize)
+title(['General Syllable Usage (sorted by usage, ' Batch_name ' )'],'FontSize',fsize)
 ylabel('Percentage','FontSize',fsize)
 xlabel('Syllables','FontSize',fsize)
 xticks(X);
@@ -164,7 +169,7 @@ xticklabels(SyllablesX(GSortedusageindex));
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Plot_AccGeneralUsage=figure;
 plot(X,AccGSortedusage,'LineWidth',1.5)
-title('Accumulated General Syllable Usage (CvsS 180831)','FontSize',fsize)
+title(['Accumulated General Syllable Usage (' Batch_name ')'],'FontSize',fsize)
 ylabel('Percentage','FontSize',fsize)
 xlabel('Syllables Rank','FontSize',fsize)
 xticks(X);
@@ -176,7 +181,7 @@ hold on
 plot(X,PG2Usage,'LineWidth',1.5)
 
 legend('Contextual Novelty','Stimulus Novelty')
-title('Syllable Usage Comparison of Contextual/Stimulus Novely Mice (CvsS 180831)','FontSize',fsize)
+title(['Syllable Usage Comparison of ' G1_name ' vs. ' G2_name ' (' Batch_name ')'],'FontSize',fsize)
 ylabel('Percentage','FontSize',fsize)
 xlabel('Syllables','FontSize',fsize)
 xticks(X);
@@ -190,8 +195,8 @@ plot(X,PG2Usage(G2vsG1Sortedusageindex),'LineWidth',1.5)
 hold on
 plot(X,PG3Usage(G2vsG1Sortedusageindex),'LineWidth',1,'Color','Black')
 
-legend({'Contextual Novelty','Stimulus Novelty','Habituattion'},'FontSize',fsize)
-title('Syllable Usage Comparison of Contextual/Stimulus Novely Mice (CvsS 180831) (Sorted by stimulus novelty enrichment)','FontSize',fsize)
+legend({G1_name,G2_name,Batch_name},'FontSize',fsize)
+title(['Syllable Usage Comparison of ' G1_name ' vs. ' G2_name ' (' Batch_name ')' '(Sorted by ' G2_name ' enrichment)'],'FontSize',fsize)
 ylabel('Percentage','FontSize',fsize)
 xlabel('Syllables','FontSize',fsize)
 xticks(X);
