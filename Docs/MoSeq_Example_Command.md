@@ -1,4 +1,10 @@
 # MoSeq Example Commands
+
+You can use a shell script to do the following analysis automatically, there is a template
+```
+Shell_Script_Template.sh
+```
+
 1. Activate conda environment for MoSeq
 ```
 source activate moseq2
