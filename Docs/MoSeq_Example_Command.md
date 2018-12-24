@@ -16,11 +16,12 @@ source activate moseq2
 moseq2-extract extract ~/Programs/MoSeq_videos/MoSeq_test/session_20180728154636/depth.dat
 ```
 * Use a flip classifier
-If using for the first time, download a flip classifier
+
+If you are using for the first time, download a flip classifier
 ```
 moseq2-extract download-flip-file
 ```
-* Extraction using a flip classifier ann with increased dilation range.
+* Extraction using a flip classifier and with increased dilation range.
 ```
 moseq2-extract extract /path/to/data/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75 
 ```
