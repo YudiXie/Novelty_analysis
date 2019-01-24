@@ -21,7 +21,7 @@ Be sure to use correct `videoname_format`, an example file name of your videos, 
 
 * You will need to run the following code directly under the folder containing all the videos and `.csv` files, if the videos are placed under subfolders, use:`MoveFromDir.m`
 
-1. Mannually label the position of the arena and object, using 
+1. To mannually label the position of the arena and object, please use
 ```
 MarkObjPos.m
 ```
@@ -55,7 +55,7 @@ FindingPokeDTW.m
 ```
 
 ## Scripts for MoSeq data analysis
-Fisrt, run all the Moseq analysis, see [MoSeq Sample Commands](https://github.com/Rxie9596/Novelty_analysis/blob/master/Docs/MoSeq_Example_Command.md)
+First, run all the Moseq analysis, see [MoSeq Sample Commands](https://github.com/Rxie9596/Novelty_analysis/blob/master/Docs/MoSeq_Example_Command.md)
 
 After that,
 
