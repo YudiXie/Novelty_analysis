@@ -98,7 +98,8 @@ nch=3
 ```
 Mice_Index_Template.m
 ```
-In the following scripts, mice indexes and date indexes are used by other scripts as specified in this file , please also spcify where to find this mice index file in the following scripts that you need to run.
+This script generates a data structure and assigns each mouse an unique integer index for grouping them together later.
+In the following scripts, mice indexes and date indexes are used by other scripts as specified in this file, please also spcify where to find this mice index file in the following scripts that you need to run.
 
 3. Make labeled videos which show the syllables numbers and a color bar in the bottom which shows the syllables being used.
 ```
