@@ -68,7 +68,11 @@ MoSeqMoveRGB.m
 ```
 ModelDataTransfer.py
 ```
-Run this code in the `moseq2` conda enviroment and under the directory `Novelty_analysis/MoSeqAnalysis`, specify the path of the index file and model file, for example
+Run this script in the `moseq2` conda enviroment and under the directory where you saved this script (eg. `Novelty_analysis/MoSeqAnalysis`), using the following command,
+```
+python3 ModelDataTransfer.py
+```
+specify the path of the index file and model file, for example
 ```
 index_file = '/media/alex/DataDrive1/MoSeqData/CvsS_180831/CvsS_20180831_MoSeq/moseq2-index.yaml'
 model_file = '/media/alex/DataDrive1/MoSeqData/CvsS_180831/CvsS_20180831_MoSeq/my_model.p'
