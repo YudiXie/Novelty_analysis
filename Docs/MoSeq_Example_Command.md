@@ -93,12 +93,17 @@ First, generate index.
 ```
 moseq2-viz generate-index 
 ```
-* use `moseq2-viz add-group` to specify groups in the index. (you can also do that by editing the `moseq2-index.yaml` file directly.
+* use `moseq2-viz add-group` to specify groups in the index. (you can also do that by editing the `moseq2-index.yaml` file directly. The following command add the "group1" label to four mice whose subject names are "mouse3", "mouse4", "mouse8", and "mouse100".
 
 ```
 moseq2-viz add-group -k SubjectName -v "mouse3" -v "mouse4" -v "mouse8" -v "mouse100" -g "group1" moseq2-index.yaml
 ```
-* plot the syllable usages for each group
+If you have another group,(eg. group name "group2") please use this command again to assign the corrisponding mice to "group2".
+
+You can also add the group information by editing the `group` field in the `moseq2-index.yaml` file directly.
+
+
+* plot the syllable usages for each group, for example, if you want to plot the usage for group1 and group2, please use the following command,
 ```
 moseq2-viz plot-usages moseq2-index.yaml my_model.p --group group1 --group group2
 ```
