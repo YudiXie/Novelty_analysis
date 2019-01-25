@@ -98,7 +98,7 @@ moseq2-viz generate-index
 ```
 moseq2-viz add-group -k SubjectName -v "mouse3" -v "mouse4" -v "mouse8" -v "mouse100" -g "group1" moseq2-index.yaml
 ```
-If you have another group,(eg. group name "group2") please use this command again to assign the corrisponding mice to "group2".
+If you have another group (eg. group name "group2"), please use this command again to assign the corrisponding mice to "group2".
 
 You can also add the group information by editing the `group` field in the `moseq2-index.yaml` file directly.
 
