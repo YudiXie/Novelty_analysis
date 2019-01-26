@@ -60,22 +60,22 @@ for syliter=1:101
     end
 end
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Plot each data
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-for plotiter=1:length(G1_Mice)
-    hold on
-    scatter(X,N_G1Usage(1,G2vsG1Sortedusageindex,plotiter),mksize,'MarkerFaceColor',[ 0    0.4470    0.7410],'MarkerEdgeColor',[ 0    0.4470    0.7410])
-end
-for plotiter=1:length(G2_Mice)
-    hold on
-    scatter(X,N_G2Usage(1,G2vsG1Sortedusageindex,plotiter),mksize,'MarkerFaceColor',[0.8500    0.3250    0.0980],'MarkerEdgeColor',[0.8500    0.3250    0.0980])
-end
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %% Plot each data
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% for plotiter=1:length(G1_Mice)
+%     hold on
+%     scatter(X,N_G1Usage(1,G2vsG1Sortedusageindex,plotiter),mksize,'MarkerFaceColor',[ 0    0.4470    0.7410],'MarkerEdgeColor',[ 0    0.4470    0.7410])
+% end
+% for plotiter=1:length(G2_Mice)
+%     hold on
+%     scatter(X,N_G2Usage(1,G2vsG1Sortedusageindex,plotiter),mksize,'MarkerFaceColor',[0.8500    0.3250    0.0980],'MarkerEdgeColor',[0.8500    0.3250    0.0980])
+% end
 
 
-legend({G1_name,G2_name},'FontSize',fsize)
-title(['Syllable Usage (Averaged percentatge) Comparison of ' G1_name ' vs. ' G2_name ' (' Batch_name ')'],'FontSize',fsize)
-ylabel('Fraction','FontSize',fsize)
-xlabel('Syllables','FontSize',fsize)
-xticks(X);
-xticklabels(SyllablesX(G2vsG1Sortedusageindex));
+% legend({G1_name,G2_name},'FontSize',fsize)
+% title(['Syllable Usage (Averaged percentatge) Comparison of ' G1_name ' vs. ' G2_name ' (' Batch_name ')'],'FontSize',fsize)
+% ylabel('Fraction','FontSize',fsize)
+% xlabel('Syllables','FontSize',fsize)
+% xticks(X);
+% xticklabels(SyllablesX(G2vsG1Sortedusageindex));
