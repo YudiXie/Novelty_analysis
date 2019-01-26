@@ -1,29 +1,30 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Initialization
+% Please edit the following parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Batch_name='KaeserLab 181130';
+Batch_name='KaeserLab 190126';
 G1_name='Group1';
 G2_name='Group2';
 
-G1_Mice=[1 2 3 4];
-G2_Mice=[5 6 7 8];
+G1_Mice=1:11;
+G2_Mice=12:19;
 G1_Days=[1];
 G2_Days=[1];
 
 
 % G3 Base line
-G3_Mice=1:8;
+G3_Mice=1:19;
 G3_Days=[1];
 G3_name='Averaged Baseline';
 
+Mice_Index_path='/Users/yuxie/Dropbox/YuXie/Kaeser_Lab/190125/Mice_Index.m';
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Initialization
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 load('MoSeqDataFrame.mat')
 cmap=jet(100);
 fps=30;
 Syllablebinedge=[-6,-0.5:1:99.5];
-
-Mice_Index_path='/Users/yuxie/Dropbox/YuXie/Kaeser_Lab/181212/Results/Mice_Index.m';
 run(Mice_Index_path);
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Calculation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -93,29 +94,29 @@ for usageiter=1:length(GSortedusage)
 end
 
 % Calculate Usage of Group1, Group2, and Group3
-G1Usage=zeros(1,101);
+G1Usage=zeros(length(G1_Days),101,length(G1_Mice));
 for miceiter=G1_Mice
     for dayiter=G1_Days
-        G1Usage = G1Usage + Mice(miceiter).ExpDay(dayiter).usage;   
+        G1Usage(dayiter,:,miceiter) = Mice(miceiter).ExpDay(dayiter).usage;   
     end
 end
-PG1Usage=G1Usage./sum(G1Usage);
+PG1Usage=sum(sum(G1Usage,1),3)./sum(sum(sum(G1Usage,1),3));
 
-G2Usage=zeros(1,101);
+G2Usage=zeros(length(G2_Days),101,length(G2_Mice));
 for miceiter=G2_Mice
     for dayiter=G2_Days
-        G2Usage = G2Usage + Mice(miceiter).ExpDay(dayiter).usage;
+        G2Usage(dayiter,:,miceiter) = Mice(miceiter).ExpDay(dayiter).usage;   
     end
 end
-PG2Usage=G2Usage./sum(G2Usage);
+PG2Usage=sum(sum(G2Usage,1),3)./sum(sum(sum(G2Usage,1),3));
 
-G3Usage=zeros(1,101);
+G3Usage=zeros(length(G3_Days),101,length(G3_Mice));
 for miceiter=G3_Mice
     for dayiter=G3_Days
-        G3Usage = G3Usage + Mice(miceiter).ExpDay(dayiter).usage;
+        G3Usage(dayiter,:,miceiter) = Mice(miceiter).ExpDay(dayiter).usage;   
     end
 end
-PG3Usage=G3Usage./sum(G3Usage);
+PG3Usage=sum(sum(G3Usage,1),3)./sum(sum(sum(G3Usage,1),3));
 
 G2vsG1usage=(PG2Usage-PG1Usage)./(PG2Usage+PG1Usage);
 [G2vsG1Sortedusage,G2vsG1Sortedusageindex]=sort(G2vsG1usage,'descend');
@@ -198,7 +199,7 @@ plot(X,PG3Usage(G2vsG1Sortedusageindex),'LineWidth',1,'Color','Black')
 
 legend({G1_name,G2_name,G3_name},'FontSize',fsize)
 title(['Syllable Usage Comparison of ' G1_name ' vs. ' G2_name ' (' Batch_name ')' '(Sorted by ' G2_name ' enrichment)'],'FontSize',fsize)
-ylabel('Percentage','FontSize',fsize)
+ylabel('Fraction','FontSize',fsize)
 xlabel('Syllables','FontSize',fsize)
 xticks(X);
 xticklabels(SyllablesX(G2vsG1Sortedusageindex));
