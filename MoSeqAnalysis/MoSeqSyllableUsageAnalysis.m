@@ -73,9 +73,9 @@ end
 % end
 
 
-% legend({G1_name,G2_name},'FontSize',fsize)
-% title(['Syllable Usage (Averaged percentatge) Comparison of ' G1_name ' vs. ' G2_name ' (' Batch_name ')'],'FontSize',fsize)
-% ylabel('Fraction','FontSize',fsize)
-% xlabel('Syllables','FontSize',fsize)
-% xticks(X);
-% xticklabels(SyllablesX(G2vsG1Sortedusageindex));
+legend({G1_name,G2_name},'FontSize',fsize)
+title(['Syllable Usage (Averaged percentatge) Comparison of ' G1_name ' vs. ' G2_name ' (' Batch_name ')'],'FontSize',fsize)
+ylabel('Fraction','FontSize',fsize)
+xlabel('Syllables','FontSize',fsize)
+xticks(X);
+xticklabels(SyllablesX(G2vsG1Sortedusageindex));
