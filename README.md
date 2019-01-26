@@ -74,12 +74,12 @@ python3 ModelDataTransfer.py
 ```
 Before running it, please remember to specify the path of the index file and model file, for example
 ```
-index_file = '/media/alex/DataDrive1/MoSeqData/CvsS_180831/CvsS_20180831_MoSeq/moseq2-index.yaml'
-model_file = '/media/alex/DataDrive1/MoSeqData/CvsS_180831/CvsS_20180831_MoSeq/my_model.p'
+index_file = '/media/richard/DataDrive1/MoSeqData/CvsS_180831/CvsS_20180831_MoSeq/moseq2-index.yaml'
+model_file = '/media/richard/DataDrive1/MoSeqData/CvsS_180831/CvsS_20180831_MoSeq/my_model.p'
 ```
 Also, specify where you would like to save the output file, for example,
 ```
-save_directory='/home/alex/Desktop/MoSeqDataFrame.mat'
+save_directory='/home/richard/Desktop/MoSeqDataFrame.mat'
 ```
 
 * if you are doing fiber phtotmetry with MoSeq, run the following code to transfer the fiber phtotmetry data to MATLAB readable format.
@@ -88,8 +88,8 @@ FPDataTransfer.py
 ```
 Also, remember to specify the input and output directory.
 ```
-save_directory='/home/alex/Desktop/MoSeqFP.mat'
-filename = '/media/alex/DataDrive1/MoSeqData/MSFP_Test/180922/session_20180922154525/nidaq.dat'
+save_directory='/home/richard/Desktop/MoSeqFP.mat'
+filename = '/media/richard/DataDrive1/MoSeqData/MSFP_Test/180922/session_20180922154525/nidaq.dat'
 nch=3
 ```
 `nch` is the number of channels plus 1 (timestamps) of your photometry recording. For example, if you are recording two channels, GCaMP and tdTomato, choose `nch=3`
