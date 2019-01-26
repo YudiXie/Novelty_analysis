@@ -123,6 +123,10 @@ G3_Days=[1 2];
 ```
 The results are sorted by `(G2-G1)/(G2+G1)`, so on the left hand side are G2 enriched syllables and on the right hand side are G1 enriched syllables.
 
+To do the statistical analysis by two sample t-test, please use
+```
+MoSeqSyllableUsageStatisticalAnalysis.m
+```
 5. Structure clusting of syllables,
 ```
 MoSeqSyllableClustering.m
