@@ -26,7 +26,7 @@ for sheetiter=1:length(G2_Mice)
     N_G2Usage_tt(sheetiter,:)=N_G2Usage(1,:,sheetiter);
 end
 
-h=ttest2(N_G1Usage_tt,N_G2Usage_tt);
+h=ttest2(N_G1Usage_tt,N_G2Usage_tt,'Vartype','unequal');
 
 
 mksize=4;
