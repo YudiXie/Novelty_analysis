@@ -1,8 +1,8 @@
-load('GeneralUsage.mat')
-nodename=regexp(sprintf('%i ',0:99),'(\d+)','match');
-
-Group1Name='Contextual Novelty';
-Group2Name='Stimulus Novelty';
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Please edit the following parameters
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Group1Name='Group1';
+Group2Name='Group2';
 
 fsize=20;
 plotnodesize=1000;
@@ -14,11 +14,14 @@ Generalthreshold=30.*1e-04;
 
 % Nodes thresholded by usage
 usageth=0.1.*1e-4;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Processing
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+load('GeneralUsage.mat')
+nodename=regexp(sprintf('%i ',0:99),'(\d+)','match');
 
 % General transition of Group 1 and Group 2
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 PGBM_th=PGBM-PGBM.*(PGBM<Generalthreshold);
 PG2BM_th=PG2BM-PG2BM.*(PGBM<Generalthreshold);
 PG1BM_th=PG1BM-PG1BM.*(PGBM<Generalthreshold);
