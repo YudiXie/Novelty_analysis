@@ -173,11 +173,13 @@ MoSeqEventAlignedAnalysis.m
 MoSeqEventBasedAnalysis.m
 ```
 
-* Scripts for sychronizing photometry data,
+12. Fiber photometry analysis,
+Scripts for sychronizing photometry data,
 ```
-MoSeqFiberPhotometry.m
+MoSeqFP.m
+MoSeqFP_Dis.m
+MoSeqFP_raster.m
 ```
-
 # Sample commands for using DeepLabCut and MoSeq
 
 [Running an existing network (Korleki)](https://github.com/Rxie9596/Novelty_analysis/blob/master/Docs/Using_DLC_in_UchidaLab_Korleki.md)
