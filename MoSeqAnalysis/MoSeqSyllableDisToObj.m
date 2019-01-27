@@ -1,10 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Please edit the following parameters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-ObjPos=[-180 -131];
-Mice_Index_path='/Users/yuxie/Dropbox/YuXie/CvsS_180831/CvsS_180831_MoSeq/Mice_Index.m';
-Analysis_Mice=1:8;
-Analysis_Days=3;
+ObjPos=[-200 -150];
+Mice_Index_path='/Users/yuxie/Dropbox/YuXie/Kaeser_Lab/190125/Mice_Index.m';
+Analysis_Mice=1:19;
+Analysis_Days=1;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Processing
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -61,11 +61,19 @@ areahandle=area(dis,SylDisPCount','LineStyle','none');
 title('Syllable Usage at different distance to object (N1)','FontSize',FSize)
 xlabel('Distance (mm)','FontSize',FSize)
 ylabel('Usage (Percentage)','FontSize',FSize)
-xlim([0 630])
+xlim([0 210])
 
 Plot_SyllableDisToObjNormalized=figure;
 areahandleNor=area(dis,SylDisPCountNormalized','LineStyle','none');
 title('Syllable Usage at different distance to object Normalized (N1)','FontSize',FSize)
 xlabel('Distance (mm)','FontSize',FSize)
 ylabel('Usage (Percentage)','FontSize',FSize)
-axis([0,630,0,1])
+axis([0,210,0,1])
+
+
+% This if for checking the syllable munber with colored areas
+% for coloriter=1:100
+%     areahandleNor(coloriter).FaceColor=[0 0 0];
+%     coloriter-1
+%     pause
+% end
