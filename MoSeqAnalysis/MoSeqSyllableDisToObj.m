@@ -1,13 +1,18 @@
-load('MoSeqDataFrame.mat');
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Please edit the following parameters
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ObjPos=[-180 -131];
-cmap=jet(100);
-totalcount=length(MoSeqDataFrame.model_label);
 Mice_Index_path='/Users/yuxie/Dropbox/YuXie/CvsS_180831/CvsS_180831_MoSeq/Mice_Index.m';
-run(Mice_Index_path);
-FSize=20;
-
 Analysis_Mice=1:8;
 Analysis_Days=3;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Processing
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+load('MoSeqDataFrame.mat');
+cmap=jet(100);
+totalcount=length(MoSeqDataFrame.model_label);
+run(Mice_Index_path);
+FSize=20;
 
 MoSeqDataFrame.SODis=sqrt((MoSeqDataFrame.centroid_x_mm-ObjPos(1)).^2+(MoSeqDataFrame.centroid_y_mm-ObjPos(2)).^2);
 
