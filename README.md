@@ -49,7 +49,7 @@ DistHistPerUnitArea.m
 EventBasedAnalysis.m
 ```
 
-* Code for finding approach-retreat behavior in stimulus novelty mice.
+* Code for finding the approach-retreat behavior in stimulus novelty mice.
 ```
 FindingPokeDTW.m
 ```
