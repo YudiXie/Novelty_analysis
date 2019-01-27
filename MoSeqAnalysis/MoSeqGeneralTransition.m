@@ -6,8 +6,8 @@ Group2Name='Group2';
 
 fsize=20;
 plotnodesize=1000;
-plotedgewidth=1400;
-compareplotedgewidth=40;
+plotedgewidth=1500;
+compareplotedgewidth=50;
 
 % edge thresholded by percentage usage
 Generalthreshold=30.*1e-04;
@@ -106,7 +106,7 @@ G2cb=colorbar;
 G2cb.Label.String = 'Bigram Transition Probabillity';
 G2cb.Label.FontSize=fsize;
 colormap cool
-title(['General Transition of' Group2Name 'Mice'],'FontSize',fsize)
+title(['General Transition of ' Group2Name ' Mice'],'FontSize',fsize)
 set(G2Transition, 'position', [0 0 1000 850]);
 
 X=Plot_G2TG.XData;
@@ -135,7 +135,7 @@ G1cb=colorbar;
 G1cb.Label.String = 'Bigram Transition Probabillity';
 G1cb.Label.FontSize=fsize;
 colormap cool
-title(['General Transition of' Group1Name 'Mice'],'FontSize',fsize)
+title(['General Transition of ' Group1Name ' Mice'],'FontSize',fsize)
 set(G1Transition, 'position', [0 0 1000 850]);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -171,5 +171,5 @@ G2G1cb=colorbar;
 G2G1cb.Label.String = ['Bigram Transition Probabillity Comparison ' Group2Name ' vs.' Group1Name];
 G2G1cb.Label.FontSize=fsize;
 colormap cool
-title(['General Transition Comparison' Group2Name ' vs ' Group1Name],'FontSize',fsize)
+title(['General Transition Comparison ' Group2Name ' vs ' Group1Name],'FontSize',fsize)
 set(G2vsG1Transition, 'position', [0 0 1000 850]);
