@@ -105,6 +105,11 @@ In the following scripts, mice indexes and date indexes are used by other script
 ```
 MoSeqVideoLabeling.m
 ```
+Make labeled videos which show the syllables numbers and a dynamic waveform graph showing the fiber photometry signals in the bottom.
+```
+MoSeqFP_Video.m
+MoSeqFP_VideoLabeling.m
+```
 
 4. Calculate and plot general syllable usage and conpare syllable expression of several different groups.
 ```
