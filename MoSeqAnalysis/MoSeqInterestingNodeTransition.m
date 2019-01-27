@@ -1,6 +1,6 @@
-load('GeneralUsage.mat')
-nodename=regexp(sprintf('%i ',0:99),'(\d+)','match');
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Please edit the following parameters
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Group1Name='Contextual Novelty';
 Group2Name='Stimulus Novelty';
 
@@ -13,7 +13,11 @@ IntNode='70';
 
 % edge thresholded by percentage usage
 InterestingNodeThreshold=3.*1e-04;
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Processing
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+load('GeneralUsage.mat')
+nodename=regexp(sprintf('%i ',0:99),'(\d+)','match');
 % Interesting node transition of Group1 and Group2
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 PGBM_th=PGBM-PGBM.*(PGBM<InterestingNodeThreshold);
