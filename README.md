@@ -131,6 +131,7 @@ The results are sorted by `(G2-G1)/(G2+G1)`, so on the left hand side are G2 enr
 To do the statistical analysis by two sample t-test, please use
 ```
 MoSeqSyllableUsageStatisticalAnalysis.m
+MoSeqShuffling.m
 ```
 5. Structure clusting of syllables,
 ```
