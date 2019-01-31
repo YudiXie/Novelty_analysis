@@ -46,7 +46,7 @@ Start training
 cd pose-tensorflow/models/data_set_name/train
 TF_CUDNN_USE_AUTOTUNE=0 CUDA_VISIBLE_DEVICES=0 python3 ../../../train.py 
 ```
-7. Evaluate your network:
+7. Evaluate your network, (run this code inside the Evaluation-tools folder)
 ```
 CUDA_VISIBLE_DEVICES=0 python3 Step1_EvaluateModelonDataset.py #to evaluate your model [needs TensorFlow]
 python3 Step2_AnalysisofResults.py  #to compute test & train errors for your trained model
@@ -55,9 +55,9 @@ python3 Step2_AnalysisofResults.py  #to compute test & train errors for your tra
 # Analyzing videos
 0. Configuration of your project:
 
-Edit: `myconfig_analysis.py`
+Edit: `myconfig_analysis.py` file at the main DeepLabCut folder
 
-1. AnalyzingVideos:
+1. AnalyzingVideos, (run this code inside the Analysis-tools folder)
 ```
 CUDA_VISIBLE_DEVICES=0 python3 AnalyzeVideos.py
 ```
