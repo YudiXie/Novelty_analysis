@@ -62,6 +62,7 @@ for miceiter=1:length(Mice)
 end
 
 h=zeros(size(G1_Comb,1),101);
+dis=zeros(size(G1_Comb,1),101);
 
 for combiter=1:size(G1_Comb,1)
     combiter
@@ -116,5 +117,8 @@ for combiter=1:size(G1_Comb,1)
     end
 
     h(combiter,:)=ttest2(N_G1Usage_tt,N_G2Usage_tt,'Vartype','unequal');
+    dis(combiter,:)=abs(AN_G1Usage-AN_G2Usage);
 
 end
+
+
