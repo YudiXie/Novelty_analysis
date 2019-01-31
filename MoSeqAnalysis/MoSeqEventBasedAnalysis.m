@@ -1,35 +1,42 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Parameters
+% Please edit the following parameters
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Mice_Index_path='/Users/yuxie/Dropbox/YuXie/CvsS_180831/CvsS_180831_MoSeq/Mice_Index.m';
+starttime=0;         % in minute  Pending: in the future, this should depend on the starting frame of each experiments
+timeseg=0:5:30;      % in minute
+
+Analysis_Mice=1:8;   % All mice in the dataset
+Analysis_Day=1:6;    % All days in the dataset
+Plot_SingleDay=3;    % The day that you are interested in
+Plot_MultiDay=3:6;   % multiple days that you are interested in
+
+IntSyl=70;           % the syllable that you are interested in
+
+Group1Name='Contextual';
+Group1Num=4;
+
+Group2Name='Stimulus';
+Group2Num=4;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Initialization
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 load('MoSeqDataFrame.mat')
 Syllablebinedge=[-6,-0.5:1:99.5];
-
-Mice_Index_path='/Users/yuxie/Dropbox/YuXie/CvsS_180831/CvsS_180831_MoSeq/Mice_Index.m';
 run(Mice_Index_path);
-
 cmap=cool(12);
 
 mksize=80;
 fsize=16;
-
 fps=30;
-starttime=0;         % in minute  Pending: in the future, this should depend on the starting frame of each experiments
-timeseg=0:5:30;      % in minute
+
 timeseg=starttime+timeseg;
 frameseg=timeseg.*60.*fps;
 
-Analysis_Mice=1:8;
-Analysis_Day=1:6;     % first novelty day
-Plot_SingleDay=3;
-Plot_MultiDay=3:6;
+Cnum=Group1Num;
+Snum=Group2Num;
 
-IntSyl=70;          % Interesting Syllable
-
-Cnum=4;
-Snum=4;
-
-CVSXTick={'Contextual' 'Stimulus'};
 CVSX=1:2;
+CVSXTick={Group1Name,Group2Name};
 
 for segiter=1:length(timeseg)-1
     IntersessionXTick{segiter}=[num2str(timeseg(segiter)) '-' num2str(timeseg(segiter+1))];
@@ -79,7 +86,6 @@ for miceiter=Analysis_Mice
         syltime_per_minute(miceiter,:,dayiter)=Mice(miceiter).ExpDay(dayiter).syltime_per_minute;
     end
 end
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Plot_total_interaction_time=figure;
 
