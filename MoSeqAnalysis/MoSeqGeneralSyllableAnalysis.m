@@ -217,6 +217,34 @@ xticks(X);
 xticklabels(SyllablesX(G2vsG1Sortedusageindex));
 
 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % Plot syllable usage without plotting less frequently used syllables
+% PG1Usage_sort_filtered_raw=PG1Usage(G2vsG1Sortedusageindex);
+% PG2Usage_sort_filtered_raw=PG2Usage(G2vsG1Sortedusageindex);
+% SyllablesX_sort_filtered_raw=SyllablesX(G2vsG1Sortedusageindex);
+
+% Usage_th=0.01; % usage threshold
+% iter=1;
+% for syliter=1:101
+%     if PG1Usage_sort_filtered_raw(syliter)+PG2Usage_sort_filtered_raw(syliter)>Usage_th
+%         PG1Usage_sort_filtered(iter)=PG1Usage_sort_filtered_raw(syliter);
+%         PG2Usage_sort_filtered(iter)=PG2Usage_sort_filtered_raw(syliter);
+%         SyllablesX_sort_filtered(iter)=SyllablesX_sort_filtered_raw(syliter);
+%         iter=iter+1;
+%     end
+% end
+
+% Plot_UsageCompare_sorted_filtered=figure;
+% plot(X(1:length(PG1Usage_sort_filtered)),PG1Usage_sort_filtered,'LineWidth',1.5)
+% hold on
+% plot(X(1:length(PG1Usage_sort_filtered)),PG2Usage_sort_filtered,'LineWidth',1.5)
+
+% legend({G1_name,G2_name,G3_name},'FontSize',fsize)
+% title(['Syllable Usage Comparison of ' G1_name ' vs. ' G2_name ' (' Batch_name ')' '(Sorted by ' G2_name ' enrichment) filtered'],'FontSize',fsize)
+% ylabel('Fraction','FontSize',fsize)
+% xlabel('Syllables','FontSize',fsize)
+% xticks(X(1:length(PG1Usage_sort_filtered)));
+% xticklabels(SyllablesX_sort_filtered);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Saving Data
@@ -226,6 +254,4 @@ close all
 clearvars Plot_UsageCompare_sorted Plot_UsageCompare Plot_AccGeneralUsage Plot_GeneralUsage
 save('GeneralUsage.mat')
 clear
-
-
 
