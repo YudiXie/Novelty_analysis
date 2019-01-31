@@ -13,10 +13,10 @@ Plot_MultiDay=3:6;   % multiple days that you are interested in
 IntSyl=70;           % the syllable that you are interested in
 
 Group1Name='Contextual';
-Group1Num=4;
+Group1Num=4;         % number of mice in group 1
 
 Group2Name='Stimulus';
-Group2Num=4;
+Group2Num=4;         % number of mice in group 2
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Initialization
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
