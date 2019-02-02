@@ -133,6 +133,11 @@ To do the statistical analysis by two sample t-test, please use
 MoSeqSyllableUsageStatisticalAnalysis.m
 MoSeqShuffling.m
 ```
+
+To calculate syllable length, please use
+```
+MoSeqSyllableLength.m
+```
 5. Structure clusting of syllables,
 ```
 MoSeqSyllableClustering.m
