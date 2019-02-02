@@ -126,9 +126,9 @@ PGUsage=GUsage_count./sum(GUsage_count);
 
 % Calculate Usage of Group1, Group2, and Group3
 G1Usage=zeros(length(G1_Days),101,length(G1_Mice));
-d1iter=1;
 d3iter=1;
 for miceiter=G1_Mice
+    d1iter=1;
     for dayiter=G1_Days
         G1Usage(d1iter,:,d3iter) = Mice(miceiter).ExpDay(dayiter).usage;
         d1iter=d1iter+1;
@@ -138,9 +138,9 @@ end
 PG1Usage=sum(sum(G1Usage,1),3)./sum(sum(sum(G1Usage,1),3));
 
 G2Usage=zeros(length(G2_Days),101,length(G2_Mice));
-d1iter=1;
 d3iter=1;
 for miceiter=G2_Mice
+    d1iter=1;
     for dayiter=G2_Days
         G2Usage(d1iter,:,d3iter) = Mice(miceiter).ExpDay(dayiter).usage;
         d1iter=d1iter+1;
@@ -150,9 +150,9 @@ end
 PG2Usage=sum(sum(G2Usage,1),3)./sum(sum(sum(G2Usage,1),3));
 
 G3Usage=zeros(length(G3_Days),101,length(G3_Mice));
-d1iter=1;
 d3iter=1;
 for miceiter=G3_Mice
+    d1iter=1;
     for dayiter=G3_Days
         G3Usage(d1iter,:,d3iter) = Mice(miceiter).ExpDay(dayiter).usage;
         d1iter=d1iter+1;
@@ -166,9 +166,9 @@ G2vsG1usage=(PG2Usage-PG1Usage)./(PG2Usage+PG1Usage);
 
 % Calculate Usage Count of Group1, Group2, and Group3
 G1Usage_count=zeros(length(G1_Days),101,length(G1_Mice));
-d1iter=1;
 d3iter=1;
 for miceiter=G1_Mice
+    d1iter=1;
     for dayiter=G1_Days
         G1Usage_count(d1iter,:,d3iter) = Mice(miceiter).ExpDay(dayiter).usage_count;
         d1iter=d1iter+1;
@@ -178,9 +178,9 @@ end
 PG1Usage_count=sum(sum(G1Usage_count,1),3)./sum(sum(sum(G1Usage_count,1),3));
 
 G2Usage_count=zeros(length(G2_Days),101,length(G2_Mice));
-d1iter=1;
 d3iter=1;
 for miceiter=G2_Mice
+    d1iter=1;
     for dayiter=G2_Days
         G2Usage_count(d1iter,:,d3iter) = Mice(miceiter).ExpDay(dayiter).usage_count;
         d1iter=d1iter+1;
@@ -190,9 +190,9 @@ end
 PG2Usage_count=sum(sum(G2Usage_count,1),3)./sum(sum(sum(G2Usage_count,1),3));
 
 G3Usage_count=zeros(length(G3_Days),101,length(G3_Mice));
-d1iter=1;
 d3iter=1;
 for miceiter=G3_Mice
+    d1iter=1;
     for dayiter=G3_Days
         G3Usage_count(d1iter,:,d3iter) = Mice(miceiter).ExpDay(dayiter).usage_count;
         d1iter=d1iter+1;
