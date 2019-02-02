@@ -60,6 +60,7 @@ for miceiter=1:length(Mice)
         Mice(miceiter).ExpDay(dayiter).usage_countsum=0;
         
         for frameiter=1:labellen-1
+            readwindow=Labels(frameiter:frameiter+1);
 
             % Calculate number of times of syllable usage, usage_count(1) 'none' syllable, usage_count(2) number of times syllable 0 is used...
             % usagesum_count is the sum of all syllables except 'none' type
@@ -71,7 +72,6 @@ for miceiter=1:length(Mice)
                 end
             end
 
-            readwindow=Labels(frameiter:frameiter+1);
             if sum(readwindow<0)>0
                 continue
             end
