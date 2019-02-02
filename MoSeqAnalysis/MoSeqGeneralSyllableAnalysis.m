@@ -114,6 +114,16 @@ for usageiter=1:length(GSortedusage)
     AccGSortedusage(usageiter)=sum(GSortedusage(1:usageiter));
 end
 
+% Calculate General Usage Count of all experiments
+GUsage_count=zeros(1,101);
+for miceiter=1:length(Mice)
+    for dayiter=1:length(Mice(miceiter).ExpDay)
+        GUsage_count = GUsage_count + Mice(miceiter).ExpDay(dayiter).usage_count;   
+    end
+end
+PGUsage=GUsage_count./sum(GUsage_count);
+
+
 % Calculate Usage of Group1, Group2, and Group3
 G1Usage=zeros(length(G1_Days),101,length(G1_Mice));
 d1iter=1;
@@ -153,6 +163,46 @@ PG3Usage=sum(sum(G3Usage,1),3)./sum(sum(sum(G3Usage,1),3));
 
 G2vsG1usage=(PG2Usage-PG1Usage)./(PG2Usage+PG1Usage);
 [G2vsG1Sortedusage,G2vsG1Sortedusageindex]=sort(G2vsG1usage,'descend');
+
+% Calculate Usage Count of Group1, Group2, and Group3
+G1Usage_count=zeros(length(G1_Days),101,length(G1_Mice));
+d1iter=1;
+d3iter=1;
+for miceiter=G1_Mice
+    for dayiter=G1_Days
+        G1Usage_count(d1iter,:,d3iter) = Mice(miceiter).ExpDay(dayiter).usage_count;
+        d1iter=d1iter+1;
+    end
+    d3iter=d3iter+1;
+end
+PG1Usage_count=sum(sum(G1Usage_count,1),3)./sum(sum(sum(G1Usage_count,1),3));
+
+G2Usage_count=zeros(length(G2_Days),101,length(G2_Mice));
+d1iter=1;
+d3iter=1;
+for miceiter=G2_Mice
+    for dayiter=G2_Days
+        G2Usage_count(d1iter,:,d3iter) = Mice(miceiter).ExpDay(dayiter).usage_count;
+        d1iter=d1iter+1;
+    end
+    d3iter=d3iter+1;
+end
+PG2Usage_count=sum(sum(G2Usage_count,1),3)./sum(sum(sum(G2Usage_count,1),3));
+
+G3Usage_count=zeros(length(G3_Days),101,length(G3_Mice));
+d1iter=1;
+d3iter=1;
+for miceiter=G3_Mice
+    for dayiter=G3_Days
+        G3Usage_count(d1iter,:,d3iter) = Mice(miceiter).ExpDay(dayiter).usage_count;
+        d1iter=d1iter+1;
+    end
+    d3iter=d3iter+1;
+end
+PG3Usage_count=sum(sum(G3Usage_count,1),3)./sum(sum(sum(G3Usage_count,1),3));
+
+G2vsG1usage_count=(PG2Usage_count-PG1Usage_count)./(PG2Usage_count+PG1Usage_count);
+[G2vsG1Sortedusage_count,G2vsG1Sortedusage_countindex]=sort(G2vsG1usage_count,'descend');
 
 % Calculate General Bigram Transition Matrix of all experiments
 GBM=zeros(100,100);
