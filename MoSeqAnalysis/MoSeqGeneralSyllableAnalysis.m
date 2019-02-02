@@ -55,6 +55,9 @@ for miceiter=1:length(Mice)
         % BiMatrixSum is the sum of Bi-transition, exclude window with 'none' type
         Mice(miceiter).ExpDay(dayiter).BiMatrix=zeros(100,100);
         Mice(miceiter).ExpDay(dayiter).BiMatrixSum=0;
+
+        Mice(miceiter).ExpDay(dayiter).usage_count=zeros(1,101);
+        Mice(miceiter).ExpDay(dayiter).usage_countsum=0;
         
         for frameiter=1:labellen-1
 
@@ -66,13 +69,31 @@ for miceiter=1:length(Mice)
             Mice(miceiter).ExpDay(dayiter).BiMatrix(readwindow(1)+1,readwindow(2)+1) = 1 + Mice(miceiter).ExpDay(dayiter).BiMatrix(readwindow(1)+1,readwindow(2)+1);
             Mice(miceiter).ExpDay(dayiter).BiMatrixSum=Mice(miceiter).ExpDay(dayiter).BiMatrixSum+1;
 
+            % Calculate number of times of syllable usage, usage_count(1) 'none' syllable, usage_count(2) number of times syllable 0 is used...
+            % usagesum_count is the sum of all syllables except 'none' type
+            if readwindow(1)~=readwindow(2)
+                if readwindow(1)==-5
+                    Mice(miceiter).ExpDay(dayiter).usage_count(1)=Mice(miceiter).ExpDay(dayiter).usage_count(1)+1;
+                else 
+                    Mice(miceiter).ExpDay(dayiter).usage_count(readwindow(1)+2)=Mice(miceiter).ExpDay(dayiter).usage_count(readwindow(1)+2)+1;
+                end
+            end
+
         end
 
-        % Calculate syllable usage count, usage(1) 'none' syllable, usage(2) number of syllable 0 is used...
-        % usagesum is the sum of all frames except 'none' type
+        if readwindow(2)==-5
+            Mice(miceiter).ExpDay(dayiter).usage_count(1)=Mice(miceiter).ExpDay(dayiter).usage_count(1)+1;
+        else 
+            Mice(miceiter).ExpDay(dayiter).usage_count(readwindow(2)+2)=Mice(miceiter).ExpDay(dayiter).usage_count(readwindow(2)+2)+1;
+        end
+
+        Mice(miceiter).ExpDay(dayiter).usage_countsum=sum(Mice(miceiter).ExpDay(dayiter).usage_count(2:end));
+
+        % Calculate total frames of syllable usage, usage(1) 'none' syllable, usage(2) total frames of syllable 0...
+        % usagesum is the sum of all syllables except 'none' type
         Mice(miceiter).ExpDay(dayiter).usage=histcounts(Labels,Syllablebinedge);
         Mice(miceiter).ExpDay(dayiter).usagesum=sum(Mice(miceiter).ExpDay(dayiter).usage(2:end));
-        
+
     end
 
 end
