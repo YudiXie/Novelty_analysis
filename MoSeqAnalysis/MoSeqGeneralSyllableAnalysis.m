@@ -61,14 +61,6 @@ for miceiter=1:length(Mice)
         
         for frameiter=1:labellen-1
 
-            readwindow=Labels(frameiter:frameiter+1);
-            if sum(readwindow<0)>0
-                continue
-            end
-
-            Mice(miceiter).ExpDay(dayiter).BiMatrix(readwindow(1)+1,readwindow(2)+1) = 1 + Mice(miceiter).ExpDay(dayiter).BiMatrix(readwindow(1)+1,readwindow(2)+1);
-            Mice(miceiter).ExpDay(dayiter).BiMatrixSum=Mice(miceiter).ExpDay(dayiter).BiMatrixSum+1;
-
             % Calculate number of times of syllable usage, usage_count(1) 'none' syllable, usage_count(2) number of times syllable 0 is used...
             % usagesum_count is the sum of all syllables except 'none' type
             if readwindow(1)~=readwindow(2)
@@ -78,6 +70,14 @@ for miceiter=1:length(Mice)
                     Mice(miceiter).ExpDay(dayiter).usage_count(readwindow(1)+2)=Mice(miceiter).ExpDay(dayiter).usage_count(readwindow(1)+2)+1;
                 end
             end
+
+            readwindow=Labels(frameiter:frameiter+1);
+            if sum(readwindow<0)>0
+                continue
+            end
+
+            Mice(miceiter).ExpDay(dayiter).BiMatrix(readwindow(1)+1,readwindow(2)+1) = 1 + Mice(miceiter).ExpDay(dayiter).BiMatrix(readwindow(1)+1,readwindow(2)+1);
+            Mice(miceiter).ExpDay(dayiter).BiMatrixSum=Mice(miceiter).ExpDay(dayiter).BiMatrixSum+1;
 
         end
 
