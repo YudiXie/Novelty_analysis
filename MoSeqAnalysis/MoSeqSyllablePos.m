@@ -24,7 +24,7 @@ for miceiter=Analysis_Mice
 
     for dayiter=Analysis_Days
 
-        for frameiter=1:length(MoSeqDataFrame.SODis)
+        for frameiter=1:length(MoSeqDataFrame.model_label)
             if strcmp(Mice(miceiter).ExpDay(dayiter).MSid, MoSeqDataFrame.uuid(frameiter,:))
                 FilteredLabel=[FilteredLabel double(MoSeqDataFrame.model_label(frameiter))];
                 FilteredXPos=[FilteredXPos MoSeqDataFrame.centroid_x_mm(frameiter)];
