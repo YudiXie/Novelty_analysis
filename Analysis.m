@@ -46,7 +46,7 @@ PathRoot=[pathname '/'];
 filelist=dir([PathRoot,'*' videoname_format(end-3:end)]);
 flen = length(filelist);
 
-for fiter =1:flen
+for fiter =flen:1
     if ~isempty(strfind(filelist(fiter).name,'abeled'))
         filelist(fiter)=[];
     end
