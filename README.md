@@ -1,5 +1,6 @@
 # Novelty Analysis
-
+Matlab and Python code for novelty exploration behavior analysis in mice.
+Used after [DeepLabCut](https://github.com/AlexEMG/DeepLabCut) and [MoSeq](http://datta.hms.harvard.edu/research/behavioral-analysis/).
 
 ## Scripts for DeepLabCut data analysis
 
