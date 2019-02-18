@@ -122,3 +122,34 @@ for combiter=1:size(G1_Comb,1)
 end
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% indexes of col to filtered out
+filtered_idx=[1	3	6	7	21	24	26	28	29	32	37	49	50	55	56	57	59	60	61	62	63	66	69	71	72	74	78	81	82	84	85	90	96	99	100];
+
+h(:,filtered_idx)=0;
+dis(:,filtered_idx)=0;
+
+% h
+sum_h=sum(h,2);
+h_mean=mean(sum_h)
+h_median=median(sum_h)
+
+figure(1)
+hist(sum_h,40)
+title('Distribution of number of syllables that are significant different')
+xlabel('Number of significant different syllables')
+ylabel('Number of combinations')
+set(gca,'box','off','TickDir','out','FontSize',16)
+
+
+% dis
+sum_dis=sum(dis,2);
+dis_mean=mean(sum_dis)
+dis_median=median(sum_dis)
+
+figure(2)
+hist(sum_dis,40)
+title('Distribution of usage distance between two ramdon groups of mice')
+xlabel('Distance between two groups')
+ylabel('Number of combinations')
+set(gca,'box','off','TickDir','out','FontSize',16)
