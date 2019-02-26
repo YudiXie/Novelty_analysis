@@ -29,16 +29,19 @@ moseq2-extract extract /path/to/data/depth.dat --flip-classifier /home/alex/mose
 ```
 moseq2-extract extract depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl --bg-roi-dilate 75 75 --use-tracking-model True --cable-filter-iters 1
 ```
-* Trimming frames when the mouse is not in the arena, this is staged for the next version of moseq2-extract (v0.1.1). If you want to try now checkout the v0.1.1 branch (if it is already this version, skip this part)
-```
-cd ~/location_of_moseq2-extract/
-git pull
-git checkout v0.1.1
-```
+* Trimming frames when the mouse is not in the arena, 
 
 The relevant option is --frame-trim which is number of frames to trim from the beginning and from the end. To skip the first 500 and last 5000 frames,
 ```
 moseq2-extract --frame-trim 500 5000 depth.dat --output-dir trim_test
+```
+For older version:
+
+this is staged for the next version of moseq2-extract (v0.1.1). If you want to try now checkout the v0.1.1 branch (if it is already this version, skip this part)
+```
+cd ~/location_of_moseq2-extract/
+git pull
+git checkout v0.1.1
 ```
 
 * to customize height, use `bg-roi-depth-range`
