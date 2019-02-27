@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Use this to list all the subfolders
+# find -type d -printf '%d\t%P\n' | sort -r -nk1 | cut -f2-
+
 moseq2-extract extract /media/alex/DataDrive1/MoSeqData/Kaeser_Lab/181212/Exp/Num16/session_20181130202457/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl
 moseq2-extract extract /media/alex/DataDrive1/MoSeqData/Kaeser_Lab/181212/Exp/Num22/session_20181130214357/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl
 moseq2-extract extract /media/alex/DataDrive1/MoSeqData/Kaeser_Lab/181212/Exp/Num24/session_20181130230028/depth.dat --flip-classifier /home/alex/moseq2/flip_classifier_k2_c57_10to13weeks.pkl
