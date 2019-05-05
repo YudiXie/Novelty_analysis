@@ -5,7 +5,7 @@ Used after [DeepLabCut](https://github.com/AlexEMG/DeepLabCut) and [MoSeq](http:
 ## Scripts for DeepLabCut data analysis
 
 #### Basic data analysis
-Fisrt, run DeepLabCut, please see [Training a New Network for DeepLabCut](https://github.com/Rxie9596/Novelty_analysis/blob/master/Docs/Training_a_new_network.md) and [Running an existing network (Korleki)](https://github.com/Rxie9596/Novelty_analysis/blob/master/Docs/Using_DLC_in_UchidaLab_Korleki.md)
+First, run DeepLabCut, please see [Training a New Network for DeepLabCut](https://github.com/Rxie9596/Novelty_analysis/blob/master/Docs/Training_a_new_network.md) and [Running an existing network (Korleki)](https://github.com/Rxie9596/Novelty_analysis/blob/master/Docs/Using_DLC_in_UchidaLab_Korleki.md)
 
 After that,
 
