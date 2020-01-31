@@ -55,7 +55,7 @@ FindingPokeDTW.m
 ```
 
 ## Scripts for MoSeq data analysis
-First, run all the Moseq analysis, see [MoSeq Sample Commands](https://github.com/Rxie9596/Novelty_analysis/blob/master/Docs/MoSeq_Example_Command.md)
+First, run all the Moseq analysis, see [MoSeq Example Commands](https://github.com/Rxie9596/Novelty_analysis/blob/master/Docs/MoSeq_Example_Command.md)
 
 After that,
 
@@ -186,7 +186,7 @@ MoSeqFP.m
 MoSeqFP_Dis.m
 MoSeqFP_raster.m
 ```
-# Sample commands for using DeepLabCut and MoSeq
+# Example commands for using DeepLabCut and MoSeq
 
 [Running an existing network (Korleki)](https://github.com/Rxie9596/Novelty_analysis/blob/master/Docs/Using_DLC_in_UchidaLab_Korleki.md)
 
@@ -199,7 +199,7 @@ MoSeqFP_raster.m
 
 [Training a New Network for DeepLabCut](https://github.com/Rxie9596/Novelty_analysis/blob/master/Docs/Training_a_new_network.md)
 
-[MoSeq Sample Commands](https://github.com/Rxie9596/Novelty_analysis/blob/master/Docs/MoSeq_Example_Command.md)
+[MoSeq Example Commands](https://github.com/Rxie9596/Novelty_analysis/blob/master/Docs/MoSeq_Example_Command.md)
 
  
 # Running on the cluster
